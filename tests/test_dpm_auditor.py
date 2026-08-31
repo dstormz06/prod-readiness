@@ -91,7 +91,7 @@ def test_all_seven_artifact_types_have_an_adapter(doc):
 
 
 def test_the_verdict_rule_is_mechanical_and_ordered(doc):
-    v = doc.split("### The verdict")[1].split("## 6 ·")[0]
+    v = doc.split("### The verdict")[1].split("## 7 ·")[0]
     for i, decision in enumerate(("NOT CLEARED", "CLEARED WITH CONDITIONS",
                                   "LIMITED PILOT ONLY", "CLEARED FOR USE"), 1):
         assert f"{i}." in v and decision in v, f"verdict step {i} ({decision}) missing"
@@ -107,7 +107,7 @@ def test_all_four_severities_are_defined(doc):
 
 
 def test_the_finding_format_has_all_seven_parts(doc):
-    block = doc.split("One finding, eight parts")[1].split("## 7 ·")[0]
+    block = doc.split("One finding, eight parts")[1].split("## 8 ·")[0]
     for field in ("ID", "TITLE", "IMPACT", "STATE", "SEVERITY", "EVIDENCE", "METHOD", "FIX"):
         assert re.search(rf"^{field}\s", block, re.M), f"finding field {field} missing"
 
@@ -146,7 +146,7 @@ def test_rule_zero_forbids_testing_with_real_protected_data(doc):
 
 
 def test_escalation_routes_every_decision_that_is_not_the_auditors(doc):
-    esc = doc.split("## 9 ·")[1].split("## 10 ·")[0]
+    esc = doc.split("## 10 ·")[1].split("## 11 ·")[0]
     for owner in ("Records officer", "Privacy office", "ISSO", "Contracting officer",
                   "Section 508 program"):
         assert owner in esc, f"{owner} not named as a decision owner"
@@ -162,7 +162,7 @@ def test_part_11_is_routed_not_decided(doc):
 
 
 def test_the_citation_verification_rule_outranks_every_citation(doc):
-    f = doc.split("## 10 ·")[1]
+    f = doc.split("## 11 ·")[1]
     assert "including anything named in this document" in f
     assert "outranks every citation in this document" in f
     assert "not verified" in f
@@ -192,7 +192,7 @@ def test_secrets_are_reported_by_location_and_kind_only(doc):
 
 
 def test_the_proactive_section_is_actionable_not_aspirational(doc):
-    p = doc.split("## 8 ·")[1].split("## 9 ·")[0]
+    p = doc.split("## 9 ·")[1].split("## 10 ·")[0]
     for habit in ("draft the corrected text", "What happens if we do nothing",
                   "Name the mechanism, not the worry", "shortest credible route",
                   "Say what is good"):
@@ -205,14 +205,14 @@ def test_prompt_injection_has_a_test_a_non_engineer_can_run(doc):
 
 
 def test_the_self_check_covers_every_way_the_audit_itself_can_fail(doc):
-    s = doc.split("## 11 ·")[1].split("## 12 ·")[0]
+    s = doc.split("## 12 ·")[1].split("## 13 ·")[0]
     boxes = [l for l in s.splitlines() if l.strip().startswith("- [ ]")]
     assert len(boxes) >= 25, f"only {len(boxes)} self-check items"
     assert "say so in the memo rather than completing it weakly" in s
 
 
 def test_language_standard_is_present(doc):
-    lang = doc.split("## 12 ·")[1]
+    lang = doc.split("## 13 ·")[1]
     for rule in ("One idea per sentence", "Active voice", "No metaphor",
                  "Define every acronym"):
         assert rule in lang
@@ -290,7 +290,7 @@ def test_uncertainty_may_not_move_severity_in_either_direction(doc):
 
 
 def test_the_document_states_the_rule_in_the_same_order_the_code_applies_it(doc):
-    v = doc.split("### The verdict")[1].split("## 6 ·")[0]
+    v = doc.split("### The verdict")[1].split("## 7 ·")[0]
     positions = [v.index(d) for d in ("NOT CLEARED", "CLEARED WITH CONDITIONS",
                                       "LIMITED PILOT ONLY", "CLEARED FOR USE")]
     assert positions == sorted(positions), "the written rule is out of order"
@@ -394,21 +394,21 @@ def test_every_cross_reference_resolves_and_points_at_the_right_section(doc):
 
     # Each reference promises the target contains something. Check it does.
     promises = {
-        "owner named in §9": (9, "Records officer"),
-        "`METHOD` line in §6": (6, "METHOD"),
-        "another office** (§9)": (9, "Whose call"),
-        "risk-acceptance block in §7": (7, "RISK ACCEPTED"),
-        "those are §9 determinations": (9, "Privacy office"),
+        "owner named in §10": (10, "Records officer"),
+        "`METHOD` line in §7": (7, "METHOD"),
+        "another office** (§10)": (10, "Whose call"),
+        "risk-acceptance block in §8": (8, "RISK ACCEPTED"),
+        "those are §10 determinations": (10, "Privacy office"),
         "**Scope it** (§3)": (3, "Stakes tier"),
-        "**Work the lenses** (§4)": (4, "PA1"),
-        "output** (§7)": (7, "Decision memo"),
-        "adapt with §10": (10, "not in §3"),
-        "Co-signature required (§9)": (9, "never signed by one person"),
+        "**Work the lenses** (§5)": (5, "PA1"),
+        "output** (§8)": (8, "Decision memo"),
+        "adapt with §11": (11, "not in §3"),
+        "Co-signature required (§10)": (10, "never signed by one person"),
         "person.** See §2": (2, "Describe artifacts, never people"),
-        "triggers from §10": (10, "Re-review when"),
-        "in the §6 format": (6, "SEVERITY"),
+        "triggers from §11": (11, "Re-review when"),
+        "in the §7 format": (7, "SEVERITY"),
         "not in §3": (3, "Artifact type"),
-        "verdict follows §5": (5, "The verdict"),
+        "verdict follows §6": (6, "The verdict"),
     }
     for ref, (target, must_contain) in promises.items():
         assert ref in doc, f"cross-reference text vanished: {ref!r}"
@@ -477,7 +477,7 @@ def test_provenance_and_conflict_are_captured_in_the_memo(doc):
 def test_working_papers_are_preserved_and_indexed(doc):
     assert "Preserve the working papers" in doc
     assert "consult your records officer before doing anything" in doc
-    annex = doc.split("### Part B")[1].split("## 8 ·")[0]
+    annex = doc.split("### Part B")[1].split("## 9 ·")[0]
     assert "**B8**" in annex and "Working-papers index" in annex
     assert "**B9**" in annex and "unedited" in annex
 
@@ -495,7 +495,7 @@ def test_the_limits_of_the_audit_are_enumerated(doc):
 
 
 def test_the_annex_now_has_nine_parts(doc):
-    annex = doc.split("### Part B")[1].split("## 8 ·")[0]
+    annex = doc.split("### Part B")[1].split("## 9 ·")[0]
     for n in range(1, 10):
         assert f"**B{n}**" in annex, f"annex part B{n} missing"
 
@@ -512,6 +512,8 @@ def test_the_document_obeys_its_own_phrasing_rules(doc):
         + doc.split("**Never write:**")[1].split("\n")[0]
         + doc.split("- [ ] No sentence describes a person")[1].split("\n")[0]
         + doc.split("| | Means | You may write it as |")[1].split("\n\n")[0]
+        # §4 rule 4 forbids the word rather than using it
+        + doc.split("It describes the artifact and its use, never its author.")[1].split("\n")[0]
     )
     for pattern in (r"there (is|are) no ", r"\bit does not exist\b",
                     r"the system has no ", r"\bfailed to\b", r"\bshould have known\b",
@@ -602,7 +604,7 @@ def test_a_new_risk_class_may_get_a_new_lens(doc):
 
 
 def test_the_new_rules_reach_the_self_check(doc):
-    s = doc.split("## 11 ·")[1].split("## 12 ·")[0]
+    s = doc.split("## 12 ·")[1].split("## 13 ·")[0]
     for item in ("Nothing you could not examine is written as `NOT FOUND`",
                  "compensating control that is itself `UNVERIFIED`",
                  "artifact did not assess itself",
@@ -623,10 +625,103 @@ def test_the_external_reach_triggers_are_graded_not_contradictory(doc):
 
 def test_the_self_check_survives_an_extended_audit(doc):
     """§10 permits adding a lens; a check hard-coded to 64 would then fail."""
-    assert "plus any you added under §10" in doc
+    assert "plus any you added under §11" in doc
 
 
 def test_the_change_log_describes_the_rules_as_they_now_read(doc):
     entry = doc.split("**v3.2**")[1].split("**v3.1**")[0]
     assert "`[A]` control you could not go and look at" in entry
     assert "`[E]` control is unaffected by a closed artifact" in entry
+
+
+# --- v3.3: the expert read --------------------------------------------------
+
+def test_the_expert_read_is_its_own_stage_in_the_workflow(doc):
+    assert "## 4 · The expert read" in doc
+    assert "**Four steps, every time.**" in doc
+    assert "**Read it as an expert** (§4)" in doc
+    card = doc.split("## Start here")[1].split("\n---\n")[0]
+    assert "§3–§5" in card, "Tier 3 must still reach the expert read"
+
+
+def test_a_hypothesis_can_never_become_a_finding_by_itself(doc):
+    """The step's whole risk is manufacturing plausible concerns."""
+    s = doc.split("## 4 · The expert read")[1].split("## 5 ·")[0]
+    assert "produces hypotheses, never findings" in s
+    assert "no evidence state" in s and "never reaches the memo" in s
+    assert "**Plausible is not evidence.**" in s
+    assert "A hypothesis is not a finding" in s
+
+
+def test_the_expert_read_has_all_four_questions_and_all_five_rules(doc):
+    s = doc.split("## 4 · The expert read")[1].split("## 5 ·")[0]
+    questions = re.findall(r"^\d\. \*\*", s.split("### Adapt the depth")[0], re.M)
+    assert len(questions) == 4, f"expected 4 questions, found {len(questions)}"
+    rules = re.findall(r"^\d\. \*\*", s.split("five rules")[1], re.M)
+    assert len(rules) == 5, f"expected 5 rules, found {len(rules)}"
+
+
+def test_the_expert_read_adapts_by_tier(doc):
+    s = doc.split("## 4 · The expert read")[1].split("## 5 ·")[0]
+    for tier in ("**3**", "**2**", "**1**"):
+        assert f"| {tier} |" in s, f"tier {tier} has no depth row"
+    assert "pre-mortem" in s
+
+
+def test_the_expert_read_cannot_set_severity_or_describe_people(doc):
+    s = doc.split("## 4 · The expert read")[1].split("## 5 ·")[0]
+    assert "never sets severity" in s
+    assert "Severity comes from §6" in s
+    assert "never about who was careless" in s
+
+
+def test_the_95_percent_rule_is_reconciled_with_hypotheses(doc):
+    """Without this the two rules contradict: a hypothesis is uncertain by design."""
+    s = doc.split("## 4 · The expert read")[1].split("## 5 ·")[0]
+    assert "The 95% rule does not gate a hypothesis" in s
+    assert "gates what you *write down as a claim*" in s
+    assert "Guess freely here, and nowhere else" in s
+
+
+def test_killed_hypotheses_must_be_recorded(doc):
+    s = doc.split("## 4 · The expert read")[1].split("## 5 ·")[0]
+    assert "Kill your own hypotheses" in s
+    assert "Record every one you killed and what killed it" in s
+    assert "confirms everything it guessed was not a read" in s
+
+
+def test_an_empty_expert_read_is_a_legitimate_outcome(doc):
+    s = doc.split("## 4 · The expert read")[1].split("## 5 ·")[0]
+    assert "If the expert read produces nothing, say that" in s
+    assert "An invented concern to fill the space" in s
+
+
+def test_the_expert_read_is_recorded_in_the_annex(doc):
+    annex = doc.split("### Part B")[1].split("## 9 ·")[0]
+    assert "**B10**" in annex and "expert read" in annex
+    assert "killed and why" in annex
+
+
+def test_the_expert_read_reaches_the_self_check(doc):
+    s = doc.split("## 12 ·")[1].split("## 13 ·")[0]
+    assert "confirmed into a finding or killed" in s
+    assert "No hypothesis reached the memo" in s
+
+
+def test_the_example_annex_is_in_order_and_the_footer_is_last(example):
+    """A footer that lands mid-annex strands the sections after it. The
+    committed v3.2 example shipped with B8 and B9 orphaned below the footer."""
+    numbers = [int(n) for n in re.findall(r"^### B(\d+) · ", example, re.M)]
+    assert numbers == sorted(numbers), f"annex sections are out of order: {numbers}"
+    assert numbers, "the example has no annex sections"
+    footer = example.rindex("*Method: READINESS AUDITOR")
+    last_section = example.rindex(f"### B{numbers[-1]} · ")
+    assert footer > last_section, "the footer appears before the last annex section"
+
+
+def test_the_example_shows_the_expert_read_with_killed_hypotheses(example):
+    assert "### B10 · The expert read" in example
+    b10 = example.split("### B10 · The expert read")[1]
+    assert b10.count("**Killed.**") >= 2, "the example must show hypotheses being killed"
+    assert "**Confirmed**" in b10
+    assert "Nothing here reached the memo except through a finding" in b10

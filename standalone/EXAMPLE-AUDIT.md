@@ -1,6 +1,6 @@
 # Worked example — a completed readiness audit
 
-*Sample output produced with READINESS AUDITOR v3.2. The tool, firm, application number, and staff names below are invented for illustration. This is not a record of any real review, product, or system.*
+*Sample output produced with READINESS AUDITOR v3.3. The tool, firm, application number, and staff names below are invented for illustration. This is not a record of any real review, product, or system.*
 
 ---
 
@@ -193,10 +193,6 @@ FIX       Move the document to the end, wrap it in a marked block, and add:
 
 Triggered by any of: closure of all five conditions · a model or vendor version change · use on a new data type · owner or maintainer change · removal of a compensating control · a change to the terms of service · twelve months elapsed.
 
----
-
-*Method: READINESS AUDITOR v3.2 · 64 controls · 7 lenses. Verdict derived mechanically: 3 blockers present → NOT CLEARED.*
-
 ### B8 · Working papers
 
 | Item | Kept where |
@@ -217,3 +213,28 @@ the records officer determines; that determination is open (see memo).
 
 No risk has been accepted to date.
 
+### B10 · The expert read
+
+Read end to end before opening the checklist, on <date>.
+
+**What is this for, and who is hurt if it is wrong?** A reviewer summarises correspondence into a deficiency list. If the list is wrong, a firm receives a deficiency that was never in the record, or a real one is dropped and reaches the next cycle.
+
+**How will it most likely fail?** Not dramatically — quietly. A tired reviewer accepts a fluent list on a Friday without opening the source document, because the list reads exactly like the ones that were right.
+
+**What would a specialist check first?** For a prompt: the examples, and whether instructions continue after the untrusted document is inserted. Both were checked; both produced findings.
+
+**What is unusual?** The prompt instructs the tool to "Be confident" and to "Always provide a complete list." That is an instruction to produce a complete-looking answer whether or not the document supports one. It became RA-L2-002.
+
+| Hypothesis | Outcome |
+|---|---|
+| Instructions continue after the document is inserted, so a document could redirect the tool | **Confirmed** → RA-L7-002 |
+| The prompt rewards confident output over accurate output | **Confirmed** → RA-L2-002 |
+| The example block may carry real firm content | **Confirmed** → RA-L3-001 |
+| Output may be pasted into correspondence with no review step | **Killed.** The owner's written procedure requires reviewer sign-off before any text is used, and `PA3` confirmed it. Recorded so the next reviewer does not raise it again. |
+| The tool may retain prior documents between runs | **Killed.** Three consecutive synthetic runs with different documents showed no carry-over. Not a finding. |
+
+Two of five hypotheses were killed. Nothing here reached the memo except through a finding with evidence and a method.
+
+---
+
+*Method: READINESS AUDITOR v3.3 · 64 controls · 7 lenses. Verdict derived mechanically: 3 blockers present → NOT CLEARED.*

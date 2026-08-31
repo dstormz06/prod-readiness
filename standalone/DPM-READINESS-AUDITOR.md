@@ -1,6 +1,6 @@
 # READINESS AUDITOR — AI, Tools, Prompts, and Digital Work Products
 
-*v3.2.1 · 2026-08-31 · 64 controls · 7 lenses · 3 stakes tiers · defensibility standard · dual output: director memo + working annex · self-contained*
+*v3.3 · 2026-08-31 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
 
 **What this is.** A structured method for deciding whether a tool is fit to use in regulatory work — an AI product, a prompt, an agent, a script, a spreadsheet, a dashboard, a vendor service, or any digital thing whose output reaches the work. Run by the person who owns the work, not by an engineer.
 
@@ -13,12 +13,12 @@
 | You are… | Do this | Read |
 |---|---|---|
 | **New to this** | Read a completed example first, then §0 and §1. | §0, §1 |
-| **Running a quick check** — no agency data, no work product | Tier 3: lenses L1, L3, L7 only. One page. ~30 min. | §3, §4 |
-| **Auditing a work product** — drafts a person fully reviews | Tier 2: all 7 lenses, every `[A]` control. ~2–4 hrs. | §3–§7 |
-| **Auditing anything decision-adjacent** | Tier 1: everything, and a co-signer. ~1–2 days. | all, and §9 |
+| **Running a quick check** — no agency data, no work product | Tier 3: lenses L1, L3, L7 only. One page. ~30 min. | §3–§5 |
+| **Auditing a work product** — drafts a person fully reviews | Tier 2: all 7 lenses, every `[A]` control. ~2–4 hrs. | §3–§8 |
+| **Auditing anything decision-adjacent** | Tier 1: everything, and a co-signer. ~1–2 days. | all, and §10 |
 | **Being asked to change a finding** | Go straight to §2. | §2 |
 
-**Three steps, every time.** 1 · **Scope it** (§3) — fix the artifact's identity, type, and tier. 2 · **Work the lenses** (§4) — for each control: *confirmed, not found, or unverified*, with what you did and where you looked. 3 · **Write the output** (§7) — director memo on top, working annex behind it.
+**Four steps, every time.** 1 · **Scope it** (§3) — fix the artifact's identity, type, and tier. 2 · **Read it as an expert** (§4) — form hypotheses before the checklist can narrow your eyes. 3 · **Work the lenses** (§5) — for each control: *confirmed, not found, or unverified*, with what you did and where you looked. 4 · **Write the output** (§8) — director memo on top, working annex behind it.
 
 **Never skip §0.** It is the one rule that protects you before you have written anything.
 
@@ -28,7 +28,7 @@
 
 **Do not use real sponsor data, personally identifiable information, trade secret or commercial confidential information, or pre-decisional material to test a tool that has not already been approved for that data.** Testing is still disclosure.
 
-Build a synthetic test set instead: realistic in shape, invented in content. Same field names, same formats, same edge cases — fabricated values. Record in the audit that the test data was synthetic. If a control can only be tested with real data, mark it `UNVERIFIED` and route it to the owner named in §9. **You never break a boundary to prove a boundary works.**
+Build a synthetic test set instead: realistic in shape, invented in content. Same field names, same formats, same edge cases — fabricated values. Record in the audit that the test data was synthetic. If a control can only be tested with real data, mark it `UNVERIFIED` and route it to the owner named in §10. **You never break a boundary to prove a boundary works.**
 
 ---
 
@@ -86,7 +86,7 @@ A finding is defensible when **another person, given the same material, would re
 3. **What you observed** — the location, referenced exactly.
 4. **When** — the date. An artifact changes. Your finding is true as of a date and no later.
 
-That is the `METHOD` line in §6. **A finding without a method is an opinion.** An opinion in a record is the thing you cannot defend.
+That is the `METHOD` line in §7. **A finding without a method is an opinion.** An opinion in a record is the thing you cannot defend.
 
 ### Describe artifacts, never people
 
@@ -112,7 +112,7 @@ Motive is not observable and is never yours to assert. **This one rule removes m
 
 **Never ask the artifact to audit itself.** An AI asked to assess its own instructions under-reports, fluently, and the output looks like a completed audit. A tool's self-assessment is a claim to verify, never evidence.
 
-**Never make a determination reserved to another office** (§9). If you are asked to anyway, record the referral, the date, and the response — including *"no response as of <date>."* That sentence is complete, accurate, and protective. A guess is none of the three.
+**Never make a determination reserved to another office** (§10). If you are asked to anyway, record the referral, the date, and the response — including *"no response as of <date>."* That sentence is complete, accurate, and protective. A guess is none of the three.
 
 ### When you are not sure — the 95% rule
 
@@ -132,7 +132,7 @@ This will happen. It is not necessarily improper — the person may know somethi
 2. **If no new evidence is offered, the finding stands as written.** Do not argue it. Do not soften the wording to end the conversation.
 3. **Record the exchange neutrally and move the decision to whoever owns it.**
 
-**The risk-acceptance block in §7 is what makes this safe for everyone.** An official may accept a known risk and proceed — that is a legitimate exercise of their authority, and this method must not obstruct it. Your job ends at stating the risk accurately. Their decision, in their own words, over their own name, is the record.
+**The risk-acceptance block in §8 is what makes this safe for everyone.** An official may accept a known risk and proceed — that is a legitimate exercise of their authority, and this method must not obstruct it. Your job ends at stating the risk accurately. Their decision, in their own words, over their own name, is the record.
 
 > **You are never the person who said no. You are the person who wrote down what was known, and who decided.**
 
@@ -142,7 +142,7 @@ If a second reviewer disagrees on the merits, record both positions in the annex
 
 State these in the memo so no reader supplies them for you:
 
-- Whether the tool is **lawful, compliant, or authorised** — those are §9 determinations, made by others.
+- Whether the tool is **lawful, compliant, or authorised** — those are §10 determinations, made by others.
 - Whether it works on **data you did not test it with**.
 - Whether it will behave the same **after any change** to the model, the vendor, the data, or the use.
 - Whether something you **could not search for** is truly absent.
@@ -152,7 +152,7 @@ State these in the memo so no reader supplies them for you:
 
 ## 3 · Scoping — what you are auditing and how deep
 
-### Artifact type — pick one, adapt with §10 if none fit
+### Artifact type — pick one, adapt with §11 if none fit
 
 | Type | What you open | The failure that actually happens |
 |---|---|---|
@@ -168,7 +168,7 @@ State these in the memo so no reader supplies them for you:
 
 | Tier | Test | Depth |
 |---|---|---|
-| **1 — Decision-adjacent** | Output could reach a submission assessment, an action letter, an inspection record, a policy document, an official file, or anything external | **All 7 lenses, all controls.** Co-signature required (§9). |
+| **1 — Decision-adjacent** | Output could reach a submission assessment, an action letter, an inspection record, a policy document, an official file, or anything external | **All 7 lenses, all controls.** Co-signature required (§10). |
 | **2 — Reviewed work product** | Drafts, summaries, analyses, trackers a person fully reviews before use; internal only | **All 7 lenses. Every `[A]` control; each `[E]` control where documentation was provided.** Solo audit with named reviewer. |
 | **3 — Personal productivity** | Formatting, scheduling, brainstorming, no agency data, no work product | **Lenses 1, 3, 7 only.** One page. |
 
@@ -184,14 +184,51 @@ The tiers assume a decision your division owns. Raise the floor when the audit r
 |---|---|
 | Another division or office will rely on it | Tier 1 floor. Name their reviewer as a co-signer, not a reader. |
 | It will be cited as precedent | Record the reasoning, not only the verdict. The next audit copies your logic, so make the logic inspectable. |
-| It touches an agency-level system, policy, or commitment | Tier 1 floor. Settle the authority question (§9) before you start, not at the end. |
+| It touches an agency-level system, policy, or commitment | Tier 1 floor. Settle the authority question (§10) before you start, not at the end. |
 | Anything reaches outside the agency | Stop. That is a clearance question before it is an audit question. |
 
 **Do not invent authority you do not have.** This method scales by adding reviewers and evidence — never by widening whose decision you are making. An audit that reaches further needs more signatures, not a bolder auditor.
 
 ---
 
-## 4 · The seven lenses — 64 controls
+## 4 · The expert read
+
+The 64 controls find what this method was told to look for. They cannot find what is wrong with **this** artifact in particular. Before you open the checklist, read the thing once as a specialist would, and write down what you expect to be broken.
+
+**This step produces hypotheses, never findings.** A hypothesis has no evidence state, no severity, and never reaches the memo. It is a search plan. Each one is either confirmed into a finding under §5–§7, or killed — and a killed hypothesis is recorded, because *"we looked at that and it was fine"* is worth more to the next reader than silence.
+
+### The four questions
+
+Read the artifact end to end with the checklist closed. Then answer, in writing, in Annex B10:
+
+1. **What is this really for, and who is hurt if it is wrong?** Name the person and the harm, not the category. "A reviewer sends a firm a deficiency that was never in the record" beats "quality risk."
+2. **How will this most likely fail in real use?** Not the worst case — the *likely* case. The thing that happens on an ordinary Tuesday, to a tired person, in a hurry.
+3. **What would a specialist in this kind of artifact check first?** Start from the *failure that actually happens* column in §3 for this artifact type, then go past it. A prompt specialist opens the examples. A spreadsheet specialist opens the formulas nobody has changed in two years.
+4. **What is unusual here?** Anything the artifact does that you have not seen before, or that the owner explained at unusual length. Unusual is where the checklist has least to say, so it is where your reading is worth most.
+
+### Adapt the depth to the tier
+
+| Tier | Effort | What you write |
+|---|---|---|
+| **3** | ~5 minutes | Question 2 only, one or two lines. |
+| **2** | ~20 minutes | All four questions, briefly. |
+| **1** | As long as it takes | All four, plus a **pre-mortem**: *it is a year from now and this tool has caused a serious problem — what happened?* Write the three most credible stories, and carry each into the lenses as a hypothesis. |
+
+### The five rules that keep this honest
+
+An expert read is the fastest way to make a method persuasive, and the fastest way to make it wrong. These are not optional.
+
+1. **A hypothesis is not a finding.** It carries no state, no severity, and no place in the memo. If you cannot confirm it with evidence and a method under §7, it has no place in this audit. **Plausible is not evidence.**
+2. **Kill your own hypotheses.** Go looking for the reason each one is wrong before you go looking for support. Record every one you killed and what killed it. An expert read that confirms everything it guessed was not a read; it was a decision made in advance.
+3. **The expert read never sets severity.** Severity comes from §6, from what the evidence supports. A hypothesis that feels alarming does not start life as a P0.
+4. **It describes the artifact and its use, never its author.** §2 applies here first and hardest — a pre-mortem is about how a thing fails, never about who was careless.
+5. **The 95% rule does not gate a hypothesis.** A hypothesis is uncertain by definition; that is what it is for. The rule gates what you *write down as a claim*. Guess freely here, and nowhere else.
+
+**If the expert read produces nothing, say that.** A short artifact you understand completely, with nothing unusual in it, is a legitimate outcome and a useful one. An empty B10 that says *"read end to end; nothing beyond the checklist suggested itself"* is honest. An invented concern to fill the space is the beginning of an audit nobody can trust.
+
+---
+
+## 5 · The seven lenses — 64 controls
 
 Work each lens in order. For every control record: **the answer · where you looked · the state it supports.** A control you did not check is `UNVERIFIED`, never a pass.
 
@@ -239,7 +276,7 @@ Work each lens in order. For every control record: **the answer · where you loo
 
 ---
 
-## 5 · Severity and the verdict
+## 6 · Severity and the verdict
 
 ### Severity — assign from consequence, not from effort to fix
 
@@ -265,7 +302,7 @@ Do not soften a P0 to sound balanced. Do not harden an `UNVERIFIED` to sound dec
 
 ---
 
-## 6 · How to write a finding
+## 7 · How to write a finding
 
 One finding, eight parts. Nothing else.
 
@@ -303,7 +340,7 @@ FIX       One concrete action, and who does it.
 
 ---
 
-## 7 · The output — one document, two audiences
+## 8 · The output — one document, two audiences
 
 ### Part A — Decision memo. One page. Always first.
 
@@ -335,7 +372,7 @@ Confidence:      <how much of this recommendation rests on what you could not
 This audit cannot tell you: <the §2 limits that apply here>
 Decisions not mine to make: <records, privacy, security, contracting, 508,
                  legal — named, with the date each was referred and any answer>
-Re-review when:  <triggers from §10>
+Re-review when:  <triggers from §11>
 
 ATTESTATION
   I examined the material listed above, on the dates shown, by the method
@@ -364,7 +401,7 @@ operate, or a privacy, records, security, or legal determination.
 
 ### Part B — Working annex. Behind the memo.
 
-**B1** Scope and method — what you reviewed, what you did not, the tier and why, how the artifact copy was identified, and that test data was synthetic · **B2** Findings in full, P0 first, in the §6 format · **B3** Control table — all 64, each marked `confirmed present` / `CONFIRMED finding` / `NOT FOUND` / `UNVERIFIED` / `N/A (reason)` / `out of tier`, with what you did and where you looked · **B4** Deferred controls, each with its trigger · **B5** Open questions, with document, holder, date referred, and any answer · **B6** What was tested — the inputs used, the number of runs, the dates, and the results · **B7** Re-review triggers and date · **B8** Working-papers index — your dated notes, test files, and results, and where they are kept · **B9** Disagreements and risk acceptances, recorded unedited.
+**B1** Scope and method — what you reviewed, what you did not, the tier and why, how the artifact copy was identified, and that test data was synthetic · **B2** Findings in full, P0 first, in the §7 format · **B3** Control table — all 64, each marked `confirmed present` / `CONFIRMED finding` / `NOT FOUND` / `UNVERIFIED` / `N/A (reason)` / `out of tier`, with what you did and where you looked · **B4** Deferred controls, each with its trigger · **B5** Open questions, with document, holder, date referred, and any answer · **B6** What was tested — the inputs used, the number of runs, the dates, and the results · **B7** Re-review triggers and date · **B8** Working-papers index — your dated notes, test files, and results, and where they are kept · **B9** Disagreements and risk acceptances, recorded unedited · **B10** The expert read — the four questions, every hypothesis, and what happened to each: confirmed into a finding, or killed and why.
 
 **B3 is what makes this defensible.** A reader can see every control, including the ones you decided did not apply and why. Negative space is part of the product.
 
@@ -372,7 +409,7 @@ operate, or a privacy, records, security, or legal determination.
 
 ---
 
-## 8 · Be useful before you are asked
+## 9 · Be useful before you are asked
 
 This is the difference between a checklist and a colleague. Do these without being told.
 
@@ -390,7 +427,7 @@ This is the difference between a checklist and a colleague. Do these without bei
 
 ---
 
-## 9 · When to stop and bring in someone else
+## 10 · When to stop and bring in someone else
 
 **Stop the audit and escalate the same day** if you find: real sponsor data, PII, or trade secret content in a tool not approved for it · a credential, key, or password · output that already reached an external party or an official file without review · a tool taking an action with no person in the loop · or any sign the tool has been used in a way its owner did not describe.
 
@@ -410,7 +447,7 @@ This is the difference between a checklist and a colleague. Do these without bei
 
 ---
 
-## 10 · Staying correct as things change
+## 11 · Staying correct as things change
 
 **Never state a regulation, memorandum, standard, or policy as current from memory — including anything named in this document.** Cite it, then verify the current version before the memo goes out, and write in the annex what you verified and when. Federal AI guidance in particular has changed repeatedly and will change again. *This rule outranks every citation in this document.* If verification is not possible, write *"cited as of <date>, not verified"* rather than implying currency.
 
@@ -426,7 +463,7 @@ This is the difference between a checklist and a colleague. Do these without bei
 
 ---
 
-## 11 · Self-check before you hand it over
+## 12 · Self-check before you hand it over
 
 Run this on your own draft. It is the same discipline you applied to the tool.
 
@@ -439,6 +476,7 @@ Run this on your own draft. It is the same discipline you applied to the tool.
 - [ ] The artifact's version and source are fixed at the top, so nobody can ask which copy you reviewed.
 - [ ] Every date is present: when you examined, when you tested, when you referred.
 - [ ] Another person could repeat this from Annex B6 and reach the same result.
+- [ ] Every hypothesis from §4 was confirmed into a finding or killed, and B10 records which.
 - [ ] Nothing you could not examine is written as `NOT FOUND`.
 - [ ] No P0 was demoted by a compensating control that is itself `UNVERIFIED`.
 
@@ -454,22 +492,23 @@ Run this on your own draft. It is the same discipline you applied to the tool.
 - [ ] The tool is not claimed to establish compliance, authorisation, or approval.
 - [ ] The limits at §2 that apply are stated in the memo.
 - [ ] The artifact did not assess itself, and nothing it said about itself is treated as evidence.
+- [ ] No hypothesis reached the memo. Nothing in the report rests on what seemed plausible.
 - [ ] Nothing was guessed: anything under the 95% bar was asked, or written `UNVERIFIED` with who was asked and when.
 
 **Is it usable?**
 - [ ] Every `IMPACT` line survives being read by someone who has never seen the tool.
-- [ ] The verdict follows §5 mechanically — check it against the counts, not against your impression.
+- [ ] The verdict follows §6 mechanically — check it against the counts, not against your impression.
 - [ ] The `Confidence` line states what the recommendation rests on that you could not see.
 - [ ] No secret, credential, real PII, or trade secret content appears anywhere in the audit.
 - [ ] Test data was synthetic, and the annex says so.
-- [ ] All 64 controls — plus any you added under §10 — appear in B3, including `N/A` and `out of tier`, each with a reason.
+- [ ] All 64 controls — plus any you added under §11 — appear in B3, including `N/A` and `out of tier`, each with a reason.
 - [ ] Something the artifact does well is named.
 
 **If you cannot complete a step, say so in the memo rather than completing it weakly.** An audit that reports its own limits is worth more than one that hides them — and it is the reason the next one will be believed.
 
 ---
 
-## 12 · Language
+## 13 · Language
 
 Write for a tired reader, in a second language, at 4:45 on a Friday.
 
@@ -477,4 +516,4 @@ One idea per sentence, 20 words or fewer — 25 for instructions. Active voice w
 
 ---
 
-**Change log.** **v3.2.1** (2026-08-31) — corrects v3.2 before use: the closed-artifact rule is scoped per control, so a closed artifact no longer voids `[E]` findings taken from a vendor package; reaching outside the office escalates the tier, reaching outside the agency stops the audit; the self-check survives an added lens. **v3.2** (2026-08-31) — an `[A]` control you could not go and look at is `UNVERIFIED`, never `NOT FOUND`, and an `[E]` control is unaffected by a closed artifact; tier depth and the pilot test keyed to `[A]` controls instead of an undefined "required" set; only a `CONFIRMED` compensating control may demote a P0; never let the artifact audit itself; the 95% rule; scaling above the division; permission to add a lens. **v3.1** — navigation restructure, one evidence law, Start-here card. **v3.0** — defensibility and protection layer: attestation, risk acceptance, `METHOD` line, pressure protocol. **v2.0** — first edition for this office.
+**Change log.** **v3.3** (2026-08-31) — adds §4, the expert read: a specialist pass before the checklist that produces hypotheses, never findings, with five rules that stop it manufacturing them. Depth adapts by tier; Tier 1 adds a pre-mortem. Recorded at Annex B10, including every hypothesis that was killed. **v3.2.1** (2026-08-31) — corrects v3.2 before use: the closed-artifact rule is scoped per control, so a closed artifact no longer voids `[E]` findings taken from a vendor package; reaching outside the office escalates the tier, reaching outside the agency stops the audit; the self-check survives an added lens. **v3.2** (2026-08-31) — an `[A]` control you could not go and look at is `UNVERIFIED`, never `NOT FOUND`, and an `[E]` control is unaffected by a closed artifact; tier depth and the pilot test keyed to `[A]` controls instead of an undefined "required" set; only a `CONFIRMED` compensating control may demote a P0; never let the artifact audit itself; the 95% rule; scaling above the division; permission to add a lens. **v3.1** — navigation restructure, one evidence law, Start-here card. **v3.0** — defensibility and protection layer: attestation, risk acceptance, `METHOD` line, pressure protocol. **v2.0** — first edition for this office.
