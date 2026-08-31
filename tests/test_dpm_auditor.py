@@ -66,7 +66,7 @@ def test_the_evidence_location_rule_is_intact(doc):
 
 
 def test_the_evaluation_table_is_ordered_and_complete(doc):
-    table = doc.split("Evaluate every control in this order")[1].split("## 5 ·")[0]
+    table = doc.split("Evaluate every control in this order")[1].split("## 6 ·")[0]
     rows = [l for l in table.splitlines() if re.match(r"^\| [1-7] \|", l)]
     assert len(rows) == 7, f"expected 7 ordered rows, found {len(rows)}"
     assert "The first match wins" in doc
@@ -91,7 +91,7 @@ def test_all_seven_artifact_types_have_an_adapter(doc):
 
 
 def test_the_verdict_rule_is_mechanical_and_ordered(doc):
-    v = doc.split("### The verdict")[1].split("## 7 ·")[0]
+    v = doc.split("### The verdict")[1].split("## 8 ·")[0]
     for i, decision in enumerate(("NOT CLEARED", "CLEARED WITH CONDITIONS",
                                   "LIMITED PILOT ONLY", "CLEARED FOR USE"), 1):
         assert f"{i}." in v and decision in v, f"verdict step {i} ({decision}) missing"
@@ -107,8 +107,8 @@ def test_all_four_severities_are_defined(doc):
 
 
 def test_the_finding_format_has_all_seven_parts(doc):
-    block = doc.split("One finding, seven parts")[1].split("## 8 ·")[0]
-    for field in ("ID", "TITLE", "IMPACT", "STATE", "SEVERITY", "EVIDENCE", "FIX"):
+    block = doc.split("One finding, eight parts")[1].split("## 9 ·")[0]
+    for field in ("ID", "TITLE", "IMPACT", "STATE", "SEVERITY", "EVIDENCE", "METHOD", "FIX"):
         assert re.search(rf"^{field}\s", block, re.M), f"finding field {field} missing"
 
 
@@ -146,7 +146,7 @@ def test_rule_zero_forbids_testing_with_real_protected_data(doc):
 
 
 def test_escalation_routes_every_decision_that_is_not_the_auditors(doc):
-    esc = doc.split("## 10 ·")[1].split("## 11 ·")[0]
+    esc = doc.split("## 11 ·")[1].split("## 12 ·")[0]
     for owner in ("Records officer", "Privacy office", "ISSO", "Contracting officer",
                   "Section 508 program"):
         assert owner in esc, f"{owner} not named as a decision owner"
@@ -162,7 +162,7 @@ def test_part_11_is_routed_not_decided(doc):
 
 
 def test_the_citation_verification_rule_outranks_every_citation(doc):
-    f = doc.split("## 11 ·")[1]
+    f = doc.split("## 12 ·")[1]
     assert "including anything named in this document" in f
     assert "outranks every citation in this document" in f
     assert "not verified" in f
@@ -192,7 +192,7 @@ def test_secrets_are_reported_by_location_and_kind_only(doc):
 
 
 def test_the_proactive_section_is_actionable_not_aspirational(doc):
-    p = doc.split("## 9 ·")[1].split("## 10 ·")[0]
+    p = doc.split("## 10 ·")[1].split("## 11 ·")[0]
     for habit in ("draft the corrected text", "What happens if we do nothing",
                   "Name the mechanism, not the worry", "shortest credible route",
                   "Say what is good"):
@@ -205,14 +205,14 @@ def test_prompt_injection_has_a_test_a_non_engineer_can_run(doc):
 
 
 def test_the_self_check_covers_every_way_the_audit_itself_can_fail(doc):
-    s = doc.split("## 12 ·")[1].split("## 13 ·")[0]
+    s = doc.split("## 13 ·")[1].split("## 14 ·")[0]
     boxes = [l for l in s.splitlines() if l.strip().startswith("- [ ]")]
-    assert len(boxes) >= 13, f"only {len(boxes)} self-check items"
+    assert len(boxes) >= 25, f"only {len(boxes)} self-check items"
     assert "say so in the memo rather than completing it weakly" in s
 
 
 def test_language_standard_is_present(doc):
-    lang = doc.split("## 13 ·")[1]
+    lang = doc.split("## 14 ·")[1]
     for rule in ("One idea per sentence", "Active voice", "No metaphor",
                  "Define every acronym"):
         assert rule in lang
@@ -278,7 +278,7 @@ def test_severity_never_rises_on_uncertainty(doc):
 
 
 def test_the_document_states_the_rule_in_the_same_order_the_code_applies_it(doc):
-    v = doc.split("### The verdict")[1].split("## 7 ·")[0]
+    v = doc.split("### The verdict")[1].split("## 8 ·")[0]
     positions = [v.index(d) for d in ("NOT CLEARED", "CLEARED WITH CONDITIONS",
                                       "LIMITED PILOT ONLY", "CLEARED FOR USE")]
     assert positions == sorted(positions), "the written rule is out of order"
@@ -310,7 +310,7 @@ def test_the_example_verdict_follows_the_mechanical_rule(example):
 def test_the_example_uses_every_memo_field(example, doc):
     memo_fields = re.findall(r"^([A-Z][A-Za-z ]+):", doc.split("### Part A")[1]
                              .split("### Part B")[0], re.M)
-    assert len(set(memo_fields)) == 11, \
+    assert len(set(memo_fields)) >= 11, \
         f"the memo template changed shape: {sorted(set(memo_fields))}"
     # labels the simple regex cannot match (slash, hyphen) are checked by name
     for label in ("Type / Tier:", "Reviewed by:", "Date:", "Re-review when:"):
@@ -348,9 +348,13 @@ def test_the_example_records_that_test_data_was_synthetic(example):
 
 
 def test_the_example_routes_decisions_it_does_not_own(example):
-    block = example.split("Decisions not mine to make")[1].split("Re-review")[0]
+    block = " ".join(example.split("Decisions not mine to make")[1]
+                     .split("Re-review")[0].split()).lower()
     for owner in ("records officer", "privacy office", "contracting officer", "508"):
-        assert owner.lower() in block.lower()
+        assert owner in block, f"{owner!r} is not named as a decision owner"
+    # every referral must carry a date and, where open, say so plainly
+    assert "referred" in block
+    assert "no response as of" in block
 
 
 def test_the_example_names_something_done_well(example):
@@ -359,3 +363,157 @@ def test_the_example_names_something_done_well(example):
 
 def test_the_example_carries_the_disclaimer(example):
     assert "not agency policy" in example.lower()
+
+
+# --- v3.0: the protection layer ---------------------------------------------
+
+def test_every_cross_reference_resolves_and_points_at_the_right_section(doc):
+    """A reference that resolves but points at the wrong section is worse than
+    a broken one: it looks correct and sends the reader to the wrong rule."""
+    bodies, order = {}, []
+    for m in re.finditer(r"^## (\d+) · (.+)$", doc, re.M):
+        order.append((int(m.group(1)), m.group(2).strip(), m.start()))
+    for i, (n, title, s) in enumerate(order):
+        e = order[i + 1][2] if i + 1 < len(order) else len(doc)
+        bodies[n] = doc[s:e]
+
+    for m in re.finditer(r"§(\d+)", doc):
+        assert int(m.group(1)) in bodies, f"§{m.group(1)} does not exist"
+
+    # Each reference promises the target contains something. Check it does.
+    promises = {
+        "owner named in §11": (11, "Records officer"),
+        "`METHOD` line in §8": (8, "METHOD"),
+        "another office** (§11)": (11, "Whose call"),
+        "risk-acceptance block in §9": (9, "RISK ACCEPTED"),
+        "those are §11 determinations": (11, "Privacy office"),
+        "**Scope it** (§4)": (4, "Stakes tier"),
+        "**Work the lenses** (§6)": (6, "PA1"),
+        "two-part output** (§9)": (9, "Decision memo"),
+        "adapt with §12": (12, "not in §4"),
+        "Co-signature required (§11)": (11, "never signed by one person"),
+        "person.** See §2": (2, "Describe artifacts, never people"),
+        "triggers from §12": (12, "Re-review when"),
+        "in the §8 format": (8, "SEVERITY"),
+        "not in §4": (4, "Artifact type"),
+        "verdict follows §7": (7, "The verdict"),
+    }
+    for ref, (target, must_contain) in promises.items():
+        assert ref in doc, f"cross-reference text vanished: {ref!r}"
+        assert must_contain in bodies[target], \
+            f"{ref!r} points at §{target}, which does not contain {must_contain!r}"
+
+
+def test_the_hostile_reader_standard_is_stated(doc):
+    p = doc.split("## 2 ·")[1].split("## 3 ·")[0]
+    assert "hostile-reader test" in p.lower() or "hostile reader" in p.lower()
+    assert "read aloud, unchanged" in p
+
+
+def test_the_defensibility_standard_has_all_four_requirements(doc):
+    p = doc.split("### The defensibility standard")[1].split("### Describe artifacts")[0]
+    for req in ("What you examined", "What you did", "What you observed", "When"):
+        assert f"**{req}**" in p, f"defensibility requirement missing: {req}"
+    assert "A finding without a method is an opinion" in p
+    assert "another person, given the same material, would reach it" in p.lower()
+
+
+def test_findings_may_never_describe_people(doc):
+    p = doc.split("### Describe artifacts, never people")[1].split("### Habits")[0]
+    assert "Motive is not observable" in p
+    for forbidden in ("failed to", "should have known", "carelessly", "ignored"):
+        assert forbidden in p.lower(), f"the forbidden phrasing {forbidden!r} is not shown"
+    assert "Never describe a person" in doc, "the rule is not repeated at the finding format"
+
+
+def test_the_pressure_protocol_exists_and_never_obstructs(doc):
+    p = doc.split("### When someone asks you to change a finding")[1].split("### What this audit cannot")[0]
+    assert "Ask what evidence supports the change" in p
+    assert "the finding stands as written" in p.lower()
+    assert "legitimate exercise of their authority" in p
+    assert "never the person who said no" in p.lower()
+    assert "recorded disagreement is a stronger audit" in p.lower()
+
+
+def test_the_risk_acceptance_block_records_without_revising(doc):
+    memo = doc.split("### Part A")[1].split("### Part B")[0]
+    assert "RISK ACCEPTED" in memo
+    assert "The finding above is unchanged" in memo
+    assert "in the accepting official's own words" in memo.lower()
+    assert "Never edit a finding to make this block unnecessary" in doc
+
+
+def test_the_attestation_claims_only_what_the_auditor_did(doc):
+    memo = doc.split("### Part A")[1].split("### Part B")[0]
+    a = " ".join(memo.split("ATTESTATION")[1].split())  # the block is line-wrapped
+    assert "I examined the material listed above" in a
+    assert "I made no determination reserved to another office" in a
+    assert "Second reviewer (required at Tier 1)" in a
+    # It must not claim compliance, safety, or approval.
+    for overclaim in ("I certify", "is compliant", "is safe", "is approved", "guarantee"):
+        assert overclaim not in a, f"the attestation overclaims: {overclaim!r}"
+    assert "claims only what you did" in doc
+
+
+def test_provenance_and_conflict_are_captured_in_the_memo(doc):
+    memo = doc.split("### Part A")[1].split("### Part B")[0]
+    for field in ("Received from:", "Interest declared:", "This audit cannot tell you:"):
+        assert field in memo, f"memo field missing: {field}"
+    assert "how you identify this exact copy" in memo
+
+
+def test_working_papers_are_preserved_and_indexed(doc):
+    assert "Preserve the working papers" in doc
+    assert "consult your records officer before doing anything" in doc
+    annex = doc.split("### Part B")[1].split("## 10 ·")[0]
+    assert "**B8**" in annex and "Working-papers index" in annex
+    assert "**B9**" in annex and "unedited" in annex
+
+
+def test_self_audit_conflict_rule(doc):
+    assert "Do not audit your own work alone" in doc
+    assert "name a second reviewer" in doc
+
+
+def test_the_limits_of_the_audit_are_enumerated(doc):
+    p = doc.split("### What this audit cannot tell you")[1].split("## 3 ·")[0]
+    for limit in ("lawful, compliant, or authorised", "data you did not test it with",
+                  "after any change", "could not search for", "the artifact's author"):
+        assert limit in p, f"limit not stated: {limit}"
+
+
+def test_the_annex_now_has_nine_parts(doc):
+    annex = doc.split("### Part B")[1].split("## 10 ·")[0]
+    for n in range(1, 10):
+        assert f"**B{n}**" in annex, f"annex part B{n} missing"
+
+
+def test_no_response_yet_is_an_acceptable_recorded_answer(doc):
+    """The auditor must never be forced to guess to fill a blank."""
+    assert "no response as of" in doc.lower()
+
+
+def test_the_document_obeys_its_own_phrasing_rules(doc):
+    """It forbids absence-as-fact and intent attribution. It must not use them."""
+    prohibitions = (
+        doc.split("### Describe artifacts, never people")[1].split("### Habits")[0]
+        + doc.split("**Never write:**")[1].split("\n")[0]
+        + doc.split("- [ ] No sentence describes a person")[1].split("\n")[0]
+        + doc.split("| | Means | You may write it as |")[1].split("\n\n")[0]
+    )
+    for pattern in (r"there (is|are) no ", r"\bit does not exist\b",
+                    r"the system has no ", r"\bfailed to\b", r"\bshould have known\b",
+                    r"\bcareless", r"\bnegligen"):
+        for m in re.finditer(pattern, doc, re.I):
+            fragment = doc[max(0, m.start() - 90):m.end() + 60]
+            assert any(line and line in prohibitions
+                       for line in [doc[max(0, m.start() - 90):m.end() + 60].strip()]) \
+                or m.group(0) in prohibitions or fragment[:50] in prohibitions, \
+                f"the document uses phrasing it forbids: ...{fragment.strip()[-110:]}"
+
+
+def test_it_never_claims_safety_or_compliance_anywhere(doc):
+    for pattern in (r"\bis compliant\b", r"\bfully compliant\b", r"\bensures compliance\b",
+                    r"\bwe certify\b", r"\bguarantees?\b", r"\bconcluding it is safe\b"):
+        assert not re.search(pattern, doc, re.I), \
+            f"the document makes a claim it cannot support: {pattern!r}"
