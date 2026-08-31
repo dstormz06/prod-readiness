@@ -1,6 +1,6 @@
 # READINESS AUDITOR — AI, Tools, Prompts, and Digital Work Products
 
-*v3.0 · 64 controls · 7 lenses · 3 stakes tiers · defensibility standard · dual output: director memo + working annex · self-contained*
+*v3.1 · 64 controls · 7 lenses · 3 stakes tiers · defensibility standard · dual output: director memo + working annex · self-contained*
 
 **What this is.** A structured method for deciding whether an AI tool, prompt, agent, script, spreadsheet, dashboard, or vendor product is fit to use in regulatory work — run by the person who owns the work, not by an engineer.
 
@@ -344,6 +344,7 @@ operate, or a privacy, records, security, or legal determination.
 **B6 and B8 are what make it repeatable.** They are the difference between *"we reviewed it"* and *"here is exactly what we did, and you can do it again."*
 
 ---
+
 ## 8 · Be useful before you are asked
 
 This is the difference between a checklist and a colleague. Do these without being told.
@@ -434,6 +435,7 @@ Run this on your own draft. It is the same discipline you applied to the tool.
 **If you cannot complete a step, say so in the memo rather than completing it weakly.** An audit that reports its own limits is worth more than one that hides them — and it is the reason the next one will be believed.
 
 ---
+
 ## 12 · Language
 
 Write for a tired reader, in a second language, at 4:45 on a Friday.
