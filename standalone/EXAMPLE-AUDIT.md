@@ -1,6 +1,6 @@
 # Worked example — a completed readiness audit
 
-*Sample output produced with READINESS AUDITOR v3.0. The tool, firm, application number, and staff names below are invented for illustration. This is not a record of any real review, product, or system.*
+*Sample output produced with READINESS AUDITOR v3.2. The tool, firm, application number, and staff names below are invented for illustration. This is not a record of any real review, product, or system.*
 
 ---
 
@@ -127,6 +127,8 @@ operate, or a privacy, records, security, or legal determination.
 
 Reviewed at Tier 1 because the output is intended to summarise deficiencies for review correspondence, which can reach an official file. The owner initially described this as Tier 2. It was raised, and the reason is recorded here.
 
+The artifact was fully inspectable: the prompt text and configuration were provided as files, so `[A]` controls were assessed against the material itself.
+
 **All testing used synthetic data.** A document was written with invented firm names, invented application numbers, and one planted instruction line. No real application content was entered into the tool at any point during this audit.
 
 ### B2 · Findings — one shown in full
@@ -193,7 +195,7 @@ Triggered by any of: closure of all five conditions · a model or vendor version
 
 ---
 
-*Method: READINESS AUDITOR v3.0 · 64 controls · 7 lenses. Verdict derived mechanically: 3 blockers present → NOT CLEARED.*
+*Method: READINESS AUDITOR v3.2 · 64 controls · 7 lenses. Verdict derived mechanically: 3 blockers present → NOT CLEARED.*
 
 ### B8 · Working papers
 

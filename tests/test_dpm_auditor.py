@@ -218,8 +218,14 @@ def test_language_standard_is_present(doc):
         assert rule in lang
 
 
-def test_it_carries_a_version_marker(doc):
-    assert re.search(r"v\d+\.\d+ · \d+ controls · \d+ lenses", doc)
+def test_it_carries_a_dated_version_marker_and_a_change_log(doc):
+    """Section 10 tells the reader to number and date every artefact. The
+    method must not fail its own rule."""
+    assert re.search(r"v\d+\.\d+ · \d{4}-\d{2}-\d{2} · \d+ controls · \d+ lenses", doc), \
+        "the version marker carries no date"
+    assert "**Change log.**" in doc
+    for version in ("v3.2", "v3.1", "v3.0", "v2.0"):
+        assert f"**{version}**" in doc, f"{version} is missing from the change log"
 
 
 def test_no_secret_shaped_example_leaks_into_the_document(doc):
@@ -270,11 +276,17 @@ def test_verdict_boundaries(p0, p1, tier, unv, expected):
     assert verdict(p0, p1, tier, unv) == expected
 
 
-def test_severity_never_rises_on_uncertainty(doc):
-    """An UNVERIFIED item can gate a tier-1 pilot but can never become a blocker."""
+def test_uncertainty_may_not_move_severity_in_either_direction(doc):
+    """An UNVERIFIED item can gate a tier-1 pilot but can never become a
+    blocker - and, since v3.2, it can never demote one either. An unverified
+    compensating control was the cheapest way to game the verdict."""
     assert verdict(0, 0, 1, 99) != "NOT CLEARED"
     assert "Uncertainty never raises severity" in doc
-    assert "A compensating control always lowers it" in doc
+    assert "A `CONFIRMED` compensating control lowers it" in doc
+    assert "uncertainty may not move severity in either direction" in doc
+    p0 = doc.split("| **P0 — Blocker** |")[1].split("\n")[0]
+    assert "`CONFIRMED` compensating control" in p0
+    assert "never demotes a P0" in p0
 
 
 def test_the_document_states_the_rule_in_the_same_order_the_code_applies_it(doc):
@@ -517,3 +529,69 @@ def test_it_never_claims_safety_or_compliance_anywhere(doc):
                     r"\bwe certify\b", r"\bguarantees?\b", r"\bconcluding it is safe\b"):
         assert not re.search(pattern, doc, re.I), \
             f"the document makes a claim it cannot support: {pattern!r}"
+
+
+# --- v3.2 -------------------------------------------------------------------
+
+def test_an_artifact_you_cannot_open_never_yields_not_found(doc):
+    """The most dangerous defect v3.1 carried: closed vendor tools produced
+    confident absences from material nobody was ever shown."""
+    law = doc.split("### Where the answer lives")[1].split("## 2 ·")[0]
+    assert "You could not open it" in law
+    assert "every `[A]` control becomes `[E]` for this audit" in law
+    assert "You cannot establish an absence in material nobody showed you" in law
+    rows = [l for l in law.splitlines() if re.match(r"^\| [1-8] \|", l)]
+    assert len(rows) == 8, f"expected 8 ordered rows, found {len(rows)}"
+    closed = [r for r in rows if "could not examine the artifact" in r]
+    assert len(closed) == 1 and "**UNVERIFIED**" in closed[0] and "Never `NOT FOUND`" in closed[0]
+    assert rows.index(closed[0]) == 2, "the closed-artifact row must precede the present/absent rows"
+
+
+def test_required_control_is_no_longer_an_undefined_term(doc):
+    """Tier depth and the pilot test both keyed on a set nothing defined."""
+    assert "controls marked required" not in doc
+    assert "any required control is `UNVERIFIED`" not in doc
+    assert "any `[A]` control is `UNVERIFIED`" in doc
+    tier2 = [l for l in doc.splitlines() if l.startswith("| **2 — Reviewed work product**")][0]
+    assert "Every `[A]` control" in tier2 and "where documentation was provided" in tier2
+
+
+def test_the_artifact_may_not_audit_itself(doc):
+    assert "Never ask the artifact to audit itself" in doc
+    assert "under-reports" in doc
+    assert "a claim to verify, never evidence" in doc
+
+
+def test_the_95_percent_rule_resolves_ask_against_just_fix_it(doc):
+    """Two instructions that would otherwise contradict each other."""
+    r = doc.split("### When you are not sure")[1].split("### When someone asks")[0]
+    assert "Resolve it yourself, or ask. Never guess." in r
+    assert "Fix it silently" in r and "reversible" in r
+    assert "less than about 95% certain" in r
+    for gated in ("state", "severity", "verdict", "leaves this audit"):
+        assert gated in r, f"the 95% gate does not name {gated!r}"
+    assert "that is not permission to guess" in r
+
+
+def test_it_scales_above_the_division_without_widening_authority(doc):
+    s = doc.split("### Above the division")[1].split("## 4 ·")[0]
+    for reach in ("Another division or office", "cited as precedent",
+                  "agency-level system", "outside the agency"):
+        assert reach in s, f"scaling row missing: {reach}"
+    assert "Do not invent authority you do not have" in s
+    assert "more signatures, not a bolder auditor" in s
+
+
+def test_a_new_risk_class_may_get_a_new_lens(doc):
+    assert "When a risk has no lens" in doc
+    assert "mark the audit `extended`" in doc
+    assert "a floor, not a ceiling" in doc
+
+
+def test_the_new_rules_reach_the_self_check(doc):
+    s = doc.split("## 11 ·")[1].split("## 12 ·")[0]
+    for item in ("Nothing you could not examine is written as `NOT FOUND`",
+                 "compensating control that is itself `UNVERIFIED`",
+                 "artifact did not assess itself",
+                 "Nothing was guessed"):
+        assert item in s, f"self-check item missing: {item}"

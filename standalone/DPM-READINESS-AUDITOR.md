@@ -1,8 +1,8 @@
 # READINESS AUDITOR — AI, Tools, Prompts, and Digital Work Products
 
-*v3.1 · 64 controls · 7 lenses · 3 stakes tiers · defensibility standard · dual output: director memo + working annex · self-contained*
+*v3.2 · 2026-08-31 · 64 controls · 7 lenses · 3 stakes tiers · defensibility standard · dual output: director memo + working annex · self-contained*
 
-**What this is.** A structured method for deciding whether an AI tool, prompt, agent, script, spreadsheet, dashboard, or vendor product is fit to use in regulatory work — run by the person who owns the work, not by an engineer.
+**What this is.** A structured method for deciding whether a tool is fit to use in regulatory work — an AI product, a prompt, an agent, a script, a spreadsheet, a dashboard, a vendor service, or any digital thing whose output reaches the work. Run by the person who owns the work, not by an engineer.
 
 **What this is not.** Not agency policy. Not an Authority to Operate. Not a privacy, records, security, or legal determination. It does not confer or establish compliance with any regulation. It produces an evidence-backed recommendation and names exactly who must decide the parts you cannot. Say this on the memo. A tool that overstates its own authority is the first thing a reviewer distrusts.
 
@@ -14,7 +14,7 @@
 |---|---|---|
 | **New to this** | Read a completed example first, then §0 and §1. | §0, §1 |
 | **Running a quick check** — no agency data, no work product | Tier 3: lenses L1, L3, L7 only. One page. ~30 min. | §3, §4 |
-| **Auditing a work product** — drafts a person fully reviews | Tier 2: all 7 lenses, required controls. ~2–4 hrs. | §3–§7 |
+| **Auditing a work product** — drafts a person fully reviews | Tier 2: all 7 lenses, every `[A]` control. ~2–4 hrs. | §3–§7 |
 | **Auditing anything decision-adjacent** | Tier 1: everything, and a co-signer. ~1–2 days. | all, and §9 |
 | **Being asked to change a finding** | Go straight to §2. | §2 |
 
@@ -44,13 +44,14 @@ Three claims look identical in a memo and are not:
 
 **A confident wrong absence is the most expensive error this method prevents.** It sends someone to build a control that already exists, or tells a director a gap is closed when nobody checked. Every rule below exists to keep these three apart.
 
-**Uncertainty never raises severity. A compensating control always lowers it.**
+**Uncertainty never raises severity.** A `CONFIRMED` compensating control lowers it. An `UNVERIFIED` one is recorded and changes nothing — uncertainty may not move severity in either direction.
 
 ### Where the answer lives decides which state you may use
 
 Every control is marked for where its answer normally lives:
 
 - **`[A]` In the artifact.** You can read it: the prompt text, the code, the workbook, the config, the instructions. **You are the right place to look, so silence supports `NOT FOUND`.**
+- **You could not open it.** A purchased service you can only drive through its interface, a model you cannot see inside. Then **every `[A]` control becomes `[E]` for this audit.** Say that once in the memo and once in Annex B1. You cannot establish an absence in material nobody showed you.
 - **`[E]` External.** It lives in a vendor package, a security assessment, an approval record, a runtime log, or an office policy. **Silence proves nothing, so it is `UNVERIFIED`** — unless the submitted package includes that documentation, in which case you *were* given the right place to look and silence becomes `NOT FOUND`.
 
 **Evaluate every control in this order. The first match wins.**
@@ -58,14 +59,15 @@ Every control is marked for where its answer normally lives:
 | # | Condition | Supports | Meaning |
 |---|---|---|---|
 | 1 | The control cannot apply to this artifact type | — | Not applicable. A prompt with no interface has no interface to make accessible. Record it as N/A with the reason. |
-| 2 | Below the tier's required depth | — | Out of scope for this audit. Say so; do not imply it passed. |
-| 3 | Present and adequate | — | Confirmed present. Judge whether it is **sufficient**, not whether it exists. |
-| 4 | Present and inadequate or wrong | **CONFIRMED** | A finding. Cite exactly where. |
-| 5 | Absent, `[A]` | **NOT FOUND** | You had the right material. The silence is real. |
-| 6 | Absent, `[E]`, **package includes that documentation** | **NOT FOUND** | You were given the right place to look. |
-| 7 | Absent, `[E]`, no such documentation given | **UNVERIFIED** | Name the exact document that would settle it, and who holds it. |
+| 2 | Below the tier's depth | — | Out of scope for this audit. Say so; do not imply it passed. |
+| 3 | You could not examine the artifact itself | **UNVERIFIED** | Never `NOT FOUND`. Name the access that would settle it. |
+| 4 | Present and adequate | — | Confirmed present. Judge whether it is **sufficient**, not whether it exists. |
+| 5 | Present and inadequate or wrong | **CONFIRMED** | A finding. Cite exactly where. |
+| 6 | Absent, `[A]` | **NOT FOUND** | You had the right material. The silence is real. |
+| 7 | Absent, `[E]`, **package includes that documentation** | **NOT FOUND** | You were given the right place to look. |
+| 8 | Absent, `[E]`, no such documentation given | **UNVERIFIED** | Name the exact document that would settle it, and who holds it. |
 
-Order matters: a control that is present but weak is row 4, not row 3. A control absent from a tier you did not audit is row 2, never row 5.
+Order matters: a control that is present but weak is row 5, not row 4. A control absent from a tier you did not audit is row 2, never row 6. **A control you could not go and look at is row 3, whatever it is about.**
 
 ---
 
@@ -108,7 +110,19 @@ Motive is not observable and is never yours to assert. **This one rule removes m
 
 **Do not audit your own work alone.** If you built, own, selected, or recommended the artifact, say so in the memo and name a second reviewer. Declared, it is a fact about the review. Undeclared and later discovered, it is the whole story.
 
+**Never ask the artifact to audit itself.** An AI asked to assess its own instructions under-reports, fluently, and the output looks like a completed audit. A tool's self-assessment is a claim to verify, never evidence.
+
 **Never make a determination reserved to another office** (§9). If you are asked to anyway, record the referral, the date, and the response — including *"no response as of <date>."* That sentence is complete, accurate, and protective. A guess is none of the three.
+
+### When you are not sure — the 95% rule
+
+**Resolve it yourself, or ask. Never guess.**
+
+**Fix it silently** when the work is reversible, inside this audit, and needs no judgement from anyone else: a date you can look up, a control you can re-check, a wording fix in your own draft, a test you can simply run again. Do not spend a colleague's attention on something you can settle in two minutes.
+
+**Ask before you write it down** whenever you are less than about 95% certain **and** the answer would change a finding's state, its severity, the verdict, whose decision something is, or anything that leaves this audit. One question now costs less than a correction to a signed memo.
+
+Ask the shortest question that unblocks you, say what you will do with each answer, and record the answer with its date. **If nobody answers, that is not permission to guess.** Write `UNVERIFIED`, name who was asked and when, and carry on.
 
 ### When someone asks you to change a finding
 
@@ -155,12 +169,25 @@ State these in the memo so no reader supplies them for you:
 | Tier | Test | Depth |
 |---|---|---|
 | **1 — Decision-adjacent** | Output could reach a submission assessment, an action letter, an inspection record, a policy document, an official file, or anything external | **All 7 lenses, all controls.** Co-signature required (§9). |
-| **2 — Reviewed work product** | Drafts, summaries, analyses, trackers a person fully reviews before use; internal only | **All 7 lenses, controls marked required.** Solo audit with named reviewer. |
+| **2 — Reviewed work product** | Drafts, summaries, analyses, trackers a person fully reviews before use; internal only | **All 7 lenses. Every `[A]` control; each `[E]` control where documentation was provided.** Solo audit with named reviewer. |
 | **3 — Personal productivity** | Formatting, scheduling, brainstorming, no agency data, no work product | **Lenses 1, 3, 7 only.** One page. |
 
-**When the tier is arguable, take the higher one and say why in one line.** Under-scoping is the failure a director notices; over-scoping costs an afternoon.
+**When the tier is arguable, take the higher one and say why in one line.** Under-scoping is what a director notices; over-scoping costs an afternoon.
 
 **Escalate the tier immediately** if, at any point, you find: output reaching an external party · real sponsor data · an action taken without a person · or a decision the tool makes rather than informs.
+
+### Above the division
+
+The tiers assume a decision your division owns. Raise the floor when the audit reaches further.
+
+| Reach | What changes |
+|---|---|
+| Another division or office will rely on it | Tier 1 floor. Name their reviewer as a co-signer, not a reader. |
+| It will be cited as precedent | Record the reasoning, not only the verdict. The next audit copies your logic, so make the logic inspectable. |
+| It touches an agency-level system, policy, or commitment | Tier 1 floor. Settle the authority question (§9) before you start, not at the end. |
+| Anything reaches outside the agency | Stop. That is a clearance question before it is an audit question. |
+
+**Do not invent authority you do not have.** This method scales by adding reviewers and evidence — never by widening whose decision you are making. An audit that reaches further needs more signatures, not a bolder auditor.
 
 ---
 
@@ -218,8 +245,8 @@ Work each lens in order. For every control record: **the answer · where you loo
 
 | | Meaning | Test |
 |---|---|---|
-| **P0 — Blocker** | A credible path to a wrong regulatory outcome, a disclosure of protected information, an unreviewable official record, or an action taken without a person — with no adequate compensating control | **You can write the path down concretely.** If you cannot, it is not a P0. If a compensating control plausibly stops it, it is a P1. |
-| **P1 — Serious** | Likely to produce rework, an inconsistent result between reviewers, or an obligation that cannot be met | A required control is absent within scope |
+| **P0 — Blocker** | A credible path to a wrong regulatory outcome, a disclosure of protected information, an unreviewable official record, or an action taken without a person — with no adequate compensating control | **You can write the path down concretely.** If you cannot, it is not a P0. If a `CONFIRMED` compensating control plausibly stops it, it is a P1. An `UNVERIFIED` one never demotes a P0 — record it and leave the severity where it is. |
+| **P1 — Serious** | Likely to produce rework, an inconsistent result between reviewers, or an obligation that cannot be met | A control this tier covers is absent within scope |
 | **P2 — Moderate** | Friction, inefficiency, or a gap that will matter at larger scale | Fix on a schedule |
 | **P3 — Minor** | Polish, clarity, convenience | If it would not change a decision, leave it out |
 
@@ -231,10 +258,10 @@ A demand for enterprise controls on a three-person spreadsheet is not rigour. It
 
 1. **Any P0** → **NOT CLEARED**
 2. Else, any P1 → **CLEARED WITH CONDITIONS** — each condition gets an owner and a date
-3. Else, if Tier 1 **and** any required control is `UNVERIFIED` → **LIMITED PILOT ONLY** — bounded scope, synthetic or non-sensitive data, no regulatory decisions, until the unknowns close
+3. Else, if Tier 1 **and** any `[A]` control is `UNVERIFIED` → **LIMITED PILOT ONLY** — bounded scope, synthetic or non-sensitive data, no regulatory decisions, until the unknowns close
 4. Else → **CLEARED FOR USE**
 
-Do not soften a P0 to sound balanced. Do not harden an `UNVERIFIED` to sound decisive. **The verdict is only worth what the evidence behind it is worth**, and a reviewer can tell the difference.
+Do not soften a P0 to sound balanced. Do not harden an `UNVERIFIED` to sound decisive. **The verdict is only worth what the evidence behind it is worth**, and a reviewer can tell.
 
 ---
 
@@ -341,15 +368,15 @@ operate, or a privacy, records, security, or legal determination.
 
 **B3 is what makes this defensible.** A reader can see every control, including the ones you decided did not apply and why. Negative space is part of the product.
 
-**B6 and B8 are what make it repeatable.** They are the difference between *"we reviewed it"* and *"here is exactly what we did, and you can do it again."*
+**B6 and B8 are what make it repeatable** — the difference between *"we reviewed it"* and *"here is exactly what we did, and you can do it again."*
 
 ---
 
 ## 8 · Be useful before you are asked
 
-This is the difference between a checklist and a colleague. Do these without being told.
+Do these without being told. It is the difference between a checklist and a colleague.
 
-**Fix it while you are in there.** When a finding has an obvious, low-risk remedy — a missing "say when you do not know" instruction, an absent version number, a scope statement, a redaction step — **draft the corrected text in the annex** so the owner can paste it rather than interpret you. A finding with a ready fix gets closed; a finding with a critique gets defended.
+**Fix it while you are in there.** When a finding has an obvious, low-risk remedy — a missing "say when you do not know" instruction, an absent version number, a scope statement, a redaction step — **draft the corrected text in the annex** so the owner can paste it. A finding with a ready fix gets closed; a finding with a critique gets defended.
 
 **Answer the questions before they are asked.** A director will ask five things. Have all five in the memo already: *What happens if we do nothing? · What is the fastest path to yes? · Who else has to sign? · What does this cost us if it is wrong? · Has anyone tested it on real work?*
 
@@ -389,6 +416,8 @@ This is the difference between a checklist and a colleague. Do these without bei
 
 **When the artifact type is not in §3**, do not force it into the nearest box. Answer the seven lens questions from first principles — *should it exist and who owns it · can its output be trusted · where does the data go · could you reconstruct what happened · does it keep working · can a colleague use it · what can go wrong on purpose* — write the controls you used, and mark the audit `adapted`. The lenses are stable; the controls are examples of them.
 
+**When a risk has no lens**, add one. Name it, write its controls, say why the existing seven did not cover it, and mark the audit `extended`. The seven lenses are a floor, not a ceiling — a method that cannot grow is a method people work around.
+
 **When a control cannot apply**, record it `N/A` with the reason. Never silently drop it. A dropped control is indistinguishable from a missed one.
 
 **Re-review when any of these happens** — set the trigger, not just a date: the underlying model or vendor version changes · the tool moves to a higher stakes tier · it is used on a data type it was not cleared for · the owner or maintainer leaves · a finding's compensating control is removed · the terms of service change · **or twelve months pass**, whichever is first.
@@ -410,6 +439,8 @@ Run this on your own draft. It is the same discipline you applied to the tool.
 - [ ] The artifact's version and source are fixed at the top, so nobody can ask which copy you reviewed.
 - [ ] Every date is present: when you examined, when you tested, when you referred.
 - [ ] Another person could repeat this from Annex B6 and reach the same result.
+- [ ] Nothing you could not examine is written as `NOT FOUND`.
+- [ ] No P0 was demoted by a compensating control that is itself `UNVERIFIED`.
 
 **Does it protect you?**
 - [ ] No sentence describes a person, an intent, or what anyone should have known.
@@ -422,6 +453,8 @@ Run this on your own draft. It is the same discipline you applied to the tool.
 - [ ] Every regulation or policy cited was verified, with the date — or is marked unverified.
 - [ ] The tool is not claimed to establish compliance, authorisation, or approval.
 - [ ] The limits at §2 that apply are stated in the memo.
+- [ ] The artifact did not assess itself, and nothing it said about itself is treated as evidence.
+- [ ] Nothing was guessed: anything under the 95% bar was asked, or written `UNVERIFIED` with who was asked and when.
 
 **Is it usable?**
 - [ ] Every `IMPACT` line survives being read by someone who has never seen the tool.
@@ -441,3 +474,7 @@ Run this on your own draft. It is the same discipline you applied to the tool.
 Write for a tired reader, in a second language, at 4:45 on a Friday.
 
 One idea per sentence, 20 words or fewer — 25 for instructions. Active voice with the actor named: *"An outside user can read the draft"*, not *"the draft can be read."* One word for one meaning; do not call the same thing a tool, a system, and a solution in three sentences. Simple tenses. No noun stack longer than three words. Keep the articles. **No metaphor, no idiom, no humour, no hedging** — state the fact, or mark it `UNVERIFIED`. Define every acronym on first use. Keep identifiers, file names, cell references, and severity labels exactly as they are.
+
+---
+
+**Change log.** **v3.2** (2026-08-31) — a control you could not examine is `UNVERIFIED`, never `NOT FOUND`; tier depth and the pilot test keyed to `[A]` controls instead of an undefined "required" set; only a `CONFIRMED` compensating control may demote a P0; never let the artifact audit itself; the 95% rule; scaling above the division; permission to add a lens. **v3.1** — navigation restructure, one evidence law, Start-here card. **v3.0** — defensibility and protection layer: attestation, risk acceptance, `METHOD` line, pressure protocol. **v2.0** — first edition for this office.
