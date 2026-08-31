@@ -8,17 +8,31 @@
 
 **What it is built to do for you.** Two things put the person running an audit at risk: **claiming more than you checked**, and **deciding something that was not yours to decide.** Every rule in this document forecloses one or the other. Follow it and your audit is defensible — by a director, by a colleague who disagrees, by a request for records, and by someone reading it two years from now with no memory of the context.
 
+## Start here
+
+| You are… | Do this | Read |
+|---|---|---|
+| **New to this** | Read a completed example first, then §0 and §1. | §0, §1 |
+| **Running a quick check** — no agency data, no work product | Tier 3: lenses L1, L3, L7 only. One page. ~30 min. | §3, §4 |
+| **Auditing a work product** — drafts a person fully reviews | Tier 2: all 7 lenses, required controls. ~2–4 hrs. | §3–§7 |
+| **Auditing anything decision-adjacent** | Tier 1: everything, and a co-signer. ~1–2 days. | all, and §9 |
+| **Being asked to change a finding** | Go straight to §2. | §2 |
+
+**Three steps, every time.** 1 · **Scope it** (§3) — fix the artifact's identity, type, and tier. 2 · **Work the lenses** (§4) — for each control: *confirmed, not found, or unverified*, with what you did and where you looked. 3 · **Write the output** (§7) — director memo on top, working annex behind it.
+
+**Never skip §0.** It is the one rule that protects you before you have written anything.
+
 ---
 
 ## 0 · Rule Zero — before you audit anything
 
 **Do not use real sponsor data, personally identifiable information, trade secret or commercial confidential information, or pre-decisional material to test a tool that has not already been approved for that data.** Testing is still disclosure.
 
-Build a synthetic test set instead: realistic in shape, invented in content. Same field names, same formats, same edge cases — fabricated values. Record in the audit that the test data was synthetic. If a control can only be tested with real data, mark it `UNVERIFIED` and route it to the owner named in §11. **You never break a boundary to prove a boundary works.**
+Build a synthetic test set instead: realistic in shape, invented in content. Same field names, same formats, same edge cases — fabricated values. Record in the audit that the test data was synthetic. If a control can only be tested with real data, mark it `UNVERIFIED` and route it to the owner named in §9. **You never break a boundary to prove a boundary works.**
 
 ---
 
-## 1 · The one thing this method protects
+## 1 · The evidence law
 
 Three claims look identical in a memo and are not:
 
@@ -31,6 +45,27 @@ Three claims look identical in a memo and are not:
 **A confident wrong absence is the most expensive error this method prevents.** It sends someone to build a control that already exists, or tells a director a gap is closed when nobody checked. Every rule below exists to keep these three apart.
 
 **Uncertainty never raises severity. A compensating control always lowers it.**
+
+### Where the answer lives decides which state you may use
+
+Every control is marked for where its answer normally lives:
+
+- **`[A]` In the artifact.** You can read it: the prompt text, the code, the workbook, the config, the instructions. **You are the right place to look, so silence supports `NOT FOUND`.**
+- **`[E]` External.** It lives in a vendor package, a security assessment, an approval record, a runtime log, or an office policy. **Silence proves nothing, so it is `UNVERIFIED`** — unless the submitted package includes that documentation, in which case you *were* given the right place to look and silence becomes `NOT FOUND`.
+
+**Evaluate every control in this order. The first match wins.**
+
+| # | Condition | Supports | Meaning |
+|---|---|---|---|
+| 1 | The control cannot apply to this artifact type | — | Not applicable. A prompt with no interface has no interface to make accessible. Record it as N/A with the reason. |
+| 2 | Below the tier's required depth | — | Out of scope for this audit. Say so; do not imply it passed. |
+| 3 | Present and adequate | — | Confirmed present. Judge whether it is **sufficient**, not whether it exists. |
+| 4 | Present and inadequate or wrong | **CONFIRMED** | A finding. Cite exactly where. |
+| 5 | Absent, `[A]` | **NOT FOUND** | You had the right material. The silence is real. |
+| 6 | Absent, `[E]`, **package includes that documentation** | **NOT FOUND** | You were given the right place to look. |
+| 7 | Absent, `[E]`, no such documentation given | **UNVERIFIED** | Name the exact document that would settle it, and who holds it. |
+
+Order matters: a control that is present but weak is row 4, not row 3. A control absent from a tier you did not audit is row 2, never row 5.
 
 ---
 
@@ -49,7 +84,7 @@ A finding is defensible when **another person, given the same material, would re
 3. **What you observed** — the location, referenced exactly.
 4. **When** — the date. An artifact changes. Your finding is true as of a date and no later.
 
-That is the `METHOD` line in §8. **A finding without a method is an opinion.** An opinion in a record is the thing you cannot defend.
+That is the `METHOD` line in §6. **A finding without a method is an opinion.** An opinion in a record is the thing you cannot defend.
 
 ### Describe artifacts, never people
 
@@ -73,7 +108,7 @@ Motive is not observable and is never yours to assert. **This one rule removes m
 
 **Do not audit your own work alone.** If you built, own, selected, or recommended the artifact, say so in the memo and name a second reviewer. Declared, it is a fact about the review. Undeclared and later discovered, it is the whole story.
 
-**Never make a determination reserved to another office** (§11). If you are asked to anyway, record the referral, the date, and the response — including *"no response as of <date>."* That sentence is complete, accurate, and protective. A guess is none of the three.
+**Never make a determination reserved to another office** (§9). If you are asked to anyway, record the referral, the date, and the response — including *"no response as of <date>."* That sentence is complete, accurate, and protective. A guess is none of the three.
 
 ### When someone asks you to change a finding
 
@@ -83,7 +118,7 @@ This will happen. It is not necessarily improper — the person may know somethi
 2. **If no new evidence is offered, the finding stands as written.** Do not argue it. Do not soften the wording to end the conversation.
 3. **Record the exchange neutrally and move the decision to whoever owns it.**
 
-**The risk-acceptance block in §9 is what makes this safe for everyone.** An official may accept a known risk and proceed — that is a legitimate exercise of their authority, and this method must not obstruct it. Your job ends at stating the risk accurately. Their decision, in their own words, over their own name, is the record.
+**The risk-acceptance block in §7 is what makes this safe for everyone.** An official may accept a known risk and proceed — that is a legitimate exercise of their authority, and this method must not obstruct it. Your job ends at stating the risk accurately. Their decision, in their own words, over their own name, is the record.
 
 > **You are never the person who said no. You are the person who wrote down what was known, and who decided.**
 
@@ -93,7 +128,7 @@ If a second reviewer disagrees on the merits, record both positions in the annex
 
 State these in the memo so no reader supplies them for you:
 
-- Whether the tool is **lawful, compliant, or authorised** — those are §11 determinations, made by others.
+- Whether the tool is **lawful, compliant, or authorised** — those are §9 determinations, made by others.
 - Whether it works on **data you did not test it with**.
 - Whether it will behave the same **after any change** to the model, the vendor, the data, or the use.
 - Whether something you **could not search for** is truly absent.
@@ -101,19 +136,9 @@ State these in the memo so no reader supplies them for you:
 
 ---
 
-## 3 · How to run it — three steps
+## 3 · Scoping — what you are auditing and how deep
 
-1. **Scope it** (§4). Fix the artifact's identity, its type, and its stakes tier. Ten minutes.
-2. **Work the lenses** (§6). For each control: *confirmed, not found, or unverified* — with what you did and where you looked. Depth is set by the tier.
-3. **Write the two-part output** (§9). Director memo on top, working annex behind it.
-
-**Time to expect:** Tier 3 ≈ 30 minutes. Tier 2 ≈ 2–4 hours. Tier 1 ≈ 1–2 days, and Tier 1 is never a solo call — §11 names your co-signers.
-
----
-
-## 4 · Scoping — what you are auditing and how deep
-
-### Artifact type — pick one, adapt with §12 if none fit
+### Artifact type — pick one, adapt with §10 if none fit
 
 | Type | What you open | The failure that actually happens |
 |---|---|---|
@@ -129,7 +154,7 @@ State these in the memo so no reader supplies them for you:
 
 | Tier | Test | Depth |
 |---|---|---|
-| **1 — Decision-adjacent** | Output could reach a submission assessment, an action letter, an inspection record, a policy document, an official file, or anything external | **All 7 lenses, all controls.** Co-signature required (§11). |
+| **1 — Decision-adjacent** | Output could reach a submission assessment, an action letter, an inspection record, a policy document, an official file, or anything external | **All 7 lenses, all controls.** Co-signature required (§9). |
 | **2 — Reviewed work product** | Drafts, summaries, analyses, trackers a person fully reviews before use; internal only | **All 7 lenses, controls marked required.** Solo audit with named reviewer. |
 | **3 — Personal productivity** | Formatting, scheduling, brainstorming, no agency data, no work product | **Lenses 1, 3, 7 only.** One page. |
 
@@ -139,30 +164,7 @@ State these in the memo so no reader supplies them for you:
 
 ---
 
-## 5 · Where the evidence lives — the rule that decides NOT FOUND vs UNVERIFIED
-
-Every control is marked for where its answer normally lives:
-
-- **`[A]` In the artifact.** You can read it: the prompt text, the code, the workbook, the config, the instructions. **You are the right place to look, so silence supports `NOT FOUND`.**
-- **`[E]` External.** It lives in a vendor package, a security assessment, an approval record, a runtime log, or an office policy. **Silence proves nothing, so it is `UNVERIFIED`** — unless the submitted package includes that documentation, in which case you *were* given the right place to look and silence becomes `NOT FOUND`.
-
-**Evaluate every control in this order. The first match wins.**
-
-| # | Condition | Supports | Meaning |
-|---|---|---|---|
-| 1 | The control cannot apply to this artifact type | — | Not applicable. A prompt with no interface has no interface to make accessible. Record it as N/A with the reason. |
-| 2 | Below the tier's required depth | — | Out of scope for this audit. Say so; do not imply it passed. |
-| 3 | Present and adequate | — | Confirmed present. Judge whether it is **sufficient**, not whether it exists. |
-| 4 | Present and inadequate or wrong | **CONFIRMED** | A finding. Cite exactly where. |
-| 5 | Absent, `[A]` | **NOT FOUND** | You had the right material. The silence is real. |
-| 6 | Absent, `[E]`, **package includes that documentation** | **NOT FOUND** | You were given the right place to look. |
-| 7 | Absent, `[E]`, no such documentation given | **UNVERIFIED** | Name the exact document that would settle it, and who holds it. |
-
-Order matters: a control that is present but weak is row 4, not row 3. A control absent from a tier you did not audit is row 2, never row 5.
-
----
-
-## 6 · The seven lenses — 64 controls
+## 4 · The seven lenses — 64 controls
 
 Work each lens in order. For every control record: **the answer · where you looked · the state it supports.** A control you did not check is `UNVERIFIED`, never a pass.
 
@@ -210,7 +212,7 @@ Work each lens in order. For every control record: **the answer · where you loo
 
 ---
 
-## 7 · Severity and the verdict
+## 5 · Severity and the verdict
 
 ### Severity — assign from consequence, not from effort to fix
 
@@ -236,7 +238,7 @@ Do not soften a P0 to sound balanced. Do not harden an `UNVERIFIED` to sound dec
 
 ---
 
-## 8 · How to write a finding
+## 6 · How to write a finding
 
 One finding, eight parts. Nothing else.
 
@@ -274,7 +276,7 @@ FIX       One concrete action, and who does it.
 
 ---
 
-## 9 · The output — one document, two audiences
+## 7 · The output — one document, two audiences
 
 ### Part A — Decision memo. One page. Always first.
 
@@ -306,7 +308,7 @@ Confidence:      <how much of this recommendation rests on what you could not
 This audit cannot tell you: <the §2 limits that apply here>
 Decisions not mine to make: <records, privacy, security, contracting, 508,
                  legal — named, with the date each was referred and any answer>
-Re-review when:  <triggers from §12>
+Re-review when:  <triggers from §10>
 
 ATTESTATION
   I examined the material listed above, on the dates shown, by the method
@@ -335,14 +337,14 @@ operate, or a privacy, records, security, or legal determination.
 
 ### Part B — Working annex. Behind the memo.
 
-**B1** Scope and method — what you reviewed, what you did not, the tier and why, how the artifact copy was identified, and that test data was synthetic · **B2** Findings in full, P0 first, in the §8 format · **B3** Control table — all 64, each marked `confirmed present` / `CONFIRMED finding` / `NOT FOUND` / `UNVERIFIED` / `N/A (reason)` / `out of tier`, with what you did and where you looked · **B4** Deferred controls, each with its trigger · **B5** Open questions, with document, holder, date referred, and any answer · **B6** What was tested — the inputs used, the number of runs, the dates, and the results · **B7** Re-review triggers and date · **B8** Working-papers index — your dated notes, test files, and results, and where they are kept · **B9** Disagreements and risk acceptances, recorded unedited.
+**B1** Scope and method — what you reviewed, what you did not, the tier and why, how the artifact copy was identified, and that test data was synthetic · **B2** Findings in full, P0 first, in the §6 format · **B3** Control table — all 64, each marked `confirmed present` / `CONFIRMED finding` / `NOT FOUND` / `UNVERIFIED` / `N/A (reason)` / `out of tier`, with what you did and where you looked · **B4** Deferred controls, each with its trigger · **B5** Open questions, with document, holder, date referred, and any answer · **B6** What was tested — the inputs used, the number of runs, the dates, and the results · **B7** Re-review triggers and date · **B8** Working-papers index — your dated notes, test files, and results, and where they are kept · **B9** Disagreements and risk acceptances, recorded unedited.
 
 **B3 is what makes this defensible.** A reader can see every control, including the ones you decided did not apply and why. Negative space is part of the product.
 
 **B6 and B8 are what make it repeatable.** They are the difference between *"we reviewed it"* and *"here is exactly what we did, and you can do it again."*
 
 ---
-## 10 · Be useful before you are asked
+## 8 · Be useful before you are asked
 
 This is the difference between a checklist and a colleague. Do these without being told.
 
@@ -360,7 +362,7 @@ This is the difference between a checklist and a colleague. Do these without bei
 
 ---
 
-## 11 · When to stop and bring in someone else
+## 9 · When to stop and bring in someone else
 
 **Stop the audit and escalate the same day** if you find: real sponsor data, PII, or trade secret content in a tool not approved for it · a credential, key, or password · output that already reached an external party or an official file without review · a tool taking an action with no person in the loop · or any sign the tool has been used in a way its owner did not describe.
 
@@ -380,11 +382,11 @@ This is the difference between a checklist and a colleague. Do these without bei
 
 ---
 
-## 12 · Staying correct as things change
+## 10 · Staying correct as things change
 
 **Never state a regulation, memorandum, standard, or policy as current from memory — including anything named in this document.** Cite it, then verify the current version before the memo goes out, and write in the annex what you verified and when. Federal AI guidance in particular has changed repeatedly and will change again. *This rule outranks every citation in this document.* If verification is not possible, write *"cited as of <date>, not verified"* rather than implying currency.
 
-**When the artifact type is not in §4**, do not force it into the nearest box. Answer the seven lens questions from first principles — *should it exist and who owns it · can its output be trusted · where does the data go · could you reconstruct what happened · does it keep working · can a colleague use it · what can go wrong on purpose* — write the controls you used, and mark the audit `adapted`. The lenses are stable; the controls are examples of them.
+**When the artifact type is not in §3**, do not force it into the nearest box. Answer the seven lens questions from first principles — *should it exist and who owns it · can its output be trusted · where does the data go · could you reconstruct what happened · does it keep working · can a colleague use it · what can go wrong on purpose* — write the controls you used, and mark the audit `adapted`. The lenses are stable; the controls are examples of them.
 
 **When a control cannot apply**, record it `N/A` with the reason. Never silently drop it. A dropped control is indistinguishable from a missed one.
 
@@ -394,7 +396,7 @@ This is the difference between a checklist and a colleague. Do these without bei
 
 ---
 
-## 13 · Self-check before you hand it over
+## 11 · Self-check before you hand it over
 
 Run this on your own draft. It is the same discipline you applied to the tool.
 
@@ -422,7 +424,7 @@ Run this on your own draft. It is the same discipline you applied to the tool.
 
 **Is it usable?**
 - [ ] Every `IMPACT` line survives being read by someone who has never seen the tool.
-- [ ] The verdict follows §7 mechanically — check it against the counts, not against your impression.
+- [ ] The verdict follows §5 mechanically — check it against the counts, not against your impression.
 - [ ] The `Confidence` line states what the recommendation rests on that you could not see.
 - [ ] No secret, credential, real PII, or trade secret content appears anywhere in the audit.
 - [ ] Test data was synthetic, and the annex says so.
@@ -432,7 +434,7 @@ Run this on your own draft. It is the same discipline you applied to the tool.
 **If you cannot complete a step, say so in the memo rather than completing it weakly.** An audit that reports its own limits is worth more than one that hides them — and it is the reason the next one will be believed.
 
 ---
-## 14 · Language
+## 12 · Language
 
 Write for a tired reader, in a second language, at 4:45 on a Friday.
 
