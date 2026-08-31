@@ -142,3 +142,84 @@ def test_asd_ste100_rules_survived(doc):
     section = doc.split("ASD-STE100")[-1]
     for rule in ("One idea per sentence", "Active voice", "hedging", "verbatim"):
         assert rule in section
+
+
+# --- added in v1.1 after the line-by-line audit found these gaps -------------
+
+def test_ledger_table_order_matches_the_probe_implementation():
+    """The table says "first match wins", so its order is load-bearing.
+
+    Derived from verdicts() rather than from the table, so reordering the
+    implementation fails here instead of silently making the prompt wrong.
+    """
+    src = (REPO / "scripts" / "absence_probe.py").read_text()
+    body = src.split("def verdicts(")[1].split("def lens_signals")[0]
+    implementation = []
+    for line in body.splitlines():
+        s = line.strip()
+        if s.startswith("if dep and"):
+            implementation.append("dep")
+        elif s.startswith('if r.get("signal")'):
+            implementation.append("selector")
+        elif s.startswith('if r["polarity"] == "sink"'):
+            implementation.extend(["sink_hits", "sink_zero"])
+        elif s == "if n:":
+            implementation.append("hits")
+        elif s.startswith('elif r["scope"] == "repo"'):
+            implementation.append("repo")
+        elif s.startswith("if iac_present:"):
+            implementation.extend(["infra_iac", "infra_no_iac"])
+    assert implementation == ["dep", "selector", "sink_hits", "sink_zero",
+                              "hits", "repo", "infra_iac", "infra_no_iac"], implementation
+
+    ledger = COMPACT.read_text().split("## 3 · The evidence ledger")[1].split("## 4 ·")[0]
+    table = [l for l in ledger.splitlines() if re.match(r"^\| [1-8] \|", l)]
+    assert len(table) == 8, f"expected 8 ordered rows, found {len(table)}"
+    expected = ["`→dep` absent", "branch selector", "sink, hits > 0", "sink, 0 hits",
+                "hits > 0", "repo-scoped", "repo ships IaC", "no IaC"]
+    for row, marker in zip(table, expected):
+        assert marker in row, f"row order broke at {marker!r}: {row}"
+    assert "first match wins" in ledger
+
+
+def test_the_three_evidence_states_are_defined(doc):
+    assert "The only state that may be stated as fact" in doc
+    for state in ("`CONFIRMED`", "`NOT_FOUND`", "`UNVERIFIED`"):
+        assert state in doc
+
+
+def test_the_decision_enum_literals_are_given(doc):
+    """An agent must write SHIP/FIX_THEN_SHIP/HOLD, not the rendered label."""
+    sys.path.insert(0, str(REPO / "scripts"))
+    import finding_store
+    for decision in finding_store.DECISIONS:
+        assert f"`{decision}`" in doc, f"{decision} is not stated as a literal"
+    assert "not what you write" in doc
+
+
+def test_cross_lens_is_described(doc):
+    assert "`cross_lens` other lenses this touches" in doc
+
+
+def test_the_fixed_sequential_order_is_stated(doc):
+    assert "security, backend, database, devops, qa, frontend, ai-security" in doc
+
+
+def test_the_duplicate_fingerprint_basis_is_stated(doc):
+    gate = doc.split("## 7 ·")[1]
+    assert "shared `probe` id" in gate and "first `evidence` entry" in gate
+
+
+def test_it_carries_a_version_marker(doc):
+    assert re.search(r"v\d+\.\d+ · \d+ controls · \d+ gate rules", doc)
+
+
+def test_gate_rules_are_numbered_one_to_twenty_five(doc):
+    """Numbering is 1:1 with the distinct errors the validator can raise."""
+    gate = doc.split("## 7 · The gate")[1].split("**Overclaim")[0]
+    found = set(int(n) for n in re.findall(r"(?:^|· )(\d{1,2}) ", gate, re.M))
+    assert found == set(range(1, 26)), f"missing {sorted(set(range(1,26)) - found)}"
+
+    source = (REPO / "scripts" / "validate_findings.py").read_text()
+    distinct = source.count("err(") - source.count("def err(")
+    assert distinct >= 20, "the validator's error surface shrank unexpectedly"
