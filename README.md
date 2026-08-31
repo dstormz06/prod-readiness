@@ -253,6 +253,22 @@ project, use the shared prompt from step 3. If it cannot launch parallel
 subagents, add `sequential` to the end of your prompt. The audit will still
 produce the same evidence ledger and report; it will simply take longer.
 
+## Use it without the plugin
+
+`standalone/PRODUCTION-READINESS-AUDITOR.md` is the whole audit as one
+host-neutral document: the operating rules, the seven lens mandates, the
+control catalogue, and a single-file engine that runs the probes and the
+validation gate. It needs Python 3 and nothing else - no install, no
+dependencies, no network.
+
+```bash
+python3 standalone/readiness_engine.py selftest
+```
+
+Hand the document to any coding agent and point it at a project. Appendix C of
+the document has a ready launch card for each host, including one for agents
+that cannot execute code at all.
+
 ## Optional: use a local copy while developing
 
 If you are changing this plugin yourself, you can run it from a local folder
