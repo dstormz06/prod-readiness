@@ -1,6 +1,6 @@
 # READINESS AUDITOR — AI, Tools, Prompts, and Digital Work Products
 
-*v3.2 · 2026-08-31 · 64 controls · 7 lenses · 3 stakes tiers · defensibility standard · dual output: director memo + working annex · self-contained*
+*v3.2.1 · 2026-08-31 · 64 controls · 7 lenses · 3 stakes tiers · defensibility standard · dual output: director memo + working annex · self-contained*
 
 **What this is.** A structured method for deciding whether a tool is fit to use in regulatory work — an AI product, a prompt, an agent, a script, a spreadsheet, a dashboard, a vendor service, or any digital thing whose output reaches the work. Run by the person who owns the work, not by an engineer.
 
@@ -51,7 +51,7 @@ Three claims look identical in a memo and are not:
 Every control is marked for where its answer normally lives:
 
 - **`[A]` In the artifact.** You can read it: the prompt text, the code, the workbook, the config, the instructions. **You are the right place to look, so silence supports `NOT FOUND`.**
-- **You could not open it.** A purchased service you can only drive through its interface, a model you cannot see inside. Then **every `[A]` control becomes `[E]` for this audit.** Say that once in the memo and once in Annex B1. You cannot establish an absence in material nobody showed you.
+- **You could not open it.** A purchased service you can only drive through its interface, a model you cannot see inside. Then **every `[A]` control you cannot inspect becomes `[E]` for this audit** — some behaviour is still visible through the interface, so judge this control by control. Say it once in the memo and once in Annex B1. You cannot establish an absence in material nobody showed you.
 - **`[E]` External.** It lives in a vendor package, a security assessment, an approval record, a runtime log, or an office policy. **Silence proves nothing, so it is `UNVERIFIED`** — unless the submitted package includes that documentation, in which case you *were* given the right place to look and silence becomes `NOT FOUND`.
 
 **Evaluate every control in this order. The first match wins.**
@@ -60,14 +60,14 @@ Every control is marked for where its answer normally lives:
 |---|---|---|---|
 | 1 | The control cannot apply to this artifact type | — | Not applicable. A prompt with no interface has no interface to make accessible. Record it as N/A with the reason. |
 | 2 | Below the tier's depth | — | Out of scope for this audit. Say so; do not imply it passed. |
-| 3 | You could not examine the artifact itself | **UNVERIFIED** | Never `NOT FOUND`. Name the access that would settle it. |
+| 3 | An `[A]` control you could not go and look at | **UNVERIFIED** | Never `NOT FOUND`. Name the access that would settle it. |
 | 4 | Present and adequate | — | Confirmed present. Judge whether it is **sufficient**, not whether it exists. |
 | 5 | Present and inadequate or wrong | **CONFIRMED** | A finding. Cite exactly where. |
 | 6 | Absent, `[A]` | **NOT FOUND** | You had the right material. The silence is real. |
 | 7 | Absent, `[E]`, **package includes that documentation** | **NOT FOUND** | You were given the right place to look. |
 | 8 | Absent, `[E]`, no such documentation given | **UNVERIFIED** | Name the exact document that would settle it, and who holds it. |
 
-Order matters: a control that is present but weak is row 5, not row 4. A control absent from a tier you did not audit is row 2, never row 6. **A control you could not go and look at is row 3, whatever it is about.**
+Order matters: a control that is present but weak is row 5, not row 4. A control absent from a tier you did not audit is row 2, never row 6. **An `[A]` control you could not go and look at is row 3, not row 6.** An `[E]` control is unaffected by a closed artifact — its answer was never in the artifact.
 
 ---
 
@@ -174,7 +174,7 @@ State these in the memo so no reader supplies them for you:
 
 **When the tier is arguable, take the higher one and say why in one line.** Under-scoping is what a director notices; over-scoping costs an afternoon.
 
-**Escalate the tier immediately** if, at any point, you find: output reaching an external party · real sponsor data · an action taken without a person · or a decision the tool makes rather than informs.
+**Escalate the tier immediately** if, at any point, you find: output reaching anyone outside the office · real sponsor data · an action taken without a person · or a decision the tool makes rather than informs. **Output reaching outside the agency is not an escalation — it is a stop.** See below.
 
 ### Above the division
 
@@ -261,7 +261,7 @@ A demand for enterprise controls on a three-person spreadsheet is not rigour. It
 3. Else, if Tier 1 **and** any `[A]` control is `UNVERIFIED` → **LIMITED PILOT ONLY** — bounded scope, synthetic or non-sensitive data, no regulatory decisions, until the unknowns close
 4. Else → **CLEARED FOR USE**
 
-Do not soften a P0 to sound balanced. Do not harden an `UNVERIFIED` to sound decisive. **The verdict is only worth what the evidence behind it is worth**, and a reviewer can tell.
+Do not soften a P0 to sound balanced. Do not harden an `UNVERIFIED` to sound decisive. **The verdict is only worth what the evidence behind it is worth**, and a reviewer can tell the difference.
 
 ---
 
@@ -374,7 +374,7 @@ operate, or a privacy, records, security, or legal determination.
 
 ## 8 · Be useful before you are asked
 
-Do these without being told. It is the difference between a checklist and a colleague.
+This is the difference between a checklist and a colleague. Do these without being told.
 
 **Fix it while you are in there.** When a finding has an obvious, low-risk remedy — a missing "say when you do not know" instruction, an absent version number, a scope statement, a redaction step — **draft the corrected text in the annex** so the owner can paste it. A finding with a ready fix gets closed; a finding with a critique gets defended.
 
@@ -462,7 +462,7 @@ Run this on your own draft. It is the same discipline you applied to the tool.
 - [ ] The `Confidence` line states what the recommendation rests on that you could not see.
 - [ ] No secret, credential, real PII, or trade secret content appears anywhere in the audit.
 - [ ] Test data was synthetic, and the annex says so.
-- [ ] All 64 controls appear in B3, including `N/A` and `out of tier`, each with a reason.
+- [ ] All 64 controls — plus any you added under §10 — appear in B3, including `N/A` and `out of tier`, each with a reason.
 - [ ] Something the artifact does well is named.
 
 **If you cannot complete a step, say so in the memo rather than completing it weakly.** An audit that reports its own limits is worth more than one that hides them — and it is the reason the next one will be believed.
@@ -477,4 +477,4 @@ One idea per sentence, 20 words or fewer — 25 for instructions. Active voice w
 
 ---
 
-**Change log.** **v3.2** (2026-08-31) — a control you could not examine is `UNVERIFIED`, never `NOT FOUND`; tier depth and the pilot test keyed to `[A]` controls instead of an undefined "required" set; only a `CONFIRMED` compensating control may demote a P0; never let the artifact audit itself; the 95% rule; scaling above the division; permission to add a lens. **v3.1** — navigation restructure, one evidence law, Start-here card. **v3.0** — defensibility and protection layer: attestation, risk acceptance, `METHOD` line, pressure protocol. **v2.0** — first edition for this office.
+**Change log.** **v3.2.1** (2026-08-31) — corrects v3.2 before use: the closed-artifact rule is scoped per control, so a closed artifact no longer voids `[E]` findings taken from a vendor package; reaching outside the office escalates the tier, reaching outside the agency stops the audit; the self-check survives an added lens. **v3.2** (2026-08-31) — an `[A]` control you could not go and look at is `UNVERIFIED`, never `NOT FOUND`, and an `[E]` control is unaffected by a closed artifact; tier depth and the pilot test keyed to `[A]` controls instead of an undefined "required" set; only a `CONFIRMED` compensating control may demote a P0; never let the artifact audit itself; the 95% rule; scaling above the division; permission to add a lens. **v3.1** — navigation restructure, one evidence law, Start-here card. **v3.0** — defensibility and protection layer: attestation, risk acceptance, `METHOD` line, pressure protocol. **v2.0** — first edition for this office.

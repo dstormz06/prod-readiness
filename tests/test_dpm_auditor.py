@@ -221,10 +221,10 @@ def test_language_standard_is_present(doc):
 def test_it_carries_a_dated_version_marker_and_a_change_log(doc):
     """Section 10 tells the reader to number and date every artefact. The
     method must not fail its own rule."""
-    assert re.search(r"v\d+\.\d+ · \d{4}-\d{2}-\d{2} · \d+ controls · \d+ lenses", doc), \
+    assert re.search(r"v\d+\.\d+(\.\d+)? · \d{4}-\d{2}-\d{2} · \d+ controls · \d+ lenses", doc), \
         "the version marker carries no date"
     assert "**Change log.**" in doc
-    for version in ("v3.2", "v3.1", "v3.0", "v2.0"):
+    for version in ("v3.2.1", "v3.2", "v3.1", "v3.0", "v2.0"):
         assert f"**{version}**" in doc, f"{version} is missing from the change log"
 
 
@@ -535,16 +535,29 @@ def test_it_never_claims_safety_or_compliance_anywhere(doc):
 
 def test_an_artifact_you_cannot_open_never_yields_not_found(doc):
     """The most dangerous defect v3.1 carried: closed vendor tools produced
-    confident absences from material nobody was ever shown."""
+    confident absences from material nobody was ever shown.
+
+    v3.2's first cut of this rule was itself defective - it voided every [E]
+    control on a closed artifact, including CONFIRMED findings taken from a
+    vendor package. The rule is per control, not per artifact."""
     law = doc.split("### Where the answer lives")[1].split("## 2 ·")[0]
     assert "You could not open it" in law
-    assert "every `[A]` control becomes `[E]` for this audit" in law
+    assert "every `[A]` control you cannot inspect becomes `[E]` for this audit" in law
+    assert "judge this control by control" in law
     assert "You cannot establish an absence in material nobody showed you" in law
+
     rows = [l for l in law.splitlines() if re.match(r"^\| [1-8] \|", l)]
     assert len(rows) == 8, f"expected 8 ordered rows, found {len(rows)}"
-    closed = [r for r in rows if "could not examine the artifact" in r]
-    assert len(closed) == 1 and "**UNVERIFIED**" in closed[0] and "Never `NOT FOUND`" in closed[0]
-    assert rows.index(closed[0]) == 2, "the closed-artifact row must precede the present/absent rows"
+    closed = [r for r in rows if "could not go and look at" in r]
+    assert len(closed) == 1, "the closed-artifact row is missing or duplicated"
+    assert "**UNVERIFIED**" in closed[0] and "Never `NOT FOUND`" in closed[0]
+    assert rows.index(closed[0]) == 2, "the closed-artifact row must precede present/absent"
+
+    # the defect: the row must be scoped to [A], or it swallows [E] evidence
+    assert "`[A]` control" in closed[0], \
+        "row 3 is not scoped to [A]; a closed artifact would void [E] findings too"
+    assert "An `[E]` control is unaffected by a closed artifact" in law
+
 
 
 def test_required_control_is_no_longer_an_undefined_term(doc):
@@ -595,3 +608,25 @@ def test_the_new_rules_reach_the_self_check(doc):
                  "artifact did not assess itself",
                  "Nothing was guessed"):
         assert item in s, f"self-check item missing: {item}"
+
+
+def test_the_external_reach_triggers_are_graded_not_contradictory(doc):
+    """Outside the office escalates the tier; outside the agency stops the audit.
+    v3.2 first shipped these as two different answers to one trigger."""
+    esc = [l for l in doc.splitlines() if l.startswith("**Escalate the tier immediately**")]
+    assert esc, "the escalation trigger is missing"
+    assert "outside the office" in esc[0]
+    assert "not an escalation — it is a stop" in esc[0]
+    above = doc.split("### Above the division")[1].split("## 4 ·")[0]
+    assert "outside the agency" in above and "Stop." in above
+
+
+def test_the_self_check_survives_an_extended_audit(doc):
+    """§10 permits adding a lens; a check hard-coded to 64 would then fail."""
+    assert "plus any you added under §10" in doc
+
+
+def test_the_change_log_describes_the_rules_as_they_now_read(doc):
+    entry = doc.split("**v3.2**")[1].split("**v3.1**")[0]
+    assert "`[A]` control you could not go and look at" in entry
+    assert "`[E]` control is unaffected by a closed artifact" in entry
