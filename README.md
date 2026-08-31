@@ -255,8 +255,13 @@ produce the same evidence ledger and report; it will simply take longer.
 
 ## Use it without the plugin
 
-`standalone/PRODUCTION-READINESS-AUDITOR.md` is the whole audit as one
-host-neutral document: the operating rules, the seven lens mandates, the
+`standalone/AUDITOR-COMPACT.md` is the whole audit distilled to one
+pasteable prompt of about 130 lines: the stage machine, the evidence law, all
+91 controls, the finding schema, every validation rule, the verdict rule, and
+the seven lens briefs. Paste it into any model and point it at a project.
+
+`standalone/PRODUCTION-READINESS-AUDITOR.md` is the long form of the same
+audit: the operating rules, the seven lens mandates, the
 control catalogue, and a single-file engine that runs the probes and the
 validation gate. It needs Python 3 and nothing else - no install, no
 dependencies, no network.

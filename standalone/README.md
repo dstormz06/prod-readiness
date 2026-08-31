@@ -5,7 +5,8 @@ only inside Claude Code.
 
 | File | What it is |
 | --- | --- |
-| `PRODUCTION-READINESS-AUDITOR.md` | The framework. The agent prompt, the control catalogue, and the engine, in one document. **This is the deliverable.** |
+| `AUDITOR-COMPACT.md` | **The prompt.** The whole audit distilled to ~130 lines - every rule, no engine. Paste it into any model and go. **Start here.** |
+| `PRODUCTION-READINESS-AUDITOR.md` | The long form. Same rules, plus the full regex catalogue, the seven mandates verbatim, and the engine inline. Reference, not a paste. |
 | `readiness_engine.py` | The deterministic engine. One file, Python 3.9+, standard library only. |
 | `AUDITOR.template.md` | The source the document is generated from. Edit this, never the generated file. |
 
