@@ -5,6 +5,8 @@ only inside Claude Code.
 
 | File | What it is |
 | --- | --- |
+| `DPM-READINESS-AUDITOR.md` | **The FDA / OGD / ORO / DPM edition.** Audits AI tools, prompts, agents, scripts, dashboards, and vendor products - run by the person who owns the work, not by an engineer. 64 controls, 7 lenses, 3 stakes tiers. Output is a one-page director memo over a working annex. |
+| `EXAMPLE-AUDIT.md` | A completed audit produced with that method, on an invented tool. Hand this to a colleague before the method itself. |
 | `AUDITOR-COMPACT.md` | **The prompt.** The whole audit distilled to ~130 lines - every rule, no engine. Paste it into any model and go. **Start here.** |
 | `PRODUCTION-READINESS-AUDITOR.md` | The long form. Same rules, plus the full regex catalogue, the seven mandates verbatim, and the engine inline. Reference, not a paste. |
 | `readiness_engine.py` | The deterministic engine. One file, Python 3.9+, standard library only. |
