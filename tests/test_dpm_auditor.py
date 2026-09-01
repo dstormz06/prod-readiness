@@ -924,9 +924,15 @@ def test_every_written_count_matches_what_is_actually_there(doc):
     assert "The five rules" in doc and "Six questions, under the same" in doc
     # no stale count may name §4's questions by number outside §4 itself
     assert "the four questions" not in doc
-    outside = doc.replace(s4, "")
-    assert "five questions" not in outside, \
-        "a §4 question count is stated outside §4, where it will rot"
+    # §10 introduced a second set of five questions - the ones a director asks -
+    # so the bare phrase is now ambiguous rather than merely fragile. Outside §4,
+    # and outside the change log (which legitimately describes other sections),
+    # every "five questions" must say whose.
+    outside = doc.replace(s4, "").split("**Change log.**")[0]
+    for m in re.finditer(r"five questions", outside):
+        near = outside[max(0, m.start() - 60):m.end() + 60]
+        assert "director" in near, \
+            f"'five questions' does not say whose, and there are now two sets: ...{near}..."
 
 
 def test_a_standalone_critique_must_be_labelled_as_not_an_audit(doc):
@@ -1003,3 +1009,58 @@ def test_the_owner_has_a_route_to_be_heard(doc):
     assert "route around the audit instead" in s
     # and the pressure protocol points at it
     assert "point them at the re-review in §12" in doc
+
+# --- v3.8: the memo carries everything the method mandates ------------------
+
+# what §9 and §10 promise -> the §8 memo slot that has to carry it. Every one
+# of these was promised with no slot in the template, so a memo written from
+# §8 alone omitted all five and the worked example delivered two.
+MANDATED_OUTPUTS = {
+    "Name the two or three things done well":   "Done well",
+    "Have all five in the memo already":        "If we do nothing",
+    "Say what breaks in ninety days":           "Breaks in 90 days",
+    "shortest credible route":                  "Fastest path to yes",
+    "At the end of the audit, in one line":     "OFFER",
+}
+
+
+def memo_template(doc):
+    return doc.split("### Part A — Decision memo")[1].split("```")[1]
+
+
+def memo_worked(example):
+    return example.split("READINESS AUDIT — DECISION MEMO")[1].split("```")[0]
+
+
+def test_every_mandated_output_has_a_slot_and_the_example_shows_it(doc, example):
+    tpl, memo = memo_template(doc), memo_worked(example)
+    for promise, slot in MANDATED_OUTPUTS.items():
+        assert promise in doc, f"the method no longer promises: {promise!r}"
+        assert slot in tpl, f"the §8 memo has no slot for it: {slot!r}"
+        assert slot in memo, f"the worked example omits it: {slot!r}"
+
+
+def test_the_example_memo_follows_the_template_field_order(doc, example):
+    """Order drift is how a template and its example stop being the same form."""
+    def fields(s):
+        return re.findall(r"^([A-Z][A-Za-z0-9 ,\u2019'\-]{2,32})(?::|$)", s, re.M)
+    t, m = fields(memo_template(doc)), fields(memo_worked(example))
+    shared_t = [f for f in t if f in m]
+    shared_m = [f for f in m if f in t]
+    assert shared_m == shared_t, (
+        f"the example orders fields differently: {shared_m} != {shared_t}")
+
+
+def test_part_a_does_not_promise_a_page_count_it_cannot_keep(doc):
+    """It said 'One page. Always first.' while its own worked example ran to
+    113 lines, and while §3 gave 'one page' to Tier 3 only."""
+    heading = doc.split("### Part A")[1].split("\n")[0]
+    assert "One page" not in heading, "Part A promises a page count again"
+    assert "Length follows the tier, not a page count" in doc
+
+
+def test_the_risk_block_costs_one_line_when_no_risk_was_accepted(doc, example):
+    assert '"Not exercised." — or complete every line below' in memo_template(doc)
+    tail = memo_worked(example).split("RISK ACCEPTED")[1].split("OFFER")[0]
+    assert len(tail.strip().splitlines()) <= 2, \
+        "an unexercised risk block should not render an empty form"

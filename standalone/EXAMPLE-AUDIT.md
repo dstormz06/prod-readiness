@@ -1,6 +1,6 @@
 # Worked example — a completed readiness audit
 
-*Sample output produced with READINESS AUDITOR v3.7. The tool, firm, application number, and staff names below are invented for illustration. This is not a record of any real review, product, or system.*
+*Sample output produced with READINESS AUDITOR v3.8. The tool, firm, application number, and staff names below are invented for illustration. This is not a record of any real review, product, or system.*
 
 ---
 
@@ -70,6 +70,32 @@ Open questions:  Not answerable from the material provided.
              NEEDED: the accessibility conformance report. HELD BY: vendor,
              via the 508 program.
 
+Anticipated questions - answer all five before they are asked:
+  If we do nothing:    Reviewers keep summarising deficiencies by hand, about
+                       40 minutes per application. The tool is not in use today,
+                       so waiting costs time, not correctness.
+  Fastest path to yes: Three fixes the owner can make this week - replace the
+                       real application details with invented ones, rotate the
+                       credential and move it out of the configuration file, and
+                       instruct the tool to say when it is not certain. That
+                       reaches CLEARED WITH CONDITIONS. The vendor terms and the
+                       authorisation record decide anything beyond that.
+  Who else must sign:  Records officer, privacy office, ISSO, contracting
+                       officer, and the 508 program - all listed below with the
+                       date each was referred. Tier 1 also requires a second
+                       reviewer.
+  Cost if it is wrong: A deficiency that was never in the record reaches a firm
+                       over the agency's name, and one firm's application
+                       details sit in an outside vendor's logs.
+  Tested on real work: No one, on record. The owner reports using it on two
+                       applications in draft, but provided no record of that
+                       testing. I did not test on real data (Rule Zero).
+
+Done well:       The purpose is stated in one clear sentence, the output format
+                 matches how the team actually works, and the owner volunteered
+                 the configuration file without being asked. That last one is
+                 why the credential was found now rather than after an incident.
+
 Confidence:      Moderate on the three blockers - each was reproduced directly
                  from the material provided, and the injection test was run
                  three times. Low on the tool's overall safety, because 3 of the
@@ -90,14 +116,16 @@ Decisions not mine to make:
   Contracting officer - acceptability of the vendor terms. Referred <date>.
   Section 508 program - accessibility conformance. Referred <date>.
 
+Breaks in 90 days: The prompt is written against one model version, and the
+                 vendor retires versions on roughly an annual cycle - verify the
+                 current schedule with the contracting officer. The tracker
+                 workbook holds 40 applications today; its lookup formula is
+                 row-limited and returns blanks past row 200 without warning.
+                 One person maintains both, and no backup is named.
+
 Re-review when:  All five conditions are closed · or the model or vendor version
                  changes · or the tool is used on any new data type · or twelve
                  months pass, whichever is first.
-
-Done well:       The purpose is stated in one clear sentence, the output format
-                 matches how the team actually works, and the owner volunteered
-                 the configuration file without being asked. That last one is
-                 why the credential was found now rather than after an incident.
 
 ATTESTATION
   I examined the material listed above, on the dates shown, by the method
@@ -108,12 +136,8 @@ ATTESTATION
   Second reviewer (required at Tier 1): <name, role, date>
      [x] Concur   [ ] Concur with exception (recorded at Annex B9)
 
-RISK ACCEPTED - complete only if the artifact will be used despite an open
-blocker or condition. This records a decision; it does not revise a finding.
-  Finding: <id>     Accepted by: <name, role>     Date: <date>
-  Basis, in the accepting official's own words: <quoted, not paraphrased>
-  The finding above is unchanged.
-  [ Not exercised. No blocker has been accepted; the tool is not in use. ]
+RISK ACCEPTED   Not exercised. No blocker has been accepted, and the tool is
+                not in use.
 
 OFFER (made once, not pressed)
   The audit is above. Separately, I can critique what I was given - the
