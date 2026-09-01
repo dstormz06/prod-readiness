@@ -220,7 +220,7 @@ Three other parts of this method look adjacent. They are not the same thing, and
 | | What it produces | When |
 |---|---|---|
 | **§4, this section** | Hypotheses to go looking for. They never reach the memo. | Before the checklist |
-| **§10 critique** | A separate service, only if asked, about the material *you* were given | After the audit is delivered |
+| **§9 critique** | A separate service, only if asked, about the material *you* were given | After the audit is delivered |
 | **§5 lens callouts** | Ready-made expert checks that come with the controls | During the checklist |
 | **§10 "what breaks in ninety days"** | Forward risk written *into* the memo for the reader | After the findings exist |
 | **§13 self-check** | A critique of your own draft, not of the artifact | At handover |

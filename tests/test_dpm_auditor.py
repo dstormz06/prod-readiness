@@ -897,3 +897,23 @@ def test_a_standalone_critique_must_be_labelled_as_not_an_audit(doc):
     assert "A critique asked for on its own is allowed, and must be labelled" in s
     assert "no controls were worked" in s and "it clears nothing" in s
     assert "mistaken for an audit is the one way this service can hurt" in s
+
+
+def test_no_reference_names_a_section_by_another_sections_word(doc):
+    """Generic guard. The curated promise list is hand-written and therefore
+    incomplete: it missed '§10 critique', which the renumbering pass created
+    by rewriting a row added before it ran. This derives the check from the
+    section titles instead of from a list someone has to remember to update."""
+    titles = {int(m.group(1)): m.group(2).lower()
+              for m in re.finditer(r"^## (\d+) · (.+)$", doc, re.M)}
+    vocab = {}
+    for n, title in titles.items():
+        for word in re.findall(r"[a-z]{5,}", title):
+            vocab.setdefault(word, set()).add(n)
+    problems = []
+    for m in re.finditer(r"§(\d+)\s+([A-Za-z\"'*]{4,})", doc):
+        n, word = int(m.group(1)), m.group(2).strip('"\'*').lower()
+        if word in vocab and n not in vocab[word]:
+            problems.append(f"{m.group(0).strip()!r} -> §{n} ({titles[n]}); "
+                            f"that word belongs to §{sorted(vocab[word])}")
+    assert not problems, "reference points at the wrong section: " + "; ".join(problems)
