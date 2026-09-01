@@ -851,3 +851,17 @@ def test_tier_three_is_flagged_as_the_unwitnessed_one(doc):
     s = doc.split("### Stakes tier")[1].split("### Above the division")[0]
     assert "Tier 3 is the one nobody co-signs" in s
     assert "least likely to be caught by anyone but you" in s
+
+
+def test_no_removed_stage_survives_anywhere_in_the_document(doc):
+    """v3.6 removed 4B. Two self-check items kept demanding it, so the
+    checklist asked the auditor to complete a step the method no longer has.
+    Any future removal must fail here rather than be found by accident."""
+    for ghost in ("4B", "4A", "two halves", "scope correction", "Re-scope at most once"):
+        assert ghost not in doc, \
+            f"{ghost!r} survives from a removed stage; the document contradicts itself"
+
+
+def test_the_self_check_still_carries_the_being_told_discipline(doc):
+    s = doc.split("## 13 ·")[1].split("## 14 ·")[0]
+    assert "came from a person, not the material, is checked or marked `UNVERIFIED`" in s

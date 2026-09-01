@@ -537,8 +537,7 @@ Run this on your own draft. It is the same discipline you applied to the tool.
 - [ ] Every date is present: when you examined, when you tested, when you referred.
 - [ ] Another person could repeat this from Annex B6 and reach the same result.
 - [ ] Every hypothesis from §4 was confirmed into a finding or killed, and B10 records which.
-- [ ] 4B was done: the description was checked against the artifact, the tier was justified in one line, and every claim taken from a person is marked `UNVERIFIED` or checked.
-- [ ] Any scope correction is applied and recorded in B1, and the audit was not re-scoped more than once.
+- [ ] Every claim in the scoping that came from a person, not the material, is checked or marked `UNVERIFIED`.
 - [ ] Nothing you could not examine is written as `NOT FOUND`.
 - [ ] No P0 was demoted by a compensating control that is itself `UNVERIFIED`.
 
