@@ -1,6 +1,6 @@
 # Worked example — a completed readiness audit
 
-*Sample output produced with READINESS AUDITOR v3.5. The tool, firm, application number, and staff names below are invented for illustration. This is not a record of any real review, product, or system.*
+*Sample output produced with READINESS AUDITOR v3.6. The tool, firm, application number, and staff names below are invented for illustration. This is not a record of any real review, product, or system.*
 
 ---
 
@@ -115,6 +115,11 @@ blocker or condition. This records a decision; it does not revise a finding.
   The finding above is unchanged.
   [ Not exercised. No blocker has been accepted; the tool is not in use. ]
 
+OFFER (made once, not pressed)
+  The audit is above. Separately, I can critique what I was given - the
+  request, the material, the framing, or your own draft - if that would help.
+  It is a different piece of work and it does not change this audit.
+
 This is a structured working aid. It is not agency policy, an authorisation to
 operate, or a privacy, records, security, or legal determination.
 ```
@@ -215,7 +220,7 @@ No risk has been accepted to date.
 
 ### B10 · The expert read
 
-**4A — the artifact.** Read end to end before opening the checklist, on <date>.
+Read end to end before opening the checklist, on <date>.
 
 **What is this for, and who is hurt if it is wrong?** A reviewer summarises correspondence into a deficiency list. If the list is wrong, a firm receives a deficiency that was never in the record, or a real one is dropped and reaches the next cycle.
 
@@ -233,22 +238,8 @@ No risk has been accepted to date.
 | Output may be pasted into correspondence with no review step | **Killed.** The owner's written procedure requires reviewer sign-off before any text is used, and `PA3` confirmed it. Recorded so the next reviewer does not raise it again. |
 | The tool may retain prior documents between runs | **Killed.** Three consecutive synthetic runs with different documents showed no carry-over. Not a finding. |
 
-**4B — what I was handed.**
-
-*Does the description match the artifact?* No. The owner described it as "a summariser." The prompt also instructs the tool to assign severity to each deficiency. Assigning severity is a judgement, not a summary. This gap set the tier.
-
-*Is the tier right, or convenient?* The owner proposed Tier 2. Because the output is intended for review correspondence, which can reach an official file, Tier 1 applies. **Scope correction applied once, recorded in B1.** No second re-scope was needed.
-
-*Is this the right question?* I was asked whether the tool may be used. The load-bearing question is what happens to a deficiency the tool omits, because nothing downstream re-reads the source document. The memo answers both.
-
-*What did I accept because a person said it?* Two claims: that reviewers always open the source document, and that the tool is used by three people. The first was checked against the written procedure and confirmed (`PA3`). The second was not checked and is recorded `UNVERIFIED`.
-
-*What is missing, and is the absence information?* The vendor terms were never sent and were never mentioned by the owner until I asked on <date>. That is different from a document in transit, and the memo says so.
-
-*Do I want a particular answer?* No interest declared. I did not build, select, or recommend this tool, and no deadline depends on the outcome.
-
 Two of five hypotheses were killed. Nothing here reached the memo except through a finding with evidence and a method.
 
 ---
 
-*Method: READINESS AUDITOR v3.5 · 64 controls · 7 lenses. Verdict derived mechanically: 3 blockers present → NOT CLEARED.*
+*Method: READINESS AUDITOR v3.6 · 64 controls · 7 lenses. Verdict derived mechanically: 3 blockers present → NOT CLEARED.*

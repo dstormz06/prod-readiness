@@ -1,10 +1,10 @@
 # READINESS AUDITOR — AI, Tools, Prompts, and Digital Work Products
 
-*v3.5 · 2026-08-31 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
+*v3.6 · 2026-08-31 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
 
 **What this is.** A structured method for deciding whether a tool is fit to use in regulatory work — an AI product, a prompt, an agent, a script, a spreadsheet, a dashboard, a vendor service, or any digital thing whose output reaches the work. Run by the person who owns the work, not by an engineer.
 
-**Who this is for.** The people who own the work — project managers and reviewers, not engineers. This edition was prepared for the Division of Project Management (OGD/ORO). It is deliberately office-neutral: every operative rule says *your office*, so any division at the FDA can adopt it without editing a word. Name the office that maintains it on the memo, and §10 names the decisions that office does not own.
+**Who this is for.** The people who own the work — project managers and reviewers, not engineers. This edition was prepared for the Division of Project Management (OGD/ORO). It is deliberately office-neutral: every operative rule says *your office*, so any division at the FDA can adopt it without editing a word. Name the office that maintains it on the memo, and §11 names the decisions that office does not own.
 
 **What this is not.** Not agency policy. Not an Authority to Operate. Not a privacy, records, security, or legal determination. It does not confer or establish compliance with any regulation. It produces an evidence-backed recommendation and names exactly who must decide the parts you cannot. Say this on the memo. A tool that overstates its own authority is the first thing a reviewer distrusts.
 
@@ -17,12 +17,14 @@
 | **New to this** | Read a completed example first, then §0 and §1. | §0, §1 |
 | **Running a quick check** — no agency data, no work product | Tier 3: lenses L1, L3, L7 only. One page. ~30 min. | §3–§5 |
 | **Auditing a work product** — drafts a person fully reviews | Tier 2: all 7 lenses, every `[A]` control. ~2–4 hrs. | §3–§8 |
-| **Auditing anything decision-adjacent** | Tier 1: everything, and a co-signer. ~1–2 days. | all, and §10 |
+| **Auditing anything decision-adjacent** | Tier 1: everything, and a co-signer. ~1–2 days. | all, and §11 |
 | **Being asked to change a finding** | Go straight to §2. | §2 |
 
 **Four steps, every time.** 1 · **Scope it** (§3) — fix the artifact's identity, type, and tier. 2 · **Read it as an expert** (§4) — form hypotheses before the checklist can narrow your eyes. 3 · **Work the lenses** (§5) — for each control: *confirmed, not found, or unverified*, with what you did and where you looked. 4 · **Write the output** (§8) — director memo on top, working annex behind it.
 
 **Never skip §0.** It is the one rule that protects you before you have written anything.
+
+**The audit ends at step 4.** §9 is a separate service — a critique of the request and the material *you* were given — offered once, run only if asked.
 
 ---
 
@@ -30,7 +32,7 @@
 
 **Do not use real sponsor data, personally identifiable information, trade secret or commercial confidential information, or pre-decisional material to test a tool that has not already been approved for that data.** Testing is still disclosure.
 
-Build a synthetic test set instead: realistic in shape, invented in content. Same field names, same formats, same edge cases — fabricated values. Record in the audit that the test data was synthetic. If a control can only be tested with real data, mark it `UNVERIFIED` and route it to the owner named in §10. **You never break a boundary to prove a boundary works.**
+Build a synthetic test set instead: realistic in shape, invented in content. Same field names, same formats, same edge cases — fabricated values. Record in the audit that the test data was synthetic. If a control can only be tested with real data, mark it `UNVERIFIED` and route it to the owner named in §11. **You never break a boundary to prove a boundary works.**
 
 ---
 
@@ -112,9 +114,11 @@ Motive is not observable and is never yours to assert. **This one rule removes m
 
 **Do not audit your own work alone.** If you built, own, selected, or recommended the artifact, say so in the memo and name a second reviewer. Declared, it is a fact about the review. Undeclared and later discovered, it is the whole story.
 
+**Being told is not evidence.** Every claim in your scoping that came from a person rather than from the material is `UNVERIFIED` until you check it. That does not soften because the person is senior, or is usually right.
+
 **Never ask the artifact to audit itself.** An AI asked to assess its own instructions under-reports, fluently, and the output looks like a completed audit. A tool's self-assessment is a claim to verify, never evidence.
 
-**Never make a determination reserved to another office** (§10). If you are asked to anyway, record the referral, the date, and the response — including *"no response as of <date>."* That sentence is complete, accurate, and protective. A guess is none of the three.
+**Never make a determination reserved to another office** (§11). If you are asked to anyway, record the referral, the date, and the response — including *"no response as of <date>."* That sentence is complete, accurate, and protective. A guess is none of the three.
 
 ### When you are not sure — the 95% rule
 
@@ -144,7 +148,7 @@ If a second reviewer disagrees on the merits, record both positions in the annex
 
 State these in the memo so no reader supplies them for you:
 
-- Whether the tool is **lawful, compliant, or authorised** — those are §10 determinations, made by others.
+- Whether the tool is **lawful, compliant, or authorised** — those are §11 determinations, made by others.
 - Whether it works on **data you did not test it with**.
 - Whether it will behave the same **after any change** to the model, the vendor, the data, or the use.
 - Whether something you **could not search for** is truly absent.
@@ -154,7 +158,7 @@ State these in the memo so no reader supplies them for you:
 
 ## 3 · Scoping — what you are auditing and how deep
 
-### Artifact type — pick one, adapt with §11 if none fit
+### Artifact type — pick one, adapt with §12 if none fit
 
 | Type | What you open | The failure that actually happens |
 |---|---|---|
@@ -170,11 +174,11 @@ State these in the memo so no reader supplies them for you:
 
 | Tier | Test | Depth |
 |---|---|---|
-| **1 — Decision-adjacent** | Output could reach a submission assessment, an action letter, an inspection record, a policy document, an official file, or anything external | **All 7 lenses, all controls.** Co-signature required (§10). |
+| **1 — Decision-adjacent** | Output could reach a submission assessment, an action letter, an inspection record, a policy document, an official file, or anything external | **All 7 lenses, all controls.** Co-signature required (§11). |
 | **2 — Reviewed work product** | Drafts, summaries, analyses, trackers a person fully reviews before use; internal only | **All 7 lenses. Every `[A]` control; each `[E]` control where documentation was provided.** Solo audit with named reviewer. |
 | **3 — Personal productivity** | Formatting, scheduling, brainstorming, no agency data, no work product | **Lenses 1, 3, 7 only.** One page. |
 
-**When the tier is arguable, take the higher one and say why in one line.** Under-scoping is what a director notices; over-scoping costs an afternoon.
+**When the tier is arguable, take the higher one and say why in one line.** Under-scoping is what a director notices; over-scoping costs an afternoon. **Tier 3 is the one nobody co-signs**, so a Tier 3 chosen for convenience is the error least likely to be caught by anyone but you.
 
 **Escalate the tier immediately** if, at any point, you find: output reaching anyone outside the office · real sponsor data · an action taken without a person · or a decision the tool makes rather than informs. **Output reaching outside the agency is not an escalation — it is a stop.** See below.
 
@@ -186,7 +190,7 @@ The tiers assume a decision your division owns. Raise the floor when the audit r
 |---|---|
 | Another division or office will rely on it | Tier 1 floor. Name their reviewer as a co-signer, not a reader. |
 | It will be cited as precedent | Record the reasoning, not only the verdict. The next audit copies your logic, so make the logic inspectable. |
-| It touches an agency-level system, policy, or commitment | Tier 1 floor. Settle the authority question (§10) before you start, not at the end. |
+| It touches an agency-level system, policy, or commitment | Tier 1 floor. Settle the authority question (§11) before you start, not at the end. |
 | Anything reaches outside the agency | Stop. That is a clearance question before it is an audit question. |
 
 **Do not invent authority you do not have.** This method scales by adding reviewers and evidence — never by widening whose decision you are making. An audit that reaches further needs more signatures, not a bolder auditor.
@@ -197,42 +201,17 @@ The tiers assume a decision your division owns. Raise the floor when the audit r
 
 The 64 controls find what this method was told to look for. They cannot find what is wrong with **this** artifact in particular. Before you open the checklist, read the thing once as a specialist would, and write down what you expect to be broken.
 
-It has two halves. **4A reads the artifact.** **4B reads what you were handed** — the account of the artifact, the question you were asked, and the tier you chose. Skipping 4B is how a careful audit ends up carefully answering the wrong question.
-
 **This step produces hypotheses, never findings.** A hypothesis has no evidence state, no severity, and never reaches the memo. It is a search plan. Each one is either confirmed into a finding under §5–§7, or killed — and a killed hypothesis is recorded, because *"we looked at that and it was fine"* is worth more to the next reader than silence.
 
-### 4A · Read the artifact
+### The five questions
 
 Read the artifact end to end with the checklist closed. Then answer, in writing, in Annex B10:
 
 1. **What is this really for, and who is hurt if it is wrong?** Name the person and the harm, not the category. "A reviewer sends a firm a deficiency that was never in the record" beats "quality risk."
-2. **How will this most likely fail in real use?** Not the worst case — the *likely* case. The thing that happens on an ordinary Tuesday, to a tired person, in a hurry.
-3. **What would a specialist in this kind of artifact check first?** Start from the *failure that actually happens* column in §3 for this artifact type, then go past it. A prompt specialist opens the examples. A spreadsheet specialist opens the formulas nobody has changed in two years.
-4. **What is unusual here?** Anything the artifact does that you have not seen before, or that the owner explained at unusual length. Unusual is where the checklist has least to say, so it is where your reading is worth most.
-
-### 4B · Read what you were handed
-
-The artifact is only half of what arrived. The other half is the account of it: what the owner said it does, the question you were asked, the tier you chose, and everything you accepted without checking. **Most failed audits are not a missed control. They are the right method run on the wrong framing.**
-
-Six questions. Answer them in Annex B10, beside 4A.
-
-1. **Does the description match the artifact?** The owner's account and the material often disagree, and the gap is usually the finding. *"It only summarises"* — does it? Read what it does before you accept what it is called.
-2. **Is the tier right, or is it convenient?** Would someone who did not want a particular answer choose the same tier from the same facts? Write the one line that justifies it (§3). If you cannot write that line, raise the tier.
-3. **Is this the right question?** You were asked *"can we use this."* Sometimes the load-bearing question is *"what is this replacing,"* or *"what happens to the work if it is wrong."* Ask the one that matters, and say in the memo if it differs from the one you were given.
-4. **What did you accept because a person said it?** List every claim in your scoping that came from someone rather than from the material. Each is `UNVERIFIED` until you check it. **Being told is not evidence** — that rule does not soften because the person is senior, or right most of the time.
-5. **What is missing, and is the absence itself information?** A vendor package nobody sent *and nobody mentioned* is a different fact from one that was requested and is coming. Record which, with the date.
-6. **Do you want a particular answer?** A deadline, a colleague who built it, a director who said yes in a meeting. Name it in writing before you start. §2 tells you what to do about it.
-
-**4B is worth most at Tier 3** — the quick check nobody co-signs. Under-scoping is the failure that never gets caught, precisely because a Tier 3 audit has no second reader.
-
-### What the two halves produce
-
-4A produces hypotheses. 4B produces those, and one other thing:
-
-- **A hypothesis** — handled exactly as in 4A: confirmed into a finding, or killed and recorded.
-- **A scope correction** — a change to the tier, to the artifact's identity, or to the question being answered. This is not a finding either. Apply it, return to §3, and record in Annex B1 what changed and why.
-
-**Re-scope at most once from the expert read.** If you would re-scope a second time, you do not yet understand the artifact well enough to audit it. Stop, say so, and ask for what you are missing under the 95% rule in §2. A third re-scope is not diligence; it is an audit that has lost its footing.
+2. **Does what it does match what it is called?** The owner's account and the material often disagree, and the gap is usually the finding. *"It only summarises"* — does it? Read what it does before you accept what it is called.
+3. **How will this most likely fail in real use?** Not the worst case — the *likely* case. The thing that happens on an ordinary Tuesday, to a tired person, in a hurry.
+4. **What would a specialist in this kind of artifact check first?** Start from the *failure that actually happens* column in §3 for this artifact type, then go past it. A prompt specialist opens the examples. A spreadsheet specialist opens the formulas nobody has changed in two years.
+5. **What is unusual here?** Anything the artifact does that you have not seen before, or that the owner explained at unusual length. Unusual is where the checklist has least to say, so it is where your reading is worth most.
 
 ### How this differs from the rest of the method
 
@@ -240,21 +219,21 @@ Three other parts of this method look adjacent. They are not the same thing, and
 
 | | What it produces | When |
 |---|---|---|
-| **§4A** | Hypotheses to go looking for. They never reach the memo. | Before the checklist |
-| **§4B** | The same, plus scope corrections that send you back to §3 | Before the checklist |
+| **§4, this section** | Hypotheses to go looking for. They never reach the memo. | Before the checklist |
+| **§10 critique** | A separate service, only if asked, about the material *you* were given | After the audit is delivered |
 | **§5 lens callouts** | Ready-made expert checks that come with the controls | During the checklist |
-| **§9 "what breaks in ninety days"** | Forward risk written *into* the memo for the reader | After the findings exist |
-| **§12 self-check** | A critique of your own draft, not of the artifact | At handover |
+| **§10 "what breaks in ninety days"** | Forward risk written *into* the memo for the reader | After the findings exist |
+| **§13 self-check** | A critique of your own draft, not of the artifact | At handover |
 
-The §4 pre-mortem and the §9 ninety-day note are the pair most easily confused. The first is a search plan you may be wrong about. The second is a conclusion you stand behind in writing.
+The §4 pre-mortem and the §10 ninety-day note are the pair most easily confused. The first is a search plan you may be wrong about. The second is a conclusion you stand behind in writing.
 
 ### Adapt the depth to the tier
 
 | Tier | Effort | What you write |
 |---|---|---|
-| **3** | ~10 minutes | 4A question 2, and **all of 4B** — this is where mis-scoping goes uncaught. |
-| **2** | ~30 minutes | All of 4A and all of 4B, briefly. |
-| **1** | As long as it takes | All of 4A and 4B, plus a **pre-mortem**: *it is a year from now and this tool has caused a serious problem — what happened?* Write the three most credible stories, and carry each into the lenses as a hypothesis. |
+| **3** | ~5 minutes | Question 3 only, one or two lines. |
+| **2** | ~20 minutes | All five questions, briefly. |
+| **1** | As long as it takes | All five, plus a **pre-mortem**: *it is a year from now and this tool has caused a serious problem — what happened?* Write the three most credible stories, and carry each into the lenses as a hypothesis. |
 
 ### The five rules that keep this honest
 
@@ -263,7 +242,7 @@ An expert read is the fastest way to make a method persuasive, and the fastest w
 1. **A hypothesis is not a finding.** It carries no state, no severity, and no place in the memo. If you cannot confirm it with evidence and a method under §7, it has no place in this audit. **Plausible is not evidence.**
 2. **Kill your own hypotheses.** Go looking for the reason each one is wrong before you go looking for support. Record every one you killed and what killed it. An expert read that confirms everything it guessed was not a read; it was a decision made in advance.
 3. **The expert read never sets severity.** Severity comes from §6, from what the evidence supports. A hypothesis that feels alarming does not start life as a P0.
-4. **It describes artifacts, framings and accounts — never people.** §2 applies here first and hardest. A pre-mortem is about how a thing fails, never about who was careless. 4B critiques *the framing you were given*, never the person who gave it: *"the description says it only summarises; the prompt also drafts text"* is a fact, and it is enough.
+4. **It describes the artifact and its use, never its author.** §2 applies here first and hardest — a pre-mortem is about how a thing fails, never about who was careless.
 5. **The 95% rule does not gate a hypothesis.** A hypothesis is uncertain by definition; that is what it is for. The rule gates what you *write down as a claim*. Guess freely here, and nowhere else.
 
 **If the expert read produces nothing, say that.** A short artifact you understand completely, with nothing unusual in it, is a legitimate outcome and a useful one. An empty B10 that says *"read end to end; nothing beyond the checklist suggested itself"* is honest. An invented concern to fill the space is the beginning of an audit nobody can trust.
@@ -414,7 +393,7 @@ Confidence:      <how much of this recommendation rests on what you could not
 This audit cannot tell you: <the §2 limits that apply here>
 Decisions not mine to make: <records, privacy, security, contracting, 508,
                  legal — named, with the date each was referred and any answer>
-Re-review when:  <triggers from §11>
+Re-review when:  <triggers from §12>
 
 ATTESTATION
   I examined the material listed above, on the dates shown, by the method
@@ -451,7 +430,46 @@ operate, or a privacy, records, security, or legal determination.
 
 ---
 
-## 9 · Be useful before you are asked
+## 9 · The critique, on request — a separate service
+
+The audit is finished and handed over. This is a different job, and it happens only if someone asks for it.
+
+**Most audits that go wrong are not a missed control. They are the right method run carefully on the wrong framing** — and the audit itself cannot see that, because the framing is what it was built on.
+
+**An audit judges the artifact. A critique judges what you were given** — the request, the framing, the package of material, and the requester's own draft. Merging them is a mistake three ways: it turns every audit into a partial review of the person who asked for it, it delays the deliverable the office actually needs, and it takes the auditor outside the remit they were given.
+
+So: **deliver the audit first. Then offer the critique. Never fold one into the other, and never run a critique nobody asked for.**
+
+### Make the offer once
+
+At the end of the audit, in one line:
+
+> *"The audit is above. Separately, I can critique what you gave me — the request, the material, the framing, or your own draft — if that would help. It is a different piece of work and it does not change the audit."*
+
+Do not press it. **A declined offer is a complete answer**, and a critique volunteered anyway reads as a rebuke rather than a service.
+
+### What a critique covers, once asked
+
+Six questions, under the same evidence discipline as the audit: state what you observed, name what you could not see, describe the material and never the person.
+
+1. **Does the description match what was provided?** Where the account and the material disagree, say where, and say which one you relied on.
+2. **Is the question the load-bearing one?** You were asked *"can we use this."* Sometimes what matters is *"what is this replacing"* or *"what happens to the work if it is wrong."* Say so, and say why.
+3. **What was accepted because a person said it?** List each claim that came from someone rather than from the material. Each is `UNVERIFIED` until checked. **Being told is not evidence** — and that does not soften because the person is senior, or is usually right.
+4. **What is missing, and is the absence itself information?** A vendor package nobody sent *and nobody mentioned* is a different fact from one that was requested and is coming. Say which, with the date.
+5. **Does the request point at a preferred answer?** A deadline, a colleague who built the thing, a decision already announced. Name what the material shows, not what you suspect.
+6. **What would you change about the request, in one line?** The single most useful sentence in a critique is usually this one.
+
+### The rules
+
+- **A critique never changes a delivered audit.** If it surfaces something that would have changed a finding, that is a re-review under §12 — versioned, dated, and stated as a new audit. Never a quiet edit to a memo that has already gone out.
+- **It is recorded separately.** Its own short note, with its own date. It is not an annex of the audit, and it does not travel attached to the memo unless the requester chooses to attach it.
+- **It describes the material and the framing, never the person.** §2 applies here unchanged and hardest. *"The description says it only summarises; the prompt also drafts text"* is a fact, and it is enough.
+- **If a critique would re-tier the audit, say so and stop.** Re-tiering is a scoping decision under §3, not something a critique performs.
+- **Say when the request was good.** A critique that only lists problems is discounted, and a well-scoped request is worth naming so the next one looks like it.
+
+---
+
+## 10 · Be useful before you are asked
 
 This is the difference between a checklist and a colleague. Do these without being told.
 
@@ -469,7 +487,7 @@ This is the difference between a checklist and a colleague. Do these without bei
 
 ---
 
-## 10 · When to stop and bring in someone else
+## 11 · When to stop and bring in someone else
 
 **Stop the audit and escalate the same day** if you find: real sponsor data, PII, or trade secret content in a tool not approved for it · a credential, key, or password · output that already reached an external party or an official file without review · a tool taking an action with no person in the loop · or any sign the tool has been used in a way its owner did not describe.
 
@@ -489,7 +507,7 @@ This is the difference between a checklist and a colleague. Do these without bei
 
 ---
 
-## 11 · Staying correct as things change
+## 12 · Staying correct as things change
 
 **Never state a regulation, memorandum, standard, or policy as current from memory — including anything named in this document.** Cite it, then verify the current version before the memo goes out, and write in the annex what you verified and when. Federal AI guidance in particular has changed repeatedly and will change again. *This rule outranks every citation in this document.* If verification is not possible, write *"cited as of <date>, not verified"* rather than implying currency.
 
@@ -505,7 +523,7 @@ This is the difference between a checklist and a colleague. Do these without bei
 
 ---
 
-## 12 · Self-check before you hand it over
+## 13 · Self-check before you hand it over
 
 Run this on your own draft. It is the same discipline you applied to the tool.
 
@@ -545,14 +563,15 @@ Run this on your own draft. It is the same discipline you applied to the tool.
 - [ ] The `Confidence` line states what the recommendation rests on that you could not see.
 - [ ] No secret, credential, real PII, or trade secret content appears anywhere in the audit.
 - [ ] Test data was synthetic, and the annex says so.
-- [ ] All 64 controls — plus any you added under §11 — appear in B3, including `N/A` and `out of tier`, each with a reason.
+- [ ] All 64 controls — plus any you added under §12 — appear in B3, including `N/A` and `out of tier`, each with a reason.
 - [ ] Something the artifact does well is named.
+- [ ] The §9 critique was offered once, in one line, and not pressed. Nothing from a critique was folded into this audit.
 
 **If you cannot complete a step, say so in the memo rather than completing it weakly.** An audit that reports its own limits is worth more than one that hides them — and it is the reason the next one will be believed.
 
 ---
 
-## 13 · Language
+## 14 · Language
 
 Write for a tired reader, in a second language, at 4:45 on a Friday.
 
@@ -560,4 +579,4 @@ One idea per sentence, 20 words or fewer — 25 for instructions. Active voice w
 
 ---
 
-**Change log.** **v3.5** (2026-08-31) — §4 gains a second half. 4A reads the artifact; 4B reads what you were handed: whether the description matches the material, whether the tier was chosen or merely convenient, whether the question is the load-bearing one, what was accepted because a person said it, whether an absence is itself information, and whether you want a particular answer. 4B may produce a scope correction as well as a hypothesis, and the audit may be re-scoped once. **v3.4** (2026-08-31) — names the office that prepared this edition and states that every operative rule stays office-neutral, so any division can adopt it unchanged; §4 now says how it differs from the lens callouts, the ninety-day note, and the self-check. **v3.3** (2026-08-31) — adds §4, the expert read: a specialist pass before the checklist that produces hypotheses, never findings, with five rules that stop it manufacturing them. Depth adapts by tier; Tier 1 adds a pre-mortem. Recorded at Annex B10, including every hypothesis that was killed. **v3.2.1** (2026-08-31) — corrects v3.2 before use: the closed-artifact rule is scoped per control, so a closed artifact no longer voids `[E]` findings taken from a vendor package; reaching outside the office escalates the tier, reaching outside the agency stops the audit; the self-check survives an added lens. **v3.2** (2026-08-31) — an `[A]` control you could not go and look at is `UNVERIFIED`, never `NOT FOUND`, and an `[E]` control is unaffected by a closed artifact; tier depth and the pilot test keyed to `[A]` controls instead of an undefined "required" set; only a `CONFIRMED` compensating control may demote a P0; never let the artifact audit itself; the 95% rule; scaling above the division; permission to add a lens. **v3.1** — navigation restructure, one evidence law, Start-here card. **v3.0** — defensibility and protection layer: attestation, risk acceptance, `METHOD` line, pressure protocol. **v2.0** — first edition for this office.
+**Change log.** **v3.6** (2026-08-31) — separates two jobs that v3.5 wrongly merged. §4 reads the artifact and nothing else. Critiquing what the requester provided — the request, the framing, the material, their own draft — is now §9: a separate service, offered once after the audit is delivered, run only if asked, recorded apart, and never folded back into a delivered memo. §4 keeps the description-versus-material check, because that is an observation about the artifact; "being told is not evidence" moves to §2, because it is audit discipline rather than critique. **v3.4** (2026-08-31) — names the office that prepared this edition and states that every operative rule stays office-neutral, so any division can adopt it unchanged; §4 now says how it differs from the lens callouts, the ninety-day note, and the self-check. **v3.3** (2026-08-31) — adds §4, the expert read: a specialist pass before the checklist that produces hypotheses, never findings, with five rules that stop it manufacturing them. Depth adapts by tier; Tier 1 adds a pre-mortem. Recorded at Annex B10, including every hypothesis that was killed. **v3.2.1** (2026-08-31) — corrects v3.2 before use: the closed-artifact rule is scoped per control, so a closed artifact no longer voids `[E]` findings taken from a vendor package; reaching outside the office escalates the tier, reaching outside the agency stops the audit; the self-check survives an added lens. **v3.2** (2026-08-31) — an `[A]` control you could not go and look at is `UNVERIFIED`, never `NOT FOUND`, and an `[E]` control is unaffected by a closed artifact; tier depth and the pilot test keyed to `[A]` controls instead of an undefined "required" set; only a `CONFIRMED` compensating control may demote a P0; never let the artifact audit itself; the 95% rule; scaling above the division; permission to add a lens. **v3.1** — navigation restructure, one evidence law, Start-here card. **v3.0** — defensibility and protection layer: attestation, risk acceptance, `METHOD` line, pressure protocol. **v2.0** — first edition for this office.

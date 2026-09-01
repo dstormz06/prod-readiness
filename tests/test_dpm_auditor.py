@@ -128,7 +128,7 @@ def test_the_memo_template_carries_every_decision_field(doc):
 
 
 def test_the_annex_has_all_seven_parts(doc):
-    annex = doc.split("### Part B")[1].split("## 9 ·")[0]
+    annex = doc.split("### Part B")[1].split("## 9 · The critique")[0]
     for n in range(1, 8):
         assert f"**B{n}**" in annex, f"annex part B{n} missing"
 
@@ -146,7 +146,7 @@ def test_rule_zero_forbids_testing_with_real_protected_data(doc):
 
 
 def test_escalation_routes_every_decision_that_is_not_the_auditors(doc):
-    esc = doc.split("## 10 ·")[1].split("## 11 ·")[0]
+    esc = doc.split("## 11 ·")[1].split("## 12 ·")[0]
     for owner in ("Records officer", "Privacy office", "ISSO", "Contracting officer",
                   "Section 508 program"):
         assert owner in esc, f"{owner} not named as a decision owner"
@@ -162,7 +162,7 @@ def test_part_11_is_routed_not_decided(doc):
 
 
 def test_the_citation_verification_rule_outranks_every_citation(doc):
-    f = doc.split("## 11 ·")[1]
+    f = doc.split("## 12 ·")[1]
     assert "including anything named in this document" in f
     assert "outranks every citation in this document" in f
     assert "not verified" in f
@@ -192,7 +192,7 @@ def test_secrets_are_reported_by_location_and_kind_only(doc):
 
 
 def test_the_proactive_section_is_actionable_not_aspirational(doc):
-    p = doc.split("## 9 ·")[1].split("## 10 ·")[0]
+    p = doc.split("## 10 ·")[1].split("## 11 ·")[0]
     for habit in ("draft the corrected text", "What happens if we do nothing",
                   "Name the mechanism, not the worry", "shortest credible route",
                   "Say what is good"):
@@ -205,14 +205,14 @@ def test_prompt_injection_has_a_test_a_non_engineer_can_run(doc):
 
 
 def test_the_self_check_covers_every_way_the_audit_itself_can_fail(doc):
-    s = doc.split("## 12 ·")[1].split("## 13 ·")[0]
+    s = doc.split("## 13 ·")[1].split("## 14 ·")[0]
     boxes = [l for l in s.splitlines() if l.strip().startswith("- [ ]")]
     assert len(boxes) >= 25, f"only {len(boxes)} self-check items"
     assert "say so in the memo rather than completing it weakly" in s
 
 
 def test_language_standard_is_present(doc):
-    lang = doc.split("## 13 ·")[1]
+    lang = doc.split("## 14 ·")[1]
     for rule in ("One idea per sentence", "Active voice", "No metaphor",
                  "Define every acronym"):
         assert rule in lang
@@ -394,24 +394,30 @@ def test_every_cross_reference_resolves_and_points_at_the_right_section(doc):
 
     # Each reference promises the target contains something. Check it does.
     promises = {
-        "owner named in §10": (10, "Records officer"),
+        "owner named in §11": (11, "Records officer"),
         "`METHOD` line in §7": (7, "METHOD"),
-        "another office** (§10)": (10, "Whose call"),
+        "another office** (§11)": (11, "Whose call"),
         "risk-acceptance block in §8": (8, "RISK ACCEPTED"),
-        "those are §10 determinations": (10, "Privacy office"),
+        "those are §11 determinations": (11, "Privacy office"),
         "**Scope it** (§3)": (3, "Stakes tier"),
         "**Work the lenses** (§5)": (5, "PA1"),
         "output** (§8)": (8, "Decision memo"),
-        "adapt with §11": (11, "not in §3"),
-        "Co-signature required (§10)": (10, "never signed by one person"),
+        "adapt with §12": (12, "not in §3"),
+        "Co-signature required (§11)": (11, "never signed by one person"),
         "person.** See §2": (2, "Describe artifacts, never people"),
-        "triggers from §11": (11, "Re-review when"),
+        "triggers from §12": (12, "Re-review when"),
         "in the §7 format": (7, "SEVERITY"),
         "not in §3": (3, "Artifact type"),
         "verdict follows §6": (6, "The verdict"),
     }
     for ref, (target, must_contain) in promises.items():
         assert ref in doc, f"cross-reference text vanished: {ref!r}"
+        # the number written in the reference must BE the target we check.
+        # Without this, a promise can name §11 and verify §12 and pass while
+        # the document sends the reader to the wrong section.
+        written = re.findall(r"§(\d+)", ref)
+        assert written and int(written[-1]) == target, \
+            f"{ref!r} writes §{written} but the promise checks §{target}"
         assert must_contain in bodies[target], \
             f"{ref!r} points at §{target}, which does not contain {must_contain!r}"
 
@@ -477,7 +483,7 @@ def test_provenance_and_conflict_are_captured_in_the_memo(doc):
 def test_working_papers_are_preserved_and_indexed(doc):
     assert "Preserve the working papers" in doc
     assert "consult your records officer before doing anything" in doc
-    annex = doc.split("### Part B")[1].split("## 9 ·")[0]
+    annex = doc.split("### Part B")[1].split("## 9 · The critique")[0]
     assert "**B8**" in annex and "Working-papers index" in annex
     assert "**B9**" in annex and "unedited" in annex
 
@@ -495,7 +501,7 @@ def test_the_limits_of_the_audit_are_enumerated(doc):
 
 
 def test_the_annex_now_has_nine_parts(doc):
-    annex = doc.split("### Part B")[1].split("## 9 ·")[0]
+    annex = doc.split("### Part B")[1].split("## 9 · The critique")[0]
     for n in range(1, 10):
         assert f"**B{n}**" in annex, f"annex part B{n} missing"
 
@@ -513,7 +519,7 @@ def test_the_document_obeys_its_own_phrasing_rules(doc):
         + doc.split("- [ ] No sentence describes a person")[1].split("\n")[0]
         + doc.split("| | Means | You may write it as |")[1].split("\n\n")[0]
         # §4 rule 4 forbids the word rather than using it
-        + doc.split("It describes artifacts, framings and accounts — never people.")[1].split("\n")[0]
+        + doc.split("It describes the artifact and its use, never its author.")[1].split("\n")[0]
     )
     for pattern in (r"there (is|are) no ", r"\bit does not exist\b",
                     r"the system has no ", r"\bfailed to\b", r"\bshould have known\b",
@@ -604,7 +610,7 @@ def test_a_new_risk_class_may_get_a_new_lens(doc):
 
 
 def test_the_new_rules_reach_the_self_check(doc):
-    s = doc.split("## 12 ·")[1].split("## 13 ·")[0]
+    s = doc.split("## 13 ·")[1].split("## 14 ·")[0]
     for item in ("Nothing you could not examine is written as `NOT FOUND`",
                  "compensating control that is itself `UNVERIFIED`",
                  "artifact did not assess itself",
@@ -625,7 +631,7 @@ def test_the_external_reach_triggers_are_graded_not_contradictory(doc):
 
 def test_the_self_check_survives_an_extended_audit(doc):
     """§10 permits adding a lens; a check hard-coded to 64 would then fail."""
-    assert "plus any you added under §11" in doc
+    assert "plus any you added under §12" in doc
 
 
 def test_the_change_log_describes_the_rules_as_they_now_read(doc):
@@ -653,12 +659,10 @@ def test_a_hypothesis_can_never_become_a_finding_by_itself(doc):
     assert "A hypothesis is not a finding" in s
 
 
-def test_the_expert_read_has_all_four_questions_and_all_five_rules(doc):
+def test_the_expert_read_has_all_five_questions_and_all_five_rules(doc):
     s = doc.split("## 4 · The expert read")[1].split("## 5 ·")[0]
-    questions = re.findall(r"^\d\. \*\*", s.split("### 4B")[0], re.M)
-    assert len(questions) == 4, f"expected 4 questions in 4A, found {len(questions)}"
-    b = s.split("### 4B")[1].split("### What the two halves")[0]
-    assert len(re.findall(r"^\d\. \*\*", b, re.M)) == 6, "4B must have six questions"
+    questions = re.findall(r"^\d\. \*\*", s.split("### How this differs")[0], re.M)
+    assert len(questions) == 5, f"expected 5 questions, found {len(questions)}"
     rules = re.findall(r"^\d\. \*\*", s.split("five rules")[1], re.M)
     assert len(rules) == 5, f"expected 5 rules, found {len(rules)}"
 
@@ -699,13 +703,13 @@ def test_an_empty_expert_read_is_a_legitimate_outcome(doc):
 
 
 def test_the_expert_read_is_recorded_in_the_annex(doc):
-    annex = doc.split("### Part B")[1].split("## 9 ·")[0]
+    annex = doc.split("### Part B")[1].split("## 9 · The critique")[0]
     assert "**B10**" in annex and "expert read" in annex
     assert "killed and why" in annex
 
 
 def test_the_expert_read_reaches_the_self_check(doc):
-    s = doc.split("## 12 ·")[1].split("## 13 ·")[0]
+    s = doc.split("## 13 ·")[1].split("## 14 ·")[0]
     assert "confirmed into a finding or killed" in s
     assert "No hypothesis reached the memo" in s
 
@@ -745,7 +749,7 @@ def test_it_names_its_owning_office_without_narrowing_the_rules(doc):
 
 def test_the_expert_read_is_distinguished_from_its_neighbours(doc):
     s = doc.split("### How this differs from the rest of the method")[1].split("### Adapt the depth")[0]
-    for neighbour in ("§5 lens callouts", "ninety days", "§12 self-check"):
+    for neighbour in ("§5 lens callouts", "ninety days", "§13 self-check"):
         assert neighbour in s, f"neighbour not distinguished: {neighbour}"
     assert "doing one does not discharge another" in s
     assert "a search plan you may be wrong about" in s
@@ -755,52 +759,95 @@ def test_the_expert_read_is_distinguished_from_its_neighbours(doc):
 
 # --- v3.5: 4B critiques what the auditor was handed -------------------------
 
-def test_stage_two_critiques_the_framing_not_only_the_artifact(doc):
-    """Most failed audits run the right method on the wrong framing."""
+
+
+
+
+
+
+# --- v3.6: the critique is a separate, requested service --------------------
+
+def test_the_critique_is_a_separate_section_not_part_of_the_audit(doc):
+    """v3.5 wrongly folded this into stage 2. An audit that also reviews the
+    requester is slower, outside the remit, and reads as a rebuke."""
+    assert "## 9 · The critique, on request — a separate service" in doc
+    s = doc.split("## 9 · The critique")[1].split("## 10 ·")[0]
+    assert "An audit judges the artifact. A critique judges what you were given" in s
+    assert "deliver the audit first" in s.lower()
+    assert "never run a critique nobody asked for" in s
+    assert "**The audit ends at step 4.**" in doc, "the card must say where the audit stops"
+
+
+def test_stage_two_reads_the_artifact_only(doc):
+    """§4 must not have crept back into reviewing the requester."""
     s = doc.split("## 4 · The expert read")[1].split("## 5 ·")[0]
-    assert "### 4A · Read the artifact" in s
-    assert "### 4B · Read what you were handed" in s
-    assert "the right method run on the wrong framing" in s
-    intro = s.split("### 4A")[0]
-    assert "Skipping 4B is how a careful audit ends up carefully answering the wrong question" in intro
+    assert "### The five questions" in s
+    assert "4B" not in s and "what you were handed" not in s
+    assert "scope correction" not in s.lower()
+    # the one 4B insight that is genuinely about the artifact stayed
+    assert "Does what it does match what it is called?" in s
 
 
-def test_4b_covers_the_six_ways_a_framing_goes_wrong(doc):
-    b = doc.split("### 4B · Read what you were handed")[1].split("### What the two halves")[0]
-    for probe in ("Does the description match the artifact",
-                  "Is the tier right, or is it convenient",
-                  "Is this the right question",
-                  "What did you accept because a person said it",
+def test_the_offer_is_made_once_and_not_pressed(doc):
+    s = doc.split("## 9 · The critique")[1].split("## 10 ·")[0]
+    assert "Make the offer once" in s
+    assert "A declined offer is a complete answer" in s
+    assert "reads as a rebuke rather than a service" in s
+
+
+def test_a_critique_covers_six_questions_under_audit_discipline(doc):
+    s = doc.split("What a critique covers, once asked")[1].split("### The rules")[0]
+    assert len(re.findall(r"^\d\. \*\*", s, re.M)) == 6
+    for probe in ("Does the description match what was provided",
+                  "Is the question the load-bearing one",
+                  "What was accepted because a person said it",
                   "What is missing, and is the absence itself information",
-                  "Do you want a particular answer"):
-        assert probe in b, f"4B question missing: {probe}"
-    assert "Being told is not evidence" in b
-    assert "does not soften because the person is senior" in b
+                  "Does the request point at a preferred answer",
+                  "What would you change about the request"):
+        assert probe in s, f"critique question missing: {probe}"
+    assert "Being told is not evidence" in s
 
 
-def test_4b_matters_most_where_nobody_is_watching(doc):
-    b = doc.split("### 4B · Read what you were handed")[1].split("### What the two halves")[0]
-    assert "4B is worth most at Tier 3" in b
-    assert "no second reader" in b
-    tiers = doc.split("### Adapt the depth to the tier")[1].split("### The five rules")[0]
-    assert "all of 4B" in tiers, "Tier 3 must still do all of 4B"
+def test_a_critique_can_never_alter_a_delivered_audit(doc):
+    s = doc.split("## 9 · The critique")[1].split("## 10 ·")[0]
+    assert "A critique never changes a delivered audit" in s
+    assert "re-review under §12" in s, "the re-review pointer must name the right section"
+    assert "Never a quiet edit to a memo that has already gone out" in s
+    assert "It is recorded separately" in s
+    assert "If a critique would re-tier the audit, say so and stop" in s
 
 
-def test_a_scope_correction_is_not_a_finding_and_is_bounded(doc):
-    s = doc.split("### What the two halves produce")[1].split("### How this differs")[0]
-    assert "A scope correction" in s and "This is not a finding either" in s
-    assert "return to §3" in s and "record in Annex B1" in s
-    assert "Re-scope at most once from the expert read" in s
-    assert "not diligence; it is an audit that has lost its footing" in s
+def test_being_told_is_not_evidence_is_audit_discipline_not_only_critique(doc):
+    """It moved to §2 because it governs the audit, not just the critique."""
+    s = doc.split("## 2 ·")[1].split("## 3 ·")[0]
+    assert "Being told is not evidence" in s
+    assert "does not soften because the person is senior" in s
 
 
-def test_4b_critiques_the_framing_never_the_person(doc):
-    s = doc.split("## 4 · The expert read")[1].split("## 5 ·")[0]
-    assert "critiques *the framing you were given*, never the person who gave it" in s
+def test_the_offer_reaches_the_self_check(doc):
+    s = doc.split("## 13 ·")[1].split("## 14 ·")[0]
+    assert "critique was offered once" in s
+    assert "Nothing from a critique was folded into this audit" in s
 
 
-def test_the_4b_obligations_reach_the_self_check(doc):
-    s = doc.split("## 12 ·")[1].split("## 13 ·")[0]
-    assert "4B was done" in s
-    assert "every claim taken from a person is marked" in s
-    assert "not re-scoped more than once" in s
+def test_the_example_separates_the_audit_from_the_critique(example):
+    """The worked example must model the separation, not the merge."""
+    assert "4B" not in example, "the example still shows the v3.5 merged design"
+    assert "OFFER (made once, not pressed)" in example
+    offer = example.split("OFFER (made once, not pressed)")[1][:400]
+    assert "it does not change this audit" in offer
+    memo = example.split("### Part A")[1].split("### Part B")[0] if "### Part A" in example \
+        else example.split("Part A")[1].split("Part B")[0]
+    assert "OFFER (made once, not pressed)" in memo, "the offer belongs on the memo"
+
+
+def test_the_reason_the_critique_exists_is_stated(doc):
+    s = doc.split("## 9 · The critique")[1].split("## 10 ·")[0]
+    assert "right method run carefully on the wrong framing" in s
+    assert "the audit itself cannot see that" in s
+
+
+def test_tier_three_is_flagged_as_the_unwitnessed_one(doc):
+    s = doc.split("### Stakes tier")[1].split("### Above the division")[0]
+    assert "Tier 3 is the one nobody co-signs" in s
+    assert "least likely to be caught by anyone but you" in s
