@@ -513,7 +513,7 @@ def test_the_document_obeys_its_own_phrasing_rules(doc):
         + doc.split("- [ ] No sentence describes a person")[1].split("\n")[0]
         + doc.split("| | Means | You may write it as |")[1].split("\n\n")[0]
         # §4 rule 4 forbids the word rather than using it
-        + doc.split("It describes the artifact and its use, never its author.")[1].split("\n")[0]
+        + doc.split("It describes artifacts, framings and accounts — never people.")[1].split("\n")[0]
     )
     for pattern in (r"there (is|are) no ", r"\bit does not exist\b",
                     r"the system has no ", r"\bfailed to\b", r"\bshould have known\b",
@@ -655,8 +655,10 @@ def test_a_hypothesis_can_never_become_a_finding_by_itself(doc):
 
 def test_the_expert_read_has_all_four_questions_and_all_five_rules(doc):
     s = doc.split("## 4 · The expert read")[1].split("## 5 ·")[0]
-    questions = re.findall(r"^\d\. \*\*", s.split("### Adapt the depth")[0], re.M)
-    assert len(questions) == 4, f"expected 4 questions, found {len(questions)}"
+    questions = re.findall(r"^\d\. \*\*", s.split("### 4B")[0], re.M)
+    assert len(questions) == 4, f"expected 4 questions in 4A, found {len(questions)}"
+    b = s.split("### 4B")[1].split("### What the two halves")[0]
+    assert len(re.findall(r"^\d\. \*\*", b, re.M)) == 6, "4B must have six questions"
     rules = re.findall(r"^\d\. \*\*", s.split("five rules")[1], re.M)
     assert len(rules) == 5, f"expected 5 rules, found {len(rules)}"
 
@@ -749,3 +751,56 @@ def test_the_expert_read_is_distinguished_from_its_neighbours(doc):
     assert "a search plan you may be wrong about" in s
     # and the ninety-day note points back
     assert "This is not the §4 pre-mortem" in doc
+
+
+# --- v3.5: 4B critiques what the auditor was handed -------------------------
+
+def test_stage_two_critiques_the_framing_not_only_the_artifact(doc):
+    """Most failed audits run the right method on the wrong framing."""
+    s = doc.split("## 4 · The expert read")[1].split("## 5 ·")[0]
+    assert "### 4A · Read the artifact" in s
+    assert "### 4B · Read what you were handed" in s
+    assert "the right method run on the wrong framing" in s
+    intro = s.split("### 4A")[0]
+    assert "Skipping 4B is how a careful audit ends up carefully answering the wrong question" in intro
+
+
+def test_4b_covers_the_six_ways_a_framing_goes_wrong(doc):
+    b = doc.split("### 4B · Read what you were handed")[1].split("### What the two halves")[0]
+    for probe in ("Does the description match the artifact",
+                  "Is the tier right, or is it convenient",
+                  "Is this the right question",
+                  "What did you accept because a person said it",
+                  "What is missing, and is the absence itself information",
+                  "Do you want a particular answer"):
+        assert probe in b, f"4B question missing: {probe}"
+    assert "Being told is not evidence" in b
+    assert "does not soften because the person is senior" in b
+
+
+def test_4b_matters_most_where_nobody_is_watching(doc):
+    b = doc.split("### 4B · Read what you were handed")[1].split("### What the two halves")[0]
+    assert "4B is worth most at Tier 3" in b
+    assert "no second reader" in b
+    tiers = doc.split("### Adapt the depth to the tier")[1].split("### The five rules")[0]
+    assert "all of 4B" in tiers, "Tier 3 must still do all of 4B"
+
+
+def test_a_scope_correction_is_not_a_finding_and_is_bounded(doc):
+    s = doc.split("### What the two halves produce")[1].split("### How this differs")[0]
+    assert "A scope correction" in s and "This is not a finding either" in s
+    assert "return to §3" in s and "record in Annex B1" in s
+    assert "Re-scope at most once from the expert read" in s
+    assert "not diligence; it is an audit that has lost its footing" in s
+
+
+def test_4b_critiques_the_framing_never_the_person(doc):
+    s = doc.split("## 4 · The expert read")[1].split("## 5 ·")[0]
+    assert "critiques *the framing you were given*, never the person who gave it" in s
+
+
+def test_the_4b_obligations_reach_the_self_check(doc):
+    s = doc.split("## 12 ·")[1].split("## 13 ·")[0]
+    assert "4B was done" in s
+    assert "every claim taken from a person is marked" in s
+    assert "not re-scoped more than once" in s

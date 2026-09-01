@@ -1,6 +1,6 @@
 # READINESS AUDITOR — AI, Tools, Prompts, and Digital Work Products
 
-*v3.4 · 2026-08-31 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
+*v3.5 · 2026-08-31 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
 
 **What this is.** A structured method for deciding whether a tool is fit to use in regulatory work — an AI product, a prompt, an agent, a script, a spreadsheet, a dashboard, a vendor service, or any digital thing whose output reaches the work. Run by the person who owns the work, not by an engineer.
 
@@ -197,9 +197,11 @@ The tiers assume a decision your division owns. Raise the floor when the audit r
 
 The 64 controls find what this method was told to look for. They cannot find what is wrong with **this** artifact in particular. Before you open the checklist, read the thing once as a specialist would, and write down what you expect to be broken.
 
+It has two halves. **4A reads the artifact.** **4B reads what you were handed** — the account of the artifact, the question you were asked, and the tier you chose. Skipping 4B is how a careful audit ends up carefully answering the wrong question.
+
 **This step produces hypotheses, never findings.** A hypothesis has no evidence state, no severity, and never reaches the memo. It is a search plan. Each one is either confirmed into a finding under §5–§7, or killed — and a killed hypothesis is recorded, because *"we looked at that and it was fine"* is worth more to the next reader than silence.
 
-### The four questions
+### 4A · Read the artifact
 
 Read the artifact end to end with the checklist closed. Then answer, in writing, in Annex B10:
 
@@ -208,13 +210,38 @@ Read the artifact end to end with the checklist closed. Then answer, in writing,
 3. **What would a specialist in this kind of artifact check first?** Start from the *failure that actually happens* column in §3 for this artifact type, then go past it. A prompt specialist opens the examples. A spreadsheet specialist opens the formulas nobody has changed in two years.
 4. **What is unusual here?** Anything the artifact does that you have not seen before, or that the owner explained at unusual length. Unusual is where the checklist has least to say, so it is where your reading is worth most.
 
+### 4B · Read what you were handed
+
+The artifact is only half of what arrived. The other half is the account of it: what the owner said it does, the question you were asked, the tier you chose, and everything you accepted without checking. **Most failed audits are not a missed control. They are the right method run on the wrong framing.**
+
+Six questions. Answer them in Annex B10, beside 4A.
+
+1. **Does the description match the artifact?** The owner's account and the material often disagree, and the gap is usually the finding. *"It only summarises"* — does it? Read what it does before you accept what it is called.
+2. **Is the tier right, or is it convenient?** Would someone who did not want a particular answer choose the same tier from the same facts? Write the one line that justifies it (§3). If you cannot write that line, raise the tier.
+3. **Is this the right question?** You were asked *"can we use this."* Sometimes the load-bearing question is *"what is this replacing,"* or *"what happens to the work if it is wrong."* Ask the one that matters, and say in the memo if it differs from the one you were given.
+4. **What did you accept because a person said it?** List every claim in your scoping that came from someone rather than from the material. Each is `UNVERIFIED` until you check it. **Being told is not evidence** — that rule does not soften because the person is senior, or right most of the time.
+5. **What is missing, and is the absence itself information?** A vendor package nobody sent *and nobody mentioned* is a different fact from one that was requested and is coming. Record which, with the date.
+6. **Do you want a particular answer?** A deadline, a colleague who built it, a director who said yes in a meeting. Name it in writing before you start. §2 tells you what to do about it.
+
+**4B is worth most at Tier 3** — the quick check nobody co-signs. Under-scoping is the failure that never gets caught, precisely because a Tier 3 audit has no second reader.
+
+### What the two halves produce
+
+4A produces hypotheses. 4B produces those, and one other thing:
+
+- **A hypothesis** — handled exactly as in 4A: confirmed into a finding, or killed and recorded.
+- **A scope correction** — a change to the tier, to the artifact's identity, or to the question being answered. This is not a finding either. Apply it, return to §3, and record in Annex B1 what changed and why.
+
+**Re-scope at most once from the expert read.** If you would re-scope a second time, you do not yet understand the artifact well enough to audit it. Stop, say so, and ask for what you are missing under the 95% rule in §2. A third re-scope is not diligence; it is an audit that has lost its footing.
+
 ### How this differs from the rest of the method
 
 Three other parts of this method look adjacent. They are not the same thing, and doing one does not discharge another.
 
 | | What it produces | When |
 |---|---|---|
-| **§4, this section** | Hypotheses to go looking for. They never reach the memo. | Before the checklist |
+| **§4A** | Hypotheses to go looking for. They never reach the memo. | Before the checklist |
+| **§4B** | The same, plus scope corrections that send you back to §3 | Before the checklist |
 | **§5 lens callouts** | Ready-made expert checks that come with the controls | During the checklist |
 | **§9 "what breaks in ninety days"** | Forward risk written *into* the memo for the reader | After the findings exist |
 | **§12 self-check** | A critique of your own draft, not of the artifact | At handover |
@@ -225,9 +252,9 @@ The §4 pre-mortem and the §9 ninety-day note are the pair most easily confused
 
 | Tier | Effort | What you write |
 |---|---|---|
-| **3** | ~5 minutes | Question 2 only, one or two lines. |
-| **2** | ~20 minutes | All four questions, briefly. |
-| **1** | As long as it takes | All four, plus a **pre-mortem**: *it is a year from now and this tool has caused a serious problem — what happened?* Write the three most credible stories, and carry each into the lenses as a hypothesis. |
+| **3** | ~10 minutes | 4A question 2, and **all of 4B** — this is where mis-scoping goes uncaught. |
+| **2** | ~30 minutes | All of 4A and all of 4B, briefly. |
+| **1** | As long as it takes | All of 4A and 4B, plus a **pre-mortem**: *it is a year from now and this tool has caused a serious problem — what happened?* Write the three most credible stories, and carry each into the lenses as a hypothesis. |
 
 ### The five rules that keep this honest
 
@@ -236,7 +263,7 @@ An expert read is the fastest way to make a method persuasive, and the fastest w
 1. **A hypothesis is not a finding.** It carries no state, no severity, and no place in the memo. If you cannot confirm it with evidence and a method under §7, it has no place in this audit. **Plausible is not evidence.**
 2. **Kill your own hypotheses.** Go looking for the reason each one is wrong before you go looking for support. Record every one you killed and what killed it. An expert read that confirms everything it guessed was not a read; it was a decision made in advance.
 3. **The expert read never sets severity.** Severity comes from §6, from what the evidence supports. A hypothesis that feels alarming does not start life as a P0.
-4. **It describes the artifact and its use, never its author.** §2 applies here first and hardest — a pre-mortem is about how a thing fails, never about who was careless.
+4. **It describes artifacts, framings and accounts — never people.** §2 applies here first and hardest. A pre-mortem is about how a thing fails, never about who was careless. 4B critiques *the framing you were given*, never the person who gave it: *"the description says it only summarises; the prompt also drafts text"* is a fact, and it is enough.
 5. **The 95% rule does not gate a hypothesis.** A hypothesis is uncertain by definition; that is what it is for. The rule gates what you *write down as a claim*. Guess freely here, and nowhere else.
 
 **If the expert read produces nothing, say that.** A short artifact you understand completely, with nothing unusual in it, is a legitimate outcome and a useful one. An empty B10 that says *"read end to end; nothing beyond the checklist suggested itself"* is honest. An invented concern to fill the space is the beginning of an audit nobody can trust.
@@ -492,6 +519,8 @@ Run this on your own draft. It is the same discipline you applied to the tool.
 - [ ] Every date is present: when you examined, when you tested, when you referred.
 - [ ] Another person could repeat this from Annex B6 and reach the same result.
 - [ ] Every hypothesis from §4 was confirmed into a finding or killed, and B10 records which.
+- [ ] 4B was done: the description was checked against the artifact, the tier was justified in one line, and every claim taken from a person is marked `UNVERIFIED` or checked.
+- [ ] Any scope correction is applied and recorded in B1, and the audit was not re-scoped more than once.
 - [ ] Nothing you could not examine is written as `NOT FOUND`.
 - [ ] No P0 was demoted by a compensating control that is itself `UNVERIFIED`.
 
@@ -531,4 +560,4 @@ One idea per sentence, 20 words or fewer — 25 for instructions. Active voice w
 
 ---
 
-**Change log.** **v3.4** (2026-08-31) — names the office that prepared this edition and states that every operative rule stays office-neutral, so any division can adopt it unchanged; §4 now says how it differs from the lens callouts, the ninety-day note, and the self-check. **v3.3** (2026-08-31) — adds §4, the expert read: a specialist pass before the checklist that produces hypotheses, never findings, with five rules that stop it manufacturing them. Depth adapts by tier; Tier 1 adds a pre-mortem. Recorded at Annex B10, including every hypothesis that was killed. **v3.2.1** (2026-08-31) — corrects v3.2 before use: the closed-artifact rule is scoped per control, so a closed artifact no longer voids `[E]` findings taken from a vendor package; reaching outside the office escalates the tier, reaching outside the agency stops the audit; the self-check survives an added lens. **v3.2** (2026-08-31) — an `[A]` control you could not go and look at is `UNVERIFIED`, never `NOT FOUND`, and an `[E]` control is unaffected by a closed artifact; tier depth and the pilot test keyed to `[A]` controls instead of an undefined "required" set; only a `CONFIRMED` compensating control may demote a P0; never let the artifact audit itself; the 95% rule; scaling above the division; permission to add a lens. **v3.1** — navigation restructure, one evidence law, Start-here card. **v3.0** — defensibility and protection layer: attestation, risk acceptance, `METHOD` line, pressure protocol. **v2.0** — first edition for this office.
+**Change log.** **v3.5** (2026-08-31) — §4 gains a second half. 4A reads the artifact; 4B reads what you were handed: whether the description matches the material, whether the tier was chosen or merely convenient, whether the question is the load-bearing one, what was accepted because a person said it, whether an absence is itself information, and whether you want a particular answer. 4B may produce a scope correction as well as a hypothesis, and the audit may be re-scoped once. **v3.4** (2026-08-31) — names the office that prepared this edition and states that every operative rule stays office-neutral, so any division can adopt it unchanged; §4 now says how it differs from the lens callouts, the ninety-day note, and the self-check. **v3.3** (2026-08-31) — adds §4, the expert read: a specialist pass before the checklist that produces hypotheses, never findings, with five rules that stop it manufacturing them. Depth adapts by tier; Tier 1 adds a pre-mortem. Recorded at Annex B10, including every hypothesis that was killed. **v3.2.1** (2026-08-31) — corrects v3.2 before use: the closed-artifact rule is scoped per control, so a closed artifact no longer voids `[E]` findings taken from a vendor package; reaching outside the office escalates the tier, reaching outside the agency stops the audit; the self-check survives an added lens. **v3.2** (2026-08-31) — an `[A]` control you could not go and look at is `UNVERIFIED`, never `NOT FOUND`, and an `[E]` control is unaffected by a closed artifact; tier depth and the pilot test keyed to `[A]` controls instead of an undefined "required" set; only a `CONFIRMED` compensating control may demote a P0; never let the artifact audit itself; the 95% rule; scaling above the division; permission to add a lens. **v3.1** — navigation restructure, one evidence law, Start-here card. **v3.0** — defensibility and protection layer: attestation, risk acceptance, `METHOD` line, pressure protocol. **v2.0** — first edition for this office.
