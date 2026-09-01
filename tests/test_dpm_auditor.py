@@ -229,13 +229,19 @@ def test_it_carries_a_dated_version_marker_and_a_change_log(doc):
     assert listed, "the change log lists no versions"
     keys = [tuple(int(n) for n in v.split(".")) for v in listed]
     assert keys == sorted(keys, reverse=True), f"the change log is out of order: {listed}"
-    # every minor version between the newest and the oldest must be present
-    majors = sorted({(k[0], k[1]) for k in keys}, reverse=True)
-    hi, lo = majors[0], majors[-1]
-    expected = [(hi[0], m) for m in range(hi[1], -1, -1)] if hi[0] == lo[0] else None
-    if expected:
-        missing = [f"v{a}.{b}" for a, b in expected if (a, b) not in {(k[0], k[1]) for k in keys}]
-        assert not missing, f"the change log skips a shipped version: {missing}"
+    # within each major line, the minors must be contiguous - no shipped
+    # version may vanish from the record. Grouping by major matters: an
+    # earlier attempt compared the newest against the oldest, and the presence
+    # of v2.0 made the majors differ and skipped the check entirely.
+    by_major = {}
+    for k in keys:
+        by_major.setdefault(k[0], set()).add(k[1])
+    missing = []
+    for major, minors in by_major.items():
+        for m in range(min(minors), max(minors) + 1):
+            if m not in minors:
+                missing.append(f"v{major}.{m}")
+    assert not missing, f"the change log skips a shipped version: {sorted(missing)}"
 
 
 def test_no_secret_shaped_example_leaks_into_the_document(doc):
