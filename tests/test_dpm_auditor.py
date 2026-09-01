@@ -865,3 +865,35 @@ def test_no_removed_stage_survives_anywhere_in_the_document(doc):
 def test_the_self_check_still_carries_the_being_told_discipline(doc):
     s = doc.split("## 13 ·")[1].split("## 14 ·")[0]
     assert "came from a person, not the material, is checked or marked `UNVERIFIED`" in s
+
+
+def test_every_written_count_matches_what_is_actually_there(doc):
+    """B10 said 'the four questions' after §4 grew to five. A count stated in
+    prose rots silently; this measures instead of trusting."""
+    s4 = doc.split("## 4 · The expert read")[1].split("## 5 ·")[0]
+    measured = {
+        "q4":   len(re.findall(r"^\d\. \*\*", s4.split("### How this differs")[0], re.M)),
+        "r4":   len(re.findall(r"^\d\. \*\*", s4.split("five rules")[1], re.M)),
+        "q9":   len(re.findall(r"^\d\. \*\*",
+                   doc.split("What a critique covers, once asked")[1].split("### The rules")[0], re.M)),
+        "ctl":  len(re.findall(r"`[A-Z]{2}\d+` \[[AE]\]", doc)),
+        "lens": len(re.findall(r"^### L\d · ", doc, re.M)),
+        "rows": len([l for l in doc.splitlines() if re.match(r"^\| [1-8] \|", l)]),
+    }
+    assert measured == {"q4": 5, "r4": 5, "q9": 6, "ctl": 64, "lens": 7, "rows": 8}, measured
+    assert "64 controls" in doc and "7 lenses" in doc
+    assert "### The five questions" in doc and "All five questions" in doc
+    assert "The five rules" in doc and "Six questions, under the same" in doc
+    # no stale count may name §4's questions by number outside §4 itself
+    assert "the four questions" not in doc
+    outside = doc.replace(s4, "")
+    assert "five questions" not in outside, \
+        "a §4 question count is stated outside §4, where it will rot"
+
+
+def test_a_standalone_critique_must_be_labelled_as_not_an_audit(doc):
+    """The failure mode is a critique read as clearance."""
+    s = doc.split("## 9 · The critique")[1].split("## 10 ·")[0]
+    assert "A critique asked for on its own is allowed, and must be labelled" in s
+    assert "no controls were worked" in s and "it clears nothing" in s
+    assert "mistaken for an audit is the one way this service can hurt" in s
