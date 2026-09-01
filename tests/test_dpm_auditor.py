@@ -725,3 +725,27 @@ def test_the_example_shows_the_expert_read_with_killed_hypotheses(example):
     assert b10.count("**Killed.**") >= 2, "the example must show hypotheses being killed"
     assert "**Confirmed**" in b10
     assert "Nothing here reached the memo except through a finding" in b10
+
+
+# --- v3.4: ownership in the frame, neutrality in the rules ------------------
+
+def test_it_names_its_owning_office_without_narrowing_the_rules(doc):
+    """DPM ownership must not cost another division a zero-edit adoption."""
+    assert "Division of Project Management" in doc
+    assert "deliberately office-neutral" in doc
+    assert "any division at the FDA can adopt it without editing" in doc
+    # the operative sections must stay neutral
+    body = doc.split("## 0 · Rule Zero")[1]
+    for parochial in ("DPM", "OGD", "ORO"):
+        assert parochial not in body, \
+            f"{parochial!r} appears in an operative section; the rules must stay office-neutral"
+
+
+def test_the_expert_read_is_distinguished_from_its_neighbours(doc):
+    s = doc.split("### How this differs from the rest of the method")[1].split("### Adapt the depth")[0]
+    for neighbour in ("§5 lens callouts", "ninety days", "§12 self-check"):
+        assert neighbour in s, f"neighbour not distinguished: {neighbour}"
+    assert "doing one does not discharge another" in s
+    assert "a search plan you may be wrong about" in s
+    # and the ninety-day note points back
+    assert "This is not the §4 pre-mortem" in doc

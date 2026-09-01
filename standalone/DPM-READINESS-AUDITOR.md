@@ -1,8 +1,10 @@
 # READINESS AUDITOR — AI, Tools, Prompts, and Digital Work Products
 
-*v3.3 · 2026-08-31 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
+*v3.4 · 2026-08-31 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
 
 **What this is.** A structured method for deciding whether a tool is fit to use in regulatory work — an AI product, a prompt, an agent, a script, a spreadsheet, a dashboard, a vendor service, or any digital thing whose output reaches the work. Run by the person who owns the work, not by an engineer.
+
+**Who this is for.** The people who own the work — project managers and reviewers, not engineers. This edition was prepared for the Division of Project Management (OGD/ORO). It is deliberately office-neutral: every operative rule says *your office*, so any division at the FDA can adopt it without editing a word. Name the office that maintains it on the memo, and §10 names the decisions that office does not own.
 
 **What this is not.** Not agency policy. Not an Authority to Operate. Not a privacy, records, security, or legal determination. It does not confer or establish compliance with any regulation. It produces an evidence-backed recommendation and names exactly who must decide the parts you cannot. Say this on the memo. A tool that overstates its own authority is the first thing a reviewer distrusts.
 
@@ -205,6 +207,19 @@ Read the artifact end to end with the checklist closed. Then answer, in writing,
 2. **How will this most likely fail in real use?** Not the worst case — the *likely* case. The thing that happens on an ordinary Tuesday, to a tired person, in a hurry.
 3. **What would a specialist in this kind of artifact check first?** Start from the *failure that actually happens* column in §3 for this artifact type, then go past it. A prompt specialist opens the examples. A spreadsheet specialist opens the formulas nobody has changed in two years.
 4. **What is unusual here?** Anything the artifact does that you have not seen before, or that the owner explained at unusual length. Unusual is where the checklist has least to say, so it is where your reading is worth most.
+
+### How this differs from the rest of the method
+
+Three other parts of this method look adjacent. They are not the same thing, and doing one does not discharge another.
+
+| | What it produces | When |
+|---|---|---|
+| **§4, this section** | Hypotheses to go looking for. They never reach the memo. | Before the checklist |
+| **§5 lens callouts** | Ready-made expert checks that come with the controls | During the checklist |
+| **§9 "what breaks in ninety days"** | Forward risk written *into* the memo for the reader | After the findings exist |
+| **§12 self-check** | A critique of your own draft, not of the artifact | At handover |
+
+The §4 pre-mortem and the §9 ninety-day note are the pair most easily confused. The first is a search plan you may be wrong about. The second is a conclusion you stand behind in writing.
 
 ### Adapt the depth to the tier
 
@@ -417,7 +432,7 @@ This is the difference between a checklist and a colleague. Do these without bei
 
 **Answer the questions before they are asked.** A director will ask five things. Have all five in the memo already: *What happens if we do nothing? · What is the fastest path to yes? · Who else has to sign? · What does this cost us if it is wrong? · Has anyone tested it on real work?*
 
-**Say what breaks in ninety days.** Not what is broken now — what will be. The model version that will move. The maintainer who is the only one who knows it. The spreadsheet that works at forty cases and not four hundred. The vendor term that renews. **Name the mechanism, not the worry:** *"the prompt is tuned to one model version, and the vendor retires versions on roughly a yearly cycle — verify the current schedule"* beats *"it may become outdated."*
+**Say what breaks in ninety days.** Not what is broken now — what will be. This is not the §4 pre-mortem: that one generated hypotheses you then went and tested. This one is a conclusion you put your name to. The model version that will move. The maintainer who is the only one who knows it. The spreadsheet that works at forty cases and not four hundred. The vendor term that renews. **Name the mechanism, not the worry:** *"the prompt is tuned to one model version, and the vendor retires versions on roughly a yearly cycle — verify the current schedule"* beats *"it may become outdated."*
 
 **Give the owner a path, not a verdict.** Every `NOT CLEARED` ends with the shortest credible route to `CLEARED WITH CONDITIONS`. People act on paths.
 
@@ -516,4 +531,4 @@ One idea per sentence, 20 words or fewer — 25 for instructions. Active voice w
 
 ---
 
-**Change log.** **v3.3** (2026-08-31) — adds §4, the expert read: a specialist pass before the checklist that produces hypotheses, never findings, with five rules that stop it manufacturing them. Depth adapts by tier; Tier 1 adds a pre-mortem. Recorded at Annex B10, including every hypothesis that was killed. **v3.2.1** (2026-08-31) — corrects v3.2 before use: the closed-artifact rule is scoped per control, so a closed artifact no longer voids `[E]` findings taken from a vendor package; reaching outside the office escalates the tier, reaching outside the agency stops the audit; the self-check survives an added lens. **v3.2** (2026-08-31) — an `[A]` control you could not go and look at is `UNVERIFIED`, never `NOT FOUND`, and an `[E]` control is unaffected by a closed artifact; tier depth and the pilot test keyed to `[A]` controls instead of an undefined "required" set; only a `CONFIRMED` compensating control may demote a P0; never let the artifact audit itself; the 95% rule; scaling above the division; permission to add a lens. **v3.1** — navigation restructure, one evidence law, Start-here card. **v3.0** — defensibility and protection layer: attestation, risk acceptance, `METHOD` line, pressure protocol. **v2.0** — first edition for this office.
+**Change log.** **v3.4** (2026-08-31) — names the office that prepared this edition and states that every operative rule stays office-neutral, so any division can adopt it unchanged; §4 now says how it differs from the lens callouts, the ninety-day note, and the self-check. **v3.3** (2026-08-31) — adds §4, the expert read: a specialist pass before the checklist that produces hypotheses, never findings, with five rules that stop it manufacturing them. Depth adapts by tier; Tier 1 adds a pre-mortem. Recorded at Annex B10, including every hypothesis that was killed. **v3.2.1** (2026-08-31) — corrects v3.2 before use: the closed-artifact rule is scoped per control, so a closed artifact no longer voids `[E]` findings taken from a vendor package; reaching outside the office escalates the tier, reaching outside the agency stops the audit; the self-check survives an added lens. **v3.2** (2026-08-31) — an `[A]` control you could not go and look at is `UNVERIFIED`, never `NOT FOUND`, and an `[E]` control is unaffected by a closed artifact; tier depth and the pilot test keyed to `[A]` controls instead of an undefined "required" set; only a `CONFIRMED` compensating control may demote a P0; never let the artifact audit itself; the 95% rule; scaling above the division; permission to add a lens. **v3.1** — navigation restructure, one evidence law, Start-here card. **v3.0** — defensibility and protection layer: attestation, risk acceptance, `METHOD` line, pressure protocol. **v2.0** — first edition for this office.
