@@ -924,10 +924,12 @@ def test_every_written_count_matches_what_is_actually_there(doc):
     assert "The five rules" in doc and "Six questions, under the same" in doc
     # no stale count may name §4's questions by number outside §4 itself
     assert "the four questions" not in doc
-    # §10 introduced a second set of five questions - the ones a director asks -
-    # so the bare phrase is now ambiguous rather than merely fragile. Outside §4,
-    # and outside the change log (which legitimately describes other sections),
-    # every "five questions" must say whose.
+    # There are now THREE sets of five: §4's expert-read questions, §10's
+    # director questions, and the 60-second gate's. The bare phrase is ambiguous,
+    # not merely fragile. Outside §4, and outside the change log (which
+    # legitimately describes other sections), every "five questions" must say
+    # whose. If a fourth set is ever added, disambiguate it at the point of use
+    # rather than widening this check.
     outside = doc.replace(s4, "").split("**Change log.**")[0]
     for m in re.finditer(r"five questions", outside):
         near = outside[max(0, m.start() - 60):m.end() + 60]
@@ -969,10 +971,14 @@ def test_the_worked_example_names_the_version_it_was_produced_with(doc, example)
     """It was already stale once - the example said v3.6 while the method had
     moved to v3.6.1 - and a reader cannot tell a stale sample from a current one."""
     marker = re.search(r"v(\d+\.\d+(?:\.\d+)?) · \d{4}-\d{2}-\d{2} · \d+ controls", doc)
-    stamped = re.search(r"READINESS AUDITOR v(\d+\.\d+(?:\.\d+)?)", example)
+    # EVERY stamp, not just the first: checking only the first let the closing
+    # footer sit at v3.6 while the header read v3.8, undetected.
+    stamped = re.findall(r"READINESS AUDITOR v(\d+\.\d+(?:\.\d+)?)", example)
     assert stamped, "the worked example does not say which version produced it"
-    assert stamped.group(1) == marker.group(1), (
-        f"the example says v{stamped.group(1)} but the method is v{marker.group(1)}")
+    wrong = sorted({v for v in stamped if v != marker.group(1)})
+    assert not wrong, (
+        f"the example carries stale version stamps {wrong} but the method is "
+        f"v{marker.group(1)}")
 
 
 def test_the_worked_example_shows_what_was_and_was_not_obtained(doc, example):
@@ -1064,3 +1070,89 @@ def test_the_risk_block_costs_one_line_when_no_risk_was_accepted(doc, example):
     tail = memo_worked(example).split("RISK ACCEPTED")[1].split("OFFER")[0]
     assert len(tail.strip().splitlines()) <= 2, \
         "an unexercised risk block should not render an empty form"
+
+
+# --- v3.9: adoption - the daily gate, the floor, reuse, and the owner -------
+
+def test_the_gate_is_short_daily_and_admits_what_it_is_not(doc):
+    """The method's lightest episode was ~30 minutes, so it had no daily use.
+    A gate that quietly implied clearance would be worse than none."""
+    g = doc.split("## The 60-second gate")[1].split("## 0 ·")[0]
+    assert len(re.findall(r"^\d\. \*\*", g, re.M)) == 5, "the gate must ask five questions"
+    for control in ("`SS1`", "`DC2`", "`DC3`", "`PA3`", "`PA7`", "`EA7`"):
+        assert control in g, f"the gate cites no control for {control}"
+    # it must disclaim itself, or people will treat it as a clearance
+    assert "not a clearance and it does not travel" in g
+    assert "pick a tier in §3" in g
+    assert 'Any "no" or "not sure" stops you' in g
+    # and it must sit before Rule Zero, where a daily reader will meet it
+    assert doc.index("## The 60-second gate") < doc.index("## 0 · Rule Zero")
+
+
+def test_the_floor_is_shown_not_only_the_hard_case(doc):
+    """The only worked output was a Tier 1 NOT CLEARED with three blockers, so
+    a reader could not see what the cheapest complete audit looks like."""
+    s = doc.split("### What the floor looks like")[1].split("### Part B")[0]
+    assert "Tier 3" in s and "CLEARED WITH CONDITIONS" in s
+    assert "0 blocker" in s, "the floor example should not be another failure"
+    # the two traps a short audit falls into, both demonstrated
+    assert "out of tier and are recorded as such at B3, not as passes" in s
+    assert "because I built it, not because of the tier" in s, \
+        "a self-built artifact still needs a second reviewer (§2)"
+
+
+def test_the_second_audit_is_cheaper_than_the_first(doc):
+    s = doc.split("### What the next audit may inherit")[1].split("## 13 ·")[0]
+    assert "Carry forward" in s and "Never inherit" in s
+    for must_recheck in ("`CONFIRMED` finding", "re-review trigger has fired", "citation"):
+        assert must_recheck in s, f"inheritable/not split omits: {must_recheck}"
+    assert "office library of findings" in s
+    assert "Say in B1 what you inherited" in s, "inheritance must be visible to be defensible"
+
+
+def test_the_owner_gets_a_page_written_for_them(doc):
+    s = doc.split("## If it is your tool being audited")[1].split("**Change log.**")[0]
+    assert "not an inspection of you" in s
+    assert 'Silence does not read as "fine."' in s
+    assert "A condition is not a rejection" in s
+    assert "Nobody has to be wrong for the work to go forward" in s
+    for quick_win in ("`RT1`", "`PA4`", "`DC7`"):
+        assert quick_win in s, f"the owner's three fastest fixes omit {quick_win}"
+    # and the intake step must actually send it
+    assert "Send the owner the page at the back" in doc
+
+
+def test_the_example_file_shows_a_passing_audit_too(example):
+    """One example, and it was a refusal. A reader concluded the tool exists
+    to say no."""
+    memos = example.split("READINESS AUDIT — DECISION MEMO")[1:]
+    assert len(memos) == 2, f"expected two worked memos, found {len(memos)}"
+    verdicts = [re.search(r"RECOMMENDATION:\s+([A-Z ]+)", m).group(1).strip()
+                for m in memos]
+    assert "NOT CLEARED" in verdicts, "the hard case must stay"
+    assert "CLEARED WITH CONDITIONS" in verdicts, "a passing audit must be shown"
+
+
+def test_every_worked_memo_follows_the_template_field_order(doc, example):
+    """Generalises the single-memo check: a second example is a second chance
+    for the form and its sample to drift apart."""
+    def fields(s):
+        return re.findall(r"^([A-Z][A-Za-z0-9 ,\u2019'\-]{2,32})(?::|$)", s, re.M)
+    tpl = fields(memo_template(doc))
+    for i, raw in enumerate(example.split("READINESS AUDIT — DECISION MEMO")[1:]):
+        m = fields(raw.split("```")[0])
+        shared_t = [f for f in tpl if f in m]
+        shared_m = [f for f in m if f in tpl]
+        assert shared_m == shared_t, f"memo {i} orders fields differently: {shared_m}"
+
+
+def test_every_worked_memo_obeys_the_mechanical_verdict_rule(doc, example):
+    for raw in example.split("READINESS AUDIT — DECISION MEMO")[1:]:
+        body = raw.split("```")[0]
+        c = re.search(r"Findings:\s+(\d+) blocker\s+(\d+) serious", body)
+        assert c, "a worked memo states no finding counts"
+        tier = int(re.search(r"Tier (\d)", body).group(1))
+        unver = int(re.search(r"(\d+) unverified", body).group(1))
+        stated = re.search(r"RECOMMENDATION:\s+([A-Z ]+)", body).group(1).strip()
+        assert verdict(int(c.group(1)), int(c.group(2)), tier, unver) == stated, \
+            f"memo states {stated}, rule gives {verdict(int(c.group(1)), int(c.group(2)), tier, unver)}"

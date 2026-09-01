@@ -1,6 +1,6 @@
 # READINESS AUDITOR — AI, Tools, Prompts, and Digital Work Products
 
-*v3.8 · 2026-09-01 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
+*v3.9 · 2026-09-01 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
 
 **What this is.** A structured method for deciding whether a tool is fit to use in regulatory work — an AI product, a prompt, an agent, a script, a spreadsheet, a dashboard, a vendor service, or any digital thing whose output reaches the work.
 
@@ -14,6 +14,7 @@
 
 | You are… | Do this | Read |
 |---|---|---|
+| **About to use a tool today, on your own work** | The 60-second gate below. No audit, no memo, no tier. | the gate |
 | **New to this** | Read a completed example first, then §0 and §1. | §0, §1 |
 | **Running a quick check** — no agency data, no work product | Tier 3: lenses L1, L3, L7 only. One page. ~30 min. | §3–§5 |
 | **Auditing a work product** — drafts a person fully reviews | Tier 2: all 7 lenses, every `[A]` control. ~2–4 hrs. | §3–§8 |
@@ -27,6 +28,24 @@
 **Never skip §0.** It is the one rule that protects you before you have written anything.
 
 **The audit ends at step 4.** §9 is a separate service — a critique of the request and the material *you* were given — offered once, run only if asked.
+
+---
+
+## The 60-second gate — before you put anything into a tool
+
+**Most days you do not need an audit.** You need to know whether you can put *this* into *that*, right now. Answer these five. **Any "no" or "not sure" stops you**, and the rest of this document tells you what to do next.
+
+1. **Is the tool approved for this data?** Not approved in general — approved for this kind of content, in this environment. If you do not know, that is a no. (`SS1`)
+2. **Does what I am about to enter contain sponsor data, personally identifiable information, trade secret or commercial confidential content, or anything pre-decisional?** If yes, and question 1 was not a clear yes, stop. (`DC2`, `DC3`)
+3. **Will a person read the output before it goes anywhere?** If it can leave your desk without review, stop. (`PA3`, `PA7`)
+4. **Will I check every number, date, name, and citation myself?** If you would not stake the file on it, verify it. (`EA7`)
+5. **If this output were wrong, who is harmed, and how would I find out?** If you cannot answer that in one sentence, you do not yet know what you are using it for.
+
+**Five yeses and you may proceed** — today, for this task, at your own desk.
+
+**This is not a clearance and it does not travel.** It says nothing about whether a colleague may use the tool, and nothing about whether its output may become a work product. **The moment the output reaches someone else's desk or an official file, stop using this card and pick a tier in §3.**
+
+**Stop and escalate the same day, without finishing the list,** if you find a credential inside a tool, or discover that something already went out unreviewed. §11 names who to tell.
 
 ---
 
@@ -185,6 +204,8 @@ Every item you do not have turns `[A]` controls into `[E]` ones and leaves findi
 7. Who else already uses it, and for what.
 
 **What arrives, and what does not, is itself evidence.** Record both.
+
+**Send the owner the page at the back of this document** when you ask. It says why each item is in their interest, what the three words will mean for them, and how to disagree. **An owner who understands the audit answers it faster.**
 
 ### Stakes tier — this sets the depth, and you must state which you chose
 
@@ -447,6 +468,77 @@ operate, or a privacy, records, security, or legal determination.
 
 **The `RISK ACCEPTED` block is how this method stays useful to leadership.** Work does not stop because an audit found something. An official with the authority may accept the risk and proceed, and this gives them a clean way to do it — in their words, over their name, with the finding intact. **Never edit a finding to make this block unnecessary.**
 
+### What the floor looks like — a complete Tier 3 memo
+
+Everything above, at the lightest tier. This is a whole audit.
+
+```
+READINESS AUDIT — DECISION MEMO
+
+Artifact:        "Meeting notes tidier" prompt, kept in my own notebook,
+                 last edited 14 August.
+Received from:   Me. I wrote it.       Type / Tier: Prompt / Tier 3
+Reviewed by:     <name>                Date: 14 August
+Material reviewed:   The prompt text, in full.
+Not available to me: Nothing. The artifact is three paragraphs I can read.
+Interest declared:   I built it, so a second reviewer is named below. That is
+                     required because I built it, not because of the tier.
+
+RECOMMENDATION:  CLEARED WITH CONDITIONS
+
+Bottom line:     Fine for tidying my own meeting notes. It must not be used on
+                 anything naming a firm or an application.
+
+Findings:        0 blocker  1 serious  0 moderate/minor  0 unverified
+
+What blocks it:  None.
+Conditions:      RA-L3-001 - the prompt does not say what must not be entered,
+                 so a colleague borrowing it would not know. Add one line.
+                 Owner: me. Date: 22 August.
+Open questions:  None. Lenses 1, 3 and 7 were worked in full; 2, 4, 5 and 6 are
+                 out of tier and are recorded as such at B3, not as passes.
+
+Anticipated questions - answer all five before they are asked:
+  If we do nothing:    I keep reformatting notes by hand, about 10 min a day.
+  Fastest path to yes: The one line in the condition above.
+  Who else must sign:  No one. Tier 3 needs no co-signature, and this touches
+                       no agency data.
+  Cost if it is wrong: A badly formatted personal note. Nothing leaves my desk.
+  Tested on real work: Yes - my own notes from three meetings, 12-14 August.
+
+Done well:       It is told to use only what is in the notes and to leave gaps
+                 visible rather than filling them. That is the instruction most
+                 prompts of this kind are missing.
+
+Confidence:      High. The artifact is short, I could read all of it, and
+                 nothing about it depends on a document I was not given.
+This audit cannot tell you: whether it behaves the same on notes unlike mine.
+Decisions not mine to make: none engaged at this tier - no agency data, no
+                 record, no external service.
+Breaks in 90 days: Nothing identified. It calls no service, stores nothing, and
+                 is pinned to no vendor version because it uses none.
+Re-review when:  It is used on anything naming a firm or an application, or
+                 shared with a colleague - either makes it a different audit.
+
+ATTESTATION
+  I examined the material listed above, on the date shown, by the method
+  recorded in Annex B1. The findings state what I observed. I made no
+  determination reserved to another office.
+  Reviewer: <name, role, 14 August>
+  Second reviewer: <name, role, date>  [ ] Concur
+     (named because I built the artifact, not because the tier requires it)
+
+RISK ACCEPTED   Not exercised.
+
+OFFER (made once, not pressed)
+  Not applicable. Nobody asked me for this; I audited my own tool.
+
+This is a structured working aid. It is not agency policy, an authorisation to
+operate, or a privacy, records, security, or legal determination.
+```
+
+**That is the entire Tier 3 output** — about thirty minutes of work, and a complete, defensible record. **Notice what it does not do:** it does not mark the out-of-tier lenses as passes, it does not invent findings to look thorough, and it does not let the author sign alone.
+
 ### Part B — Working annex. Behind the memo.
 
 **B1** Scope and method — what you reviewed, what you did not, the tier and why, how the artifact copy was identified, and that test data was synthetic · **B2** Findings in full, P0 first, in the §7 format · **B3** Control table — all 64, each marked `confirmed present` / `CONFIRMED finding` / `NOT FOUND` / `UNVERIFIED` / `N/A (reason)` / `out of tier`, with what you did and where you looked · **B4** Deferred controls, each with its trigger · **B5** Open questions, with document, holder, date referred, and any answer · **B6** What was tested — the inputs used, the number of runs, the dates, and the results · **B7** Re-review triggers and date · **B8** Working-papers index — your dated notes, test files, and results, and where they are kept · **B9** Disagreements and risk acceptances, recorded unedited · **B10** The expert read — your answers to the §4 questions, every hypothesis, and what happened to each: confirmed into a finding, or killed and why.
@@ -551,6 +643,18 @@ Do these without being told.
 
 **Version this audit** the way you would version the tool: number it, date it, and keep the prior one. A director comparing two audits of the same tool learns more than either audit alone.
 
+### What the next audit may inherit
+
+**The first audit of a tool costs what it costs. The second must cost less, or nobody will run it.**
+
+**Carry forward, each with the date it was established:** the artifact type and the control table you built for it · every `N/A` and its reason · every `[E]` answer that came from a document — vendor terms, an authorisation record, an accessibility report · the synthetic test set you built · an office answer to a question you already routed.
+
+**Re-check every time. Never inherit:** anything `[A]` in a version you have not read · every `CONFIRMED` finding, which is true only of the copy you examined · anything whose re-review trigger has fired · every citation, under the verification rule above.
+
+**Keep an office library of findings.** §10 says a finding written three times is a standard rather than a finding. That only works if the three are findable. Keep them in one place, each with its `IMPACT` line and its fix, and read it before starting an audit. **A finding already written is one you do not have to word again** — and an office whose audits use the same words for the same problem is an office a director can read quickly.
+
+**Say in B1 what you inherited, and from which audit.** Inheritance is defensible only when it is visible. An inherited answer nobody can trace is indistinguishable from one nobody checked.
+
 ---
 
 ## 13 · Self-check before you hand it over
@@ -606,6 +710,27 @@ Write for a tired reader, in a second language, at 4:45 on a Friday.
 
 One idea per sentence, 20 words or fewer — 25 for instructions. Active voice with the actor named: *"An outside user can read the draft"*, not *"the draft can be read."* One word for one meaning; do not call the same thing a tool, a system, and a solution in three sentences. Simple tenses. No noun stack longer than three words. Keep the articles. **No metaphor, no idiom, no humour, no hedging** — state the fact, or mark it `UNVERIFIED`. Define every acronym on first use. Keep identifiers, file names, cell references, and severity labels exactly as they are.
 
+
 ---
 
-**Change log.** **v3.8** (2026-09-01) — the memo now carries everything the method mandates. Five outputs required by §9 and §10 had no slot in the §8 template at all — what was done well, the five things a director will ask, what breaks in ninety days, the fastest path to yes, and the offer of a critique — so a memo written from the template alone omitted every one of them, and the worked example delivered two of five. All five have slots, the example shows all five, and §10 now says that a mandated item written anywhere but the memo has started a second document. "One page. Always first." is replaced: it was contradicted by the method's own example, which ran to 113 lines, and by §3, which gives one page to Tier 3 only. Length now follows the tier. The `RISK ACCEPTED` block collapses to one line when no risk was accepted, instead of rendering an empty form. The path to yes is folded into the five director questions, which asked for it twice. **v3.7** (2026-09-01) — adds an intake list to §3: the seven things to ask for before the audit starts, because each one you do not get turns an `[A]` control into an `[E]` one and leaves the finding `UNVERIFIED`; what arrives and what does not is itself recorded as evidence. Gives the artifact's owner a route to ask for a re-review under §12, which needs only something the auditor did not have or read wrong — not an official's risk acceptance and not the auditor's agreement — because an owner with no route to be heard routes around the audit instead. Labels the per-tier effort figures as estimates rather than measurements. Cuts a duplicated clause and four sentences that restated what their own sections already said, and replaces §4's fourteen-line comparison table with four lines that keep its operative rule: doing one of the adjacent passes does not discharge another. **v3.6.1** (2026-08-31) — B10 no longer states a question count that went stale when §4 grew from four questions to five; a critique asked for on its own is allowed and must be labelled as not an audit. **v3.6** (2026-08-31) — separates two jobs that v3.5 wrongly merged. §4 reads the artifact and nothing else. Critiquing what the requester provided — the request, the framing, the material, their own draft — is now §9: a separate service, offered once after the audit is delivered, run only if asked, recorded apart, and never folded back into a delivered memo. §4 keeps the description-versus-material check, because that is an observation about the artifact; "being told is not evidence" moves to §2, because it is audit discipline rather than critique. **v3.5** (2026-08-31) — added a second half to §4, in which the auditor also critiqued what they were handed. Reversed in v3.6: it merged two jobs that must stay apart. Recorded here because a version that shipped belongs in the record even when it was wrong. **v3.4** (2026-08-31) — names the office that prepared this edition and states that every operative rule stays office-neutral, so any division can adopt it unchanged; §4 now says how it differs from the lens callouts, the ninety-day note, and the self-check. **v3.3** (2026-08-31) — adds §4, the expert read: a specialist pass before the checklist that produces hypotheses, never findings, with five rules that stop it manufacturing them. Depth adapts by tier; Tier 1 adds a pre-mortem. Recorded at Annex B10, including every hypothesis that was killed. **v3.2.1** (2026-08-31) — corrects v3.2 before use: the closed-artifact rule is scoped per control, so a closed artifact no longer voids `[E]` findings taken from a vendor package; reaching outside the office escalates the tier, reaching outside the agency stops the audit; the self-check survives an added lens. **v3.2** (2026-08-31) — an `[A]` control you could not go and look at is `UNVERIFIED`, never `NOT FOUND`, and an `[E]` control is unaffected by a closed artifact; tier depth and the pilot test keyed to `[A]` controls instead of an undefined "required" set; only a `CONFIRMED` compensating control may demote a P0; never let the artifact audit itself; the 95% rule; scaling above the division; permission to add a lens. **v3.1** — navigation restructure, one evidence law, Start-here card. **v3.0** — defensibility and protection layer: attestation, risk acceptance, `METHOD` line, pressure protocol. **v2.0** — first edition for this office.
+## If it is your tool being audited
+
+*This page is written for the owner of the artifact. Hand it to them at the start.*
+
+**This is not an inspection of you.** Every finding describes the artifact and how it is used. The method forbids sentences about intent, competence, or what anyone should have known (§2). If you read one about yourself, that is a defect in the audit — say so, and it will be rewritten.
+
+**What to hand over, and why it is in your interest.** The seven items listed in §3. Every one you do not provide turns a question the auditor could have answered into one they must record as `UNVERIFIED` — and at Tier 1, unverified items hold a tool at `LIMITED PILOT ONLY`. **Silence does not read as "fine." It reads as "unknown," and unknown is what holds you up.**
+
+**What the three words mean for you.** `CONFIRMED` — they looked and saw it; ask where, and they must be able to tell you exactly. `NOT FOUND` — they searched what you gave them and it was not there; more material can change this. `UNVERIFIED` — nobody has looked yet; usually one document closes it.
+
+**A condition is not a rejection.** `CLEARED WITH CONDITIONS` means you may proceed along a named path. Each condition carries your name and a date because that is the fastest route to `CLEARED FOR USE`, not because it is a penalty.
+
+**If you disagree, you have a route.** See §12. You do not need an official to accept risk, and you do not need the auditor to agree with you. You need one of two things: something they did not have, or something they had and read wrong. Name it, and only the affected controls are re-run.
+
+**If the tool must be used despite an open finding, that is legitimate.** An official with the authority may accept the risk in writing (§8). The finding stays exactly as written; their decision is recorded in their own words, over their own name. **Nobody has to be wrong for the work to go forward.**
+
+**The three fastest things you can do today**, before anyone audits anything: put a version number and a change date on the artifact (`RT1`), write one line saying what it must **not** be used for (`PA4`), and check that no password, key, or token sits in any file that travels with it (`DC7`). Those three close findings in almost every audit this method produces.
+
+---
+
+**Change log.** **v3.9** (2026-09-01) — adoption. The method was usable only in episodes of thirty minutes to two days, so it had no daily use and no on-ramp. Four additions fix that, and none changes a rule. **A 60-second gate** now sits before §0: five questions answering what a person actually asks daily — may I put this into that, right now — drawn from `SS1`, `DC2`, `DC3`, `PA3`, `PA7`, and `EA7`. It clears nothing and does not travel, and it says so; the moment output reaches another desk or an official file it hands the reader to §3. **A complete Tier 3 memo** is shown in §8, because the only worked output was a Tier 1 failure and a reader could not see the floor. **§12 says what the next audit may inherit** and what must be re-checked, with an office findings library, so the second audit of a tool costs less than the first. **A page for the artifact's owner** is added at the back, explaining what to hand over and why it is in their interest, what the three evidence words mean for them, that a condition is not a rejection, and how to ask for a re-review; §3 now says to send it with the intake list. The worked example gains a second memo — Tier 2, `CLEARED WITH CONDITIONS` — so the first thing a reader sees is no longer a refusal. **v3.8** (2026-09-01) — the memo now carries everything the method mandates. Five outputs required by §9 and §10 had no slot in the §8 template at all — what was done well, the five things a director will ask, what breaks in ninety days, the fastest path to yes, and the offer of a critique — so a memo written from the template alone omitted every one of them, and the worked example delivered two of five. All five have slots, the example shows all five, and §10 now says that a mandated item written anywhere but the memo has started a second document. "One page. Always first." is replaced: it was contradicted by the method's own example, which ran to 113 lines, and by §3, which gives one page to Tier 3 only. Length now follows the tier. The `RISK ACCEPTED` block collapses to one line when no risk was accepted, instead of rendering an empty form. The path to yes is folded into the five director questions, which asked for it twice. **v3.7** (2026-09-01) — adds an intake list to §3: the seven things to ask for before the audit starts, because each one you do not get turns an `[A]` control into an `[E]` one and leaves the finding `UNVERIFIED`; what arrives and what does not is itself recorded as evidence. Gives the artifact's owner a route to ask for a re-review under §12, which needs only something the auditor did not have or read wrong — not an official's risk acceptance and not the auditor's agreement — because an owner with no route to be heard routes around the audit instead. Labels the per-tier effort figures as estimates rather than measurements. Cuts a duplicated clause and four sentences that restated what their own sections already said, and replaces §4's fourteen-line comparison table with four lines that keep its operative rule: doing one of the adjacent passes does not discharge another. **v3.6.1** (2026-08-31) — B10 no longer states a question count that went stale when §4 grew from four questions to five; a critique asked for on its own is allowed and must be labelled as not an audit. **v3.6** (2026-08-31) — separates two jobs that v3.5 wrongly merged. §4 reads the artifact and nothing else. Critiquing what the requester provided — the request, the framing, the material, their own draft — is now §9: a separate service, offered once after the audit is delivered, run only if asked, recorded apart, and never folded back into a delivered memo. §4 keeps the description-versus-material check, because that is an observation about the artifact; "being told is not evidence" moves to §2, because it is audit discipline rather than critique. **v3.5** (2026-08-31) — added a second half to §4, in which the auditor also critiqued what they were handed. Reversed in v3.6: it merged two jobs that must stay apart. Recorded here because a version that shipped belongs in the record even when it was wrong. **v3.4** (2026-08-31) — names the office that prepared this edition and states that every operative rule stays office-neutral, so any division can adopt it unchanged; §4 now says how it differs from the lens callouts, the ninety-day note, and the self-check. **v3.3** (2026-08-31) — adds §4, the expert read: a specialist pass before the checklist that produces hypotheses, never findings, with five rules that stop it manufacturing them. Depth adapts by tier; Tier 1 adds a pre-mortem. Recorded at Annex B10, including every hypothesis that was killed. **v3.2.1** (2026-08-31) — corrects v3.2 before use: the closed-artifact rule is scoped per control, so a closed artifact no longer voids `[E]` findings taken from a vendor package; reaching outside the office escalates the tier, reaching outside the agency stops the audit; the self-check survives an added lens. **v3.2** (2026-08-31) — an `[A]` control you could not go and look at is `UNVERIFIED`, never `NOT FOUND`, and an `[E]` control is unaffected by a closed artifact; tier depth and the pilot test keyed to `[A]` controls instead of an undefined "required" set; only a `CONFIRMED` compensating control may demote a P0; never let the artifact audit itself; the 95% rule; scaling above the division; permission to add a lens. **v3.1** — navigation restructure, one evidence law, Start-here card. **v3.0** — defensibility and protection layer: attestation, risk acceptance, `METHOD` line, pressure protocol. **v2.0** — first edition for this office.

@@ -1,6 +1,6 @@
 # Worked example — a completed readiness audit
 
-*Sample output produced with READINESS AUDITOR v3.8. The tool, firm, application number, and staff names below are invented for illustration. This is not a record of any real review, product, or system.*
+*Sample output produced with READINESS AUDITOR v3.9. The tool, firm, application number, and staff names below are invented for illustration. This is not a record of any real review, product, or system.*
 
 ---
 
@@ -266,4 +266,111 @@ Two of five hypotheses were killed. Nothing here reached the memo except through
 
 ---
 
-*Method: READINESS AUDITOR v3.6 · 64 controls · 7 lenses. Verdict derived mechanically: 3 blockers present → NOT CLEARED.*
+*Method: READINESS AUDITOR v3.9 · 64 controls · 7 lenses. Verdict derived mechanically: 3 blockers present → NOT CLEARED.*
+
+---
+
+## A second example — Tier 2, and it clears
+
+*The audit above is the hard case. This is the ordinary one: a smaller artifact, a lighter tier, and a verdict that lets the work proceed. Memo only — the annex follows the same B1–B10 shape shown above and is not reproduced here. Invented, as above.*
+
+```
+READINESS AUDIT — DECISION MEMO
+
+Artifact:        "Amendment tracker" workbook, v4 tab, file dated 2 August.
+                 Identified by the copy emailed to me, retained at Annex B8.
+Received from:   Tool owner, by email, <date>
+Type / Tier:     Script / macro / spreadsheet · Tier 2 (reviewed work product)
+Reviewed by:     <name>          Date: <date>
+Material reviewed:   The workbook including all formulas and the two macros,
+                     and the half-page of instructions kept on the first tab.
+Not available to me: Nothing I asked for was withheld. Usage logs are not kept
+                     by this kind of file, which is recorded at B3 as UNVERIFIED
+                     rather than as an absence.
+Interest declared:   None. I did not build, select, or recommend this workbook.
+
+RECOMMENDATION:  CLEARED WITH CONDITIONS
+
+Bottom line:     Sound for tracking amendment due dates, which is what it is
+                 used for. Two things must be fixed before more people use it:
+                 the lookup silently stops at row 200, and nothing on the file
+                 says what it must not be used for.
+
+Findings:        0 blocker  2 serious  1 moderate/minor  1 unverified
+
+What blocks it:  None. No path to a wrong regulatory outcome, a disclosure, or
+                 an action without a person was found in the material reviewed.
+Conditions:      RA-L5-001  The lookup formula is bounded to row 200 and the
+                 sheet holds 143 rows today. Past row 200 it returns blank
+                 rather than an error, so a missing due date would look like a
+                 date not yet assigned. FIX: change the range to whole-column.
+                 Owner: tool owner. Date: <date>.
+
+                 RA-L1-001  No statement was found on the file saying what it
+                 must not be used for. It is used correctly today by the person
+                 who wrote it; the risk begins when a second person opens it.
+                 FIX: one line on the first tab. Owner: tool owner. Date: <date>.
+Open questions:  RA-L4-001  Whether the due dates this file produces are a
+                 federal record, and under what schedule.
+                 NEEDED: a records determination. HELD BY: records officer.
+                 IF UNFAVOURABLE: retention and disposition rules apply to the
+                 file, which changes how it is stored, not whether it is used.
+
+Anticipated questions — answer all five before they are asked:
+  If we do nothing:    The workbook stays in use by one person, correctly. The
+                       row-200 limit becomes live at about 57 more rows.
+  Fastest path to yes: Both conditions are edits of a few minutes each. With
+                       them closed, this is CLEARED FOR USE at this tier.
+  Who else must sign:  Records officer, on the open question above. No one else
+                       at Tier 2; a named reviewer is recorded at B1.
+  Cost if it is wrong: A missed amendment due date presenting as a blank cell
+                       rather than an error, and nobody noticing.
+  Tested on real work: Yes. The owner has used it for eleven months. I tested
+                       on a synthetic copy at 143, 199, 200, and 214 rows.
+Done well:       The formulas are documented on a second tab in plain language,
+                 the file carries a version and a change date already, and the
+                 owner volunteered the macros without being asked. The version
+                 marking is why this audit could name the exact copy reviewed.
+
+Confidence:      High on both conditions — each was reproduced directly on a
+                 synthetic copy, three times, on the dates at B6. The one open
+                 question is a determination that is not mine to make, and it
+                 changes storage rather than use.
+This audit cannot tell you: whether the file behaves the same after anyone
+                 edits the macros; or whether the due-date logic matches the
+                 current policy, which is the owner's discipline and not mine.
+Decisions not mine to make:
+  Records officer — records determination for the due dates this file holds.
+    Referred <date>. No response as of <date>.
+Breaks in 90 days: The row-200 limit becomes live at the current growth rate of
+                 roughly twenty rows a month. One person maintains the file and
+                 no backup is named, which is a Tier 1 concern if this ever
+                 feeds a submission assessment.
+Re-review when:  Both conditions close · or the file is used by anyone other
+                 than its owner · or it feeds anything decision-adjacent, which
+                 is Tier 1 and a different audit · or twelve months pass.
+
+ATTESTATION
+  I examined the material listed above, on the dates shown, by the method
+  recorded in Annex B1. The findings state what I observed. Where I could not
+  observe something, I have said so and named who can answer it. I made no
+  determination reserved to another office.
+  Reviewer: <name, role, date>
+  Second reviewer (required at Tier 1): not required at Tier 2; named
+     reviewer recorded at B1.
+
+RISK ACCEPTED   Not exercised. Both conditions are open and the tool remains
+                in its current single-user use, which this audit clears.
+
+OFFER (made once, not pressed)
+  The audit is above. Separately, I can critique what I was given — the
+  request, the material, the framing, or your own draft — if that would help.
+  It is a different piece of work and it does not change this audit.
+
+This is a structured working aid. It is not agency policy, an authorisation to
+operate, or a privacy, records, security, or legal determination.
+```
+
+**Why this one is worth reading next to the first.** No blocker was found, and the memo still says exactly what was examined, what was not, and who owns the one question left open. **A clearance written this way is as defensible as a refusal** — and it is the outcome most audits should reach.
+
+*Method: READINESS AUDITOR v3.9 · 64 controls · 7 lenses. Verdict derived mechanically: 0 blockers, 2 serious → CLEARED WITH CONDITIONS.*
