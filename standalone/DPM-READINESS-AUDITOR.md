@@ -1,8 +1,8 @@
 # READINESS AUDITOR — AI, Tools, Prompts, and Digital Work Products
 
-*v3.6.1 · 2026-08-31 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
+*v3.7 · 2026-09-01 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
 
-**What this is.** A structured method for deciding whether a tool is fit to use in regulatory work — an AI product, a prompt, an agent, a script, a spreadsheet, a dashboard, a vendor service, or any digital thing whose output reaches the work. Run by the person who owns the work, not by an engineer.
+**What this is.** A structured method for deciding whether a tool is fit to use in regulatory work — an AI product, a prompt, an agent, a script, a spreadsheet, a dashboard, a vendor service, or any digital thing whose output reaches the work.
 
 **Who this is for.** The people who own the work — project managers and reviewers, not engineers. This edition was prepared for the Division of Project Management (OGD/ORO). It is deliberately office-neutral: every operative rule says *your office*, so any division at the FDA can adopt it without editing a word. Name the office that maintains it on the memo, and §11 names the decisions that office does not own.
 
@@ -19,6 +19,8 @@
 | **Auditing a work product** — drafts a person fully reviews | Tier 2: all 7 lenses, every `[A]` control. ~2–4 hrs. | §3–§8 |
 | **Auditing anything decision-adjacent** | Tier 1: everything, and a co-signer. ~1–2 days. | all, and §11 |
 | **Being asked to change a finding** | Go straight to §2. | §2 |
+
+*The times below are estimates, not measurements. Replace them with your own once you have run ten audits.*
 
 **Four steps, every time.** 1 · **Scope it** (§3) — fix the artifact's identity, type, and tier. 2 · **Read it as an expert** (§4) — form hypotheses before the checklist can narrow your eyes. 3 · **Work the lenses** (§5) — for each control: *confirmed, not found, or unverified*, with what you did and where you looked. 4 · **Write the output** (§8) — director memo on top, working annex behind it.
 
@@ -136,7 +138,7 @@ This will happen. It is not necessarily improper — the person may know somethi
 
 1. **Ask what evidence supports the change.** New evidence is welcome. Re-examine it, and if it changes the finding, change the finding and record what changed it and when.
 2. **If no new evidence is offered, the finding stands as written.** Do not argue it. Do not soften the wording to end the conversation.
-3. **Record the exchange neutrally and move the decision to whoever owns it.**
+3. **Record the exchange neutrally and move the decision to whoever owns it.** If it is the artifact's owner who disagrees, point them at the re-review in §12.
 
 **The risk-acceptance block in §8 is what makes this safe for everyone.** An official may accept a known risk and proceed — that is a legitimate exercise of their authority, and this method must not obstruct it. Your job ends at stating the risk accurately. Their decision, in their own words, over their own name, is the record.
 
@@ -169,6 +171,20 @@ State these in the memo so no reader supplies them for you:
 | **Vendor / purchased AI tool** | Contract, terms of service, security package, ACR/VPAT | Your input trains their model; nobody read the terms |
 | **Model / API integration** | Model name and version, parameters, error handling | The vendor changes the model and behaviour moves under you |
 | **Document generator** | Templates, merge fields, review step | Confident, fluent, wrong text reaching an official file |
+
+### Ask for these before you start
+
+Every item you do not have turns `[A]` controls into `[E]` ones and leaves findings `UNVERIFIED`. Ask once, in writing, and record the date:
+
+1. The artifact itself, and how to tell this copy from another — a version, or a file date.
+2. What it is for, in the owner's words, and what it must not be used for.
+3. Who owns it, who maintains it, and who is the backup.
+4. What data people put into it, and what the owner tells them not to.
+5. For anything bought: the terms of service, the security or authorisation record, and the accessibility conformance report.
+6. Any testing already done, and its results.
+7. Who else already uses it, and for what.
+
+**What arrives, and what does not, is itself evidence.** Record both.
 
 ### Stakes tier — this sets the depth, and you must state which you chose
 
@@ -213,19 +229,13 @@ Read the artifact end to end with the checklist closed. Then answer, in writing,
 4. **What would a specialist in this kind of artifact check first?** Start from the *failure that actually happens* column in §3 for this artifact type, then go past it. A prompt specialist opens the examples. A spreadsheet specialist opens the formulas nobody has changed in two years.
 5. **What is unusual here?** Anything the artifact does that you have not seen before, or that the owner explained at unusual length. Unusual is where the checklist has least to say, so it is where your reading is worth most.
 
-### How this differs from the rest of the method
+### Not to be confused with
 
-Three other parts of this method look adjacent. They are not the same thing, and doing one does not discharge another.
+Four parts of this method look adjacent to the expert read. **Doing one does not discharge another.**
 
-| | What it produces | When |
-|---|---|---|
-| **§4, this section** | Hypotheses to go looking for. They never reach the memo. | Before the checklist |
-| **§9 critique** | A separate service, only if asked, about the material *you* were given | After the audit is delivered |
-| **§5 lens callouts** | Ready-made expert checks that come with the controls | During the checklist |
-| **§10 "what breaks in ninety days"** | Forward risk written *into* the memo for the reader | After the findings exist |
-| **§13 self-check** | A critique of your own draft, not of the artifact | At handover |
+**§5 lens callouts** are expert checks that come with the controls. **§10 "what breaks in ninety days"** is forward risk written *into* the memo after the findings exist. **§13 self-check** critiques your own draft. **§9** is a separate service about the material *you* were given, and only if asked.
 
-The §4 pre-mortem and the §10 ninety-day note are the pair most easily confused. The first is a search plan you may be wrong about. The second is a conclusion you stand behind in writing.
+The §4 pre-mortem and the §10 ninety-day note are the pair most easily confused: **the first is a search plan you may be wrong about; the second is a conclusion you stand behind in writing.**
 
 ### Adapt the depth to the tier
 
@@ -426,8 +436,6 @@ operate, or a privacy, records, security, or legal determination.
 
 **B3 is what makes this defensible.** A reader can see every control, including the ones you decided did not apply and why. Negative space is part of the product.
 
-**B6 and B8 are what make it repeatable** — the difference between *"we reviewed it"* and *"here is exactly what we did, and you can do it again."*
-
 ---
 
 ## 9 · The critique, on request — a separate service
@@ -436,7 +444,7 @@ The audit is finished and handed over. This is a different job, and it happens o
 
 **Most audits that go wrong are not a missed control. They are the right method run carefully on the wrong framing** — and the audit itself cannot see that, because the framing is what it was built on.
 
-**An audit judges the artifact. A critique judges what you were given** — the request, the framing, the package of material, and the requester's own draft. Merging them is a mistake three ways: it turns every audit into a partial review of the person who asked for it, it delays the deliverable the office actually needs, and it takes the auditor outside the remit they were given.
+**An audit judges the artifact. A critique judges what you were given** — the request, the framing, the package of material, and the requester's own draft.
 
 So: **deliver the audit first. Then offer the critique. Never fold one into the other, and never run a critique nobody asked for.**
 
@@ -472,7 +480,7 @@ Six questions, under the same evidence discipline as the audit: state what you o
 
 ## 10 · Be useful before you are asked
 
-This is the difference between a checklist and a colleague. Do these without being told.
+Do these without being told.
 
 **Fix it while you are in there.** When a finding has an obvious, low-risk remedy — a missing "say when you do not know" instruction, an absent version number, a scope statement, a redaction step — **draft the corrected text in the annex** so the owner can paste it. A finding with a ready fix gets closed; a finding with a critique gets defended.
 
@@ -517,6 +525,8 @@ This is the difference between a checklist and a colleague. Do these without bei
 **When a risk has no lens**, add one. Name it, write its controls, say why the existing seven did not cover it, and mark the audit `extended`. The seven lenses are a floor, not a ceiling — a method that cannot grow is a method people work around.
 
 **When a control cannot apply**, record it `N/A` with the reason. Never silently drop it. A dropped control is indistinguishable from a missed one.
+
+**The owner may ask for a re-review.** They do not need an official to accept the risk, and they do not need your agreement. They need one thing: something you did not have, or something you had and read wrong. Name what it is, re-run only the affected controls, and version the result. **An owner with no route to be heard will route around the audit instead**, which costs the office more than being wrong occasionally.
 
 **Re-review when any of these happens** — set the trigger, not just a date: the underlying model or vendor version changes · the tool moves to a higher stakes tier · it is used on a data type it was not cleared for · the owner or maintainer leaves · a finding's compensating control is removed · the terms of service change · **or twelve months pass**, whichever is first.
 
@@ -579,4 +589,4 @@ One idea per sentence, 20 words or fewer — 25 for instructions. Active voice w
 
 ---
 
-**Change log.** **v3.6.1** (2026-08-31) — B10 no longer states a question count that went stale when §4 grew from four questions to five; a critique asked for on its own is allowed and must be labelled as not an audit. **v3.6** (2026-08-31) — separates two jobs that v3.5 wrongly merged. §4 reads the artifact and nothing else. Critiquing what the requester provided — the request, the framing, the material, their own draft — is now §9: a separate service, offered once after the audit is delivered, run only if asked, recorded apart, and never folded back into a delivered memo. §4 keeps the description-versus-material check, because that is an observation about the artifact; "being told is not evidence" moves to §2, because it is audit discipline rather than critique. **v3.5** (2026-08-31) — added a second half to §4, in which the auditor also critiqued what they were handed. Reversed in v3.6: it merged two jobs that must stay apart. Recorded here because a version that shipped belongs in the record even when it was wrong. **v3.4** (2026-08-31) — names the office that prepared this edition and states that every operative rule stays office-neutral, so any division can adopt it unchanged; §4 now says how it differs from the lens callouts, the ninety-day note, and the self-check. **v3.3** (2026-08-31) — adds §4, the expert read: a specialist pass before the checklist that produces hypotheses, never findings, with five rules that stop it manufacturing them. Depth adapts by tier; Tier 1 adds a pre-mortem. Recorded at Annex B10, including every hypothesis that was killed. **v3.2.1** (2026-08-31) — corrects v3.2 before use: the closed-artifact rule is scoped per control, so a closed artifact no longer voids `[E]` findings taken from a vendor package; reaching outside the office escalates the tier, reaching outside the agency stops the audit; the self-check survives an added lens. **v3.2** (2026-08-31) — an `[A]` control you could not go and look at is `UNVERIFIED`, never `NOT FOUND`, and an `[E]` control is unaffected by a closed artifact; tier depth and the pilot test keyed to `[A]` controls instead of an undefined "required" set; only a `CONFIRMED` compensating control may demote a P0; never let the artifact audit itself; the 95% rule; scaling above the division; permission to add a lens. **v3.1** — navigation restructure, one evidence law, Start-here card. **v3.0** — defensibility and protection layer: attestation, risk acceptance, `METHOD` line, pressure protocol. **v2.0** — first edition for this office.
+**Change log.** **v3.7** (2026-09-01) — adds an intake list to §3: the seven things to ask for before the audit starts, because each one you do not get turns an `[A]` control into an `[E]` one and leaves the finding `UNVERIFIED`; what arrives and what does not is itself recorded as evidence. Gives the artifact's owner a route to ask for a re-review under §12, which needs only something the auditor did not have or read wrong — not an official's risk acceptance and not the auditor's agreement — because an owner with no route to be heard routes around the audit instead. Labels the per-tier effort figures as estimates rather than measurements. Cuts a duplicated clause and four sentences that restated what their own sections already said, and replaces §4's fourteen-line comparison table with four lines that keep its operative rule: doing one of the adjacent passes does not discharge another. **v3.6.1** (2026-08-31) — B10 no longer states a question count that went stale when §4 grew from four questions to five; a critique asked for on its own is allowed and must be labelled as not an audit. **v3.6** (2026-08-31) — separates two jobs that v3.5 wrongly merged. §4 reads the artifact and nothing else. Critiquing what the requester provided — the request, the framing, the material, their own draft — is now §9: a separate service, offered once after the audit is delivered, run only if asked, recorded apart, and never folded back into a delivered memo. §4 keeps the description-versus-material check, because that is an observation about the artifact; "being told is not evidence" moves to §2, because it is audit discipline rather than critique. **v3.5** (2026-08-31) — added a second half to §4, in which the auditor also critiqued what they were handed. Reversed in v3.6: it merged two jobs that must stay apart. Recorded here because a version that shipped belongs in the record even when it was wrong. **v3.4** (2026-08-31) — names the office that prepared this edition and states that every operative rule stays office-neutral, so any division can adopt it unchanged; §4 now says how it differs from the lens callouts, the ninety-day note, and the self-check. **v3.3** (2026-08-31) — adds §4, the expert read: a specialist pass before the checklist that produces hypotheses, never findings, with five rules that stop it manufacturing them. Depth adapts by tier; Tier 1 adds a pre-mortem. Recorded at Annex B10, including every hypothesis that was killed. **v3.2.1** (2026-08-31) — corrects v3.2 before use: the closed-artifact rule is scoped per control, so a closed artifact no longer voids `[E]` findings taken from a vendor package; reaching outside the office escalates the tier, reaching outside the agency stops the audit; the self-check survives an added lens. **v3.2** (2026-08-31) — an `[A]` control you could not go and look at is `UNVERIFIED`, never `NOT FOUND`, and an `[E]` control is unaffected by a closed artifact; tier depth and the pilot test keyed to `[A]` controls instead of an undefined "required" set; only a `CONFIRMED` compensating control may demote a P0; never let the artifact audit itself; the 95% rule; scaling above the division; permission to add a lens. **v3.1** — navigation restructure, one evidence law, Start-here card. **v3.0** — defensibility and protection layer: attestation, risk acceptance, `METHOD` line, pressure protocol. **v2.0** — first edition for this office.

@@ -221,27 +221,46 @@ def test_language_standard_is_present(doc):
 def test_it_carries_a_dated_version_marker_and_a_change_log(doc):
     """Section 10 tells the reader to number and date every artefact. The
     method must not fail its own rule."""
-    assert re.search(r"v\d+\.\d+(\.\d+)? · \d{4}-\d{2}-\d{2} · \d+ controls · \d+ lenses", doc), \
-        "the version marker carries no date"
+    marker = re.search(r"v(\d+\.\d+(?:\.\d+)?) · \d{4}-\d{2}-\d{2} · \d+ controls · \d+ lenses", doc)
+    assert marker, "the version marker carries no date"
     assert "**Change log.**" in doc
     log = doc.split("**Change log.**")[1]
     listed = re.findall(r"\*\*v([\d.]+)\*\*", log)
     assert listed, "the change log lists no versions"
-    keys = [tuple(int(n) for n in v.split(".")) for v in listed]
+
+    def key(v):
+        parts = [int(n) for n in v.split(".")]
+        return tuple(parts + [0] * (3 - len(parts)))
+
+    keys = [key(v) for v in listed]
     assert keys == sorted(keys, reverse=True), f"the change log is out of order: {listed}"
-    # within each major line, the minors must be contiguous - no shipped
-    # version may vanish from the record. Grouping by major matters: an
-    # earlier attempt compared the newest against the oldest, and the presence
-    # of v2.0 made the majors differ and skipped the check entirely.
-    by_major = {}
-    for k in keys:
-        by_major.setdefault(k[0], set()).add(k[1])
+
+    # the shipped version must be the one the log describes newest. Without
+    # this a bumped marker can ship with no entry explaining what changed.
+    assert key(marker.group(1)) == keys[0], (
+        f"the marker says v{marker.group(1)} but the newest log entry is v{listed[0]}")
+
+    # no shipped version may vanish from the record. Check contiguity at BOTH
+    # levels: grouping by major alone let a missing patch (v3.6.1) pass, since
+    # the minors stayed contiguous without it. An earlier attempt was weaker
+    # still - it compared newest against oldest, and v2.0 made the majors
+    # differ, so the check never ran at all.
+    minors, patches = {}, {}
+    for maj, min_, pat in keys:
+        minors.setdefault(maj, set()).add(min_)
+        patches.setdefault((maj, min_), set()).add(pat)
     missing = []
-    for major, minors in by_major.items():
-        for m in range(min(minors), max(minors) + 1):
-            if m not in minors:
-                missing.append(f"v{major}.{m}")
+    for maj, seen in minors.items():
+        missing += [f"v{maj}.{m}" for m in range(min(seen), max(seen) + 1) if m not in seen]
+    for (maj, min_), seen in patches.items():
+        missing += [f"v{maj}.{min_}.{p}" for p in range(0, max(seen) + 1) if p not in seen]
     assert not missing, f"the change log skips a shipped version: {sorted(missing)}"
+    # Known limit, stated rather than implied: deleting the HIGHEST patch of a
+    # superseded minor (v3.6.1 while the marker reads v3.7) leaves no trace in
+    # the document, so no test reading only the document can catch it. The
+    # marker check above covers the case that actually occurred - an edit that
+    # replaced the newest entry instead of prepending to it.
+
 
 
 def test_no_secret_shaped_example_leaks_into_the_document(doc):
@@ -677,7 +696,7 @@ def test_a_hypothesis_can_never_become_a_finding_by_itself(doc):
 
 def test_the_expert_read_has_all_five_questions_and_all_five_rules(doc):
     s = doc.split("## 4 · The expert read")[1].split("## 5 ·")[0]
-    questions = re.findall(r"^\d\. \*\*", s.split("### How this differs")[0], re.M)
+    questions = re.findall(r"^\d\. \*\*", s.split("### Not to be confused")[0], re.M)
     assert len(questions) == 5, f"expected 5 questions, found {len(questions)}"
     rules = re.findall(r"^\d\. \*\*", s.split("five rules")[1], re.M)
     assert len(rules) == 5, f"expected 5 rules, found {len(rules)}"
@@ -764,11 +783,13 @@ def test_it_names_its_owning_office_without_narrowing_the_rules(doc):
 
 
 def test_the_expert_read_is_distinguished_from_its_neighbours(doc):
-    s = doc.split("### How this differs from the rest of the method")[1].split("### Adapt the depth")[0]
-    for neighbour in ("§5 lens callouts", "ninety days", "§13 self-check"):
+    s = doc.split("### Not to be confused with")[1].split("### Adapt the depth")[0]
+    for neighbour in ("§5 lens callouts", "ninety days", "§13 self-check", "§9"):
         assert neighbour in s, f"neighbour not distinguished: {neighbour}"
-    assert "doing one does not discharge another" in s
     assert "a search plan you may be wrong about" in s
+    assert "a conclusion you stand behind in writing" in s
+    # naming them apart is not the point; not substituting one for another is
+    assert "Doing one does not discharge another" in s
     # and the ninety-day note points back
     assert "This is not the §4 pre-mortem" in doc
 
@@ -889,7 +910,7 @@ def test_every_written_count_matches_what_is_actually_there(doc):
     prose rots silently; this measures instead of trusting."""
     s4 = doc.split("## 4 · The expert read")[1].split("## 5 ·")[0]
     measured = {
-        "q4":   len(re.findall(r"^\d\. \*\*", s4.split("### How this differs")[0], re.M)),
+        "q4":   len(re.findall(r"^\d\. \*\*", s4.split("### Not to be confused")[0], re.M)),
         "r4":   len(re.findall(r"^\d\. \*\*", s4.split("five rules")[1], re.M)),
         "q9":   len(re.findall(r"^\d\. \*\*",
                    doc.split("What a critique covers, once asked")[1].split("### The rules")[0], re.M)),
@@ -934,3 +955,51 @@ def test_no_reference_names_a_section_by_another_sections_word(doc):
             problems.append(f"{m.group(0).strip()!r} -> §{n} ({titles[n]}); "
                             f"that word belongs to §{sorted(vocab[word])}")
     assert not problems, "reference points at the wrong section: " + "; ".join(problems)
+
+
+# --- v3.7: intake list, owner re-review, effort caveat ----------------------
+
+def test_the_worked_example_names_the_version_it_was_produced_with(doc, example):
+    """It was already stale once - the example said v3.6 while the method had
+    moved to v3.6.1 - and a reader cannot tell a stale sample from a current one."""
+    marker = re.search(r"v(\d+\.\d+(?:\.\d+)?) · \d{4}-\d{2}-\d{2} · \d+ controls", doc)
+    stamped = re.search(r"READINESS AUDITOR v(\d+\.\d+(?:\.\d+)?)", example)
+    assert stamped, "the worked example does not say which version produced it"
+    assert stamped.group(1) == marker.group(1), (
+        f"the example says v{stamped.group(1)} but the method is v{marker.group(1)}")
+
+
+def test_the_worked_example_shows_what_was_and_was_not_obtained(doc, example):
+    """v3.7 makes the intake an explicit step; the memo has to show both halves,
+    because what did not arrive is evidence too."""
+    assert "Material reviewed:" in example
+    assert "Not available to me:" in example
+
+def test_the_intake_list_exists_and_is_actionable(doc):
+    """Every item not obtained turns [A] controls into [E] and leaves findings
+    UNVERIFIED. This is the biggest lever on how many can be resolved."""
+    s = doc.split("### Ask for these before you start")[1].split("### Stakes tier")[0]
+    assert len(re.findall(r"^\d\. ", s, re.M)) == 7, "the intake list must have seven items"
+    low = s.lower()
+    for item in ("version", "must not be used for", "backup", "terms of service",
+                 "accessibility conformance", "testing already done", "who else already uses it"):
+        assert item in low, f"intake item missing: {item}"
+    assert "What arrives, and what does not, is itself evidence" in s
+
+
+def test_the_effort_numbers_are_labelled_as_estimates(doc):
+    assert "estimates, not measurements" in doc
+    assert "Replace them with your own once you have run ten audits" in doc
+
+
+def test_the_owner_has_a_route_to_be_heard(doc):
+    """§2 protects the auditor from pressure. Without this the artifact's owner
+    has no route at all, which is what makes an audit programme resented."""
+    s = doc.split("## 12 ·")[1].split("## 13 ·")[0]
+    assert "The owner may ask for a re-review" in s
+    assert "They do not need an official to accept the risk" in s
+    assert "something you did not have, or something you had and read wrong" in s
+    assert "re-run only the affected controls" in s
+    assert "route around the audit instead" in s
+    # and the pressure protocol points at it
+    assert "point them at the re-review in §12" in doc
