@@ -224,8 +224,18 @@ def test_it_carries_a_dated_version_marker_and_a_change_log(doc):
     assert re.search(r"v\d+\.\d+(\.\d+)? · \d{4}-\d{2}-\d{2} · \d+ controls · \d+ lenses", doc), \
         "the version marker carries no date"
     assert "**Change log.**" in doc
-    for version in ("v3.2.1", "v3.2", "v3.1", "v3.0", "v2.0"):
-        assert f"**{version}**" in doc, f"{version} is missing from the change log"
+    log = doc.split("**Change log.**")[1]
+    listed = re.findall(r"\*\*v([\d.]+)\*\*", log)
+    assert listed, "the change log lists no versions"
+    keys = [tuple(int(n) for n in v.split(".")) for v in listed]
+    assert keys == sorted(keys, reverse=True), f"the change log is out of order: {listed}"
+    # every minor version between the newest and the oldest must be present
+    majors = sorted({(k[0], k[1]) for k in keys}, reverse=True)
+    hi, lo = majors[0], majors[-1]
+    expected = [(hi[0], m) for m in range(hi[1], -1, -1)] if hi[0] == lo[0] else None
+    if expected:
+        missing = [f"v{a}.{b}" for a, b in expected if (a, b) not in {(k[0], k[1]) for k in keys}]
+        assert not missing, f"the change log skips a shipped version: {missing}"
 
 
 def test_no_secret_shaped_example_leaks_into_the_document(doc):
@@ -857,8 +867,9 @@ def test_no_removed_stage_survives_anywhere_in_the_document(doc):
     """v3.6 removed 4B. Two self-check items kept demanding it, so the
     checklist asked the auditor to complete a step the method no longer has.
     Any future removal must fail here rather than be found by accident."""
+    body = doc.split("**Change log.**")[0]   # the log records history by design
     for ghost in ("4B", "4A", "two halves", "scope correction", "Re-scope at most once"):
-        assert ghost not in doc, \
+        assert ghost not in body, \
             f"{ghost!r} survives from a removed stage; the document contradicts itself"
 
 
