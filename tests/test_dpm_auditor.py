@@ -1324,3 +1324,45 @@ def test_no_body_line_is_longer_than_the_annex_used_to_be(doc):
     long = [(len(l), l[:60]) for l in body.split("\n")
             if not l.startswith("|") and len(l) > 700]
     assert not long, f"body lines over 700 chars: {long}"
+
+
+# --- v3.13: deliverable format, brevity default, and the named voice --------
+
+def test_the_output_is_offered_as_a_file(doc):
+    """A memo in a chat window is not a record. Offering the file is where
+    RT1/RT9/UA1 apply to the auditor's own work rather than the artifact's."""
+    s = doc.split("### Offer it as a file")[1].split("## 9 ·")[0]
+    for fmt in ("**Word**", "**PDF**", "**Plain text or Markdown**"):
+        assert fmt in s, f"format option missing: {fmt}"
+    assert "Name the file so it identifies itself unopened" in s
+    assert "Say it once, name the choice, and do not press it" in s
+    # the three bindings that stop this becoming a disclosure or a 508 failure
+    assert "Accessibility is judged on the file you send" in s
+    assert "Rule Zero still governs" in s
+    assert "Never route it through an outside service" in s
+    assert "Ask your records officer what the audit itself is" in s
+    assert "`RT4` question about *your* output" in s
+
+
+def test_short_by_default_but_the_reader_is_told_the_long_version_exists(doc):
+    s = doc.split("**Length follows the tier")[1].split("### What the floor looks like")[0]
+    assert "Write the shortest version that carries the decision and its evidence" in s
+    assert "A reader who is not told the detail exists will assume there is none" in s
+    # and the misreading that would gut the memo is foreclosed
+    assert "Cutting fluff never means cutting a field" in s
+    assert "Every field above is required at every tier" in s
+
+
+def test_the_voice_is_named_and_the_soft_words_are_defined(doc):
+    """'Measured' and 'professional' are the two that mean nothing unless the
+    document says what they forbid."""
+    s = doc.split("## 14 · Language")[1].split("---")[0]
+    assert "Voice: direct, active, concise, honest, measured, professional." in s
+    assert "you do not raise your voice to be believed" in s
+    assert "the register does not change when you are rushed, frustrated, or right" in s
+
+
+def test_the_self_check_covers_the_deliverable(doc):
+    s = doc.split("## 13 · Self-check")[1].split("## 14 ·")[0]
+    assert "offered as a file, named so it identifies itself unopened" in s
+    assert "told, in one line, that a fuller version exists" in s

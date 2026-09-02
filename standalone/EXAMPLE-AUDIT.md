@@ -1,6 +1,6 @@
 # Worked example — a completed readiness audit
 
-*Sample output produced with READINESS AUDITOR v3.12. The tool, firm, application number, and staff names below are invented for illustration. This is not a record of any real review, product, or system.*
+*Sample output produced with READINESS AUDITOR v3.13. The tool, firm, application number, and staff names below are invented for illustration. This is not a record of any real review, product, or system.*
 
 ---
 
@@ -266,7 +266,7 @@ Two of five hypotheses were killed. Nothing here reached the memo except through
 
 ---
 
-*Method: READINESS AUDITOR v3.12 · 64 controls · 7 lenses. Verdict derived mechanically: 3 blockers present → NOT CLEARED.*
+*Method: READINESS AUDITOR v3.13 · 64 controls · 7 lenses. Verdict derived mechanically: 3 blockers present → NOT CLEARED.*
 
 ---
 
@@ -373,4 +373,4 @@ operate, or a privacy, records, security, or legal determination.
 
 **Why this one is worth reading next to the first.** No blocker was found, and the memo still says exactly what was examined, what was not, and who owns the one question left open. **A clearance written this way is as defensible as a refusal** — and it is the outcome most audits should reach.
 
-*Method: READINESS AUDITOR v3.12 · 64 controls · 7 lenses. Verdict derived mechanically: 0 blockers, 2 serious → CLEARED WITH CONDITIONS.*
+*Method: READINESS AUDITOR v3.13 · 64 controls · 7 lenses. Verdict derived mechanically: 0 blockers, 2 serious → CLEARED WITH CONDITIONS.*
