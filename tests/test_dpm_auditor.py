@@ -1306,3 +1306,21 @@ def test_the_injection_test_says_why_the_word_is_nonsense(doc):
     assert "Use a nonsense word" in s
     assert "can appear in the output by chance" in s
     assert "a false pass here is worse than no test at all" in s
+
+
+def test_the_annex_parts_are_one_per_line(doc):
+    """B1-B10 was a single 964-character line - the longest in the document by
+    60% - and it is a lookup structure, not a sentence: an auditor building an
+    annex reads it to find what goes in B6. Same defect v3.11 fixed in §5."""
+    seg = doc.split("### Part B — Working annex")[1].split("**B3** is what makes")[0]
+    items = re.findall(r"^- \*\*B\d+\*\* ", seg, re.M)
+    assert len(items) == 10, f"expected 10 one-per-line annex parts, found {len(items)}"
+    assert " · **B" not in seg, "the annex is a dense run again"
+
+
+def test_no_body_line_is_longer_than_the_annex_used_to_be(doc):
+    """A ceiling, so the worst line cannot silently grow back."""
+    body = doc.split("**Change log.**")[0]
+    long = [(len(l), l[:60]) for l in body.split("\n")
+            if not l.startswith("|") and len(l) > 700]
+    assert not long, f"body lines over 700 chars: {long}"
