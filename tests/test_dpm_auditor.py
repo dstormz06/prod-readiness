@@ -788,6 +788,15 @@ def test_the_expert_read_is_distinguished_from_its_neighbours(doc):
         assert neighbour in s, f"neighbour not distinguished: {neighbour}"
     assert "a search plan you may be wrong about" in s
     assert "a conclusion you stand behind in writing" in s
+    # v3.14 pointed §9 at the artifact too, so the old subject-based
+    # distinction stopped separating §4 from §9. The axis is now what happens
+    # to the output, not what the output is about.
+    assert "examines the same artifact, judged as craft rather than for clearance" in s
+    assert "tell them apart by what happens to the output" in s
+    assert "A §9 judgement is an opinion that must never be tested into a finding" in s
+    assert "you have crossed the two" in s
+    assert "about the material *you* were given" not in doc, \
+        "§9 is described by its pre-v3.14 purpose somewhere"
     # naming them apart is not the point; not substituting one for another is
     assert "Doing one does not discharge another" in s
     # and the ninety-day note points back
