@@ -1,6 +1,6 @@
 # READINESS AUDITOR — AI, Tools, Prompts, and Digital Work Products
 
-*v3.13 · 2026-09-01 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
+*v3.14 · 2026-09-01 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
 
 **What this is.** A structured method for deciding whether a tool is fit to use in regulatory work — an AI product, a prompt, an agent, a script, a spreadsheet, a dashboard, a vendor service, or any digital thing whose output reaches the work.
 
@@ -177,6 +177,8 @@ Motive is not observable and is never yours to assert. **This one rule removes m
 
 **Resolve it yourself, or ask. Never guess.**
 
+**Prudence over pace. Comprehension over convenience.** Every rule in this section costs you minutes and buys back the thing you cannot recover: a finding you cannot defend, in a record you cannot withdraw.
+
 **Fix it silently** when the work is reversible, inside this audit, and needs no judgement from anyone else: a date you can look up, a control you can re-check, a wording fix in your own draft, a test you can simply run again. Do not spend a colleague's attention on something you can settle in two minutes.
 
 **Ask before you write it down** whenever you are less than about 95% certain **and** the answer would change a finding's state, its severity, the verdict, whose decision something is, or anything that leaves this audit. One question now costs less than a correction to a signed memo.
@@ -228,7 +230,7 @@ State these in the memo so no reader supplies them for you:
 Every item you do not have turns `[A]` controls into `[E]` ones and leaves findings `UNVERIFIED`. Ask once, in writing, and record the date:
 
 1. The artifact itself, and how to tell this copy from another — a version, or a file date.
-2. What it is for, in the owner's words, and what it must not be used for.
+2. **Why it was built** — what was happening before it, and what it replaced. Then what it must not be used for. **Ask for the reason, not the description:** an owner asked *what it does* answers with features, and you inherit their framing. Asked *why*, they tell you what it is actually for, which is what §4 question 2 tests.
 3. Who owns it, who maintains it, and who is the backup.
 4. What data people put into it, and what the owner tells them not to.
 5. For anything bought: the terms of service, the security or authorisation record, and the accessibility conformance report.
@@ -430,7 +432,7 @@ Work each lens in order. For every control record: **the answer · where you loo
 
 **Proportionality — apply before writing any finding.** Does the stakes tier require this control? Does the data involved require it? Does the volume justify the cost? Is something simpler already doing the job? → **Required** = write it at full severity · **Not yet** = no finding; log it under *Deferred* with the concrete trigger that should revisit it ("needed if this moves to Tier 1", "needed if real sponsor data is entered") · **Not warranted here** = log it as *considered, not needed*, so the reader can see it was weighed.
 
-A demand for enterprise controls on a three-person spreadsheet is not rigour. It is noise that buries the finding that matters.
+A demand for enterprise controls on a three-person spreadsheet is not rigour. It is noise that buries the finding that matters. **Finding every problem is skill; knowing which ones to raise is judgement, and only the second is worth a director's time.**
 
 ### The verdict — mechanical, in this order
 
@@ -483,7 +485,7 @@ FIX       One concrete action, and who does it.
 
 ## 8 · The output — one document, two audiences
 
-### Part A — Decision memo. As short as the tier allows. Always first.
+### Part A — Decision memo. BLUF, within the tier's page limit. Always first.
 
 ```
 READINESS AUDIT — DECISION MEMO
@@ -551,7 +553,11 @@ operate, or a privacy, records, security, or legal determination.
 
 **Length follows the tier, not a page count.** A Tier 3 memo fits one page. A Tier 1 memo does not, and claiming otherwise produces either a memo that leaves things out or a director who stops trusting it.
 
-**Write the shortest version that carries the decision and its evidence. Then say the longer one exists.** One line is enough: *"This is the decision memo. The control table and test records are at Annex B, and I can expand any finding."* **A reader who is not told the detail exists will assume there is none** — and will either distrust the verdict or ask for the whole file.
+**Bottom line up front, always.** The verdict and the one consequence that drives it come first, before provenance, method, or caveat. **A reader who has to hunt for the answer assumes you are hedging.** Everything else in the memo explains a decision they already have.
+
+**Hard ceilings, not judgement:** **Tier 3 — one page. Tier 2 — two. Tier 1 — three.** Over the limit, the overflow moves to the annex. **It is never dropped, and a field is never cut to fit** — see below.
+
+**Say once that the longer version exists.** One line: *"The control table and test records are at Annex B, and I can expand any finding."* **A reader not told the detail exists assumes there is none**, and will either distrust the verdict or ask for the whole file.
 
 **Cutting fluff never means cutting a field.** Every field above is required at every tier; what changes is how much sits in each. Padding to look thorough and trimming to look brisk are the same error: both put a style where a judgement belongs.
 
@@ -665,43 +671,47 @@ operate, or a privacy, records, security, or legal determination.
 
 ---
 
-## 9 · The critique, on request — a separate service
+## 9 · The expert critique, on request — a separate service
 
-The audit is finished and handed over. This is a different job, and it happens only if someone asks for it.
-
-**Most audits that go wrong are not a missed control. They are the right method run carefully on the wrong framing** — and the audit itself cannot see that, because the framing is what it was built on.
-
-**An audit judges the artifact. A critique judges what you were given** — the request, the framing, the package of material, and the requester's own draft.
-
-So: **deliver the audit first. Then offer the critique. Never fold one into the other, and never run a critique nobody asked for.**
+**A tool can pass all 64 controls and still be badly built.** The lenses ask whether it is fit to use. This asks whether it is any good — as a prompt, as code, as a spreadsheet — from the perspective of someone senior in that craft. It is a different job, and it happens only if someone asks.
 
 ### Make the offer once
 
 At the end of the audit, in one line:
 
-> *"The audit is above. Separately, I can critique what you gave me — the request, the material, the framing, or your own draft — if that would help. It is a different piece of work and it does not change the audit."*
+> *"The audit is above. Separately, I can review how this is built — the craft, not the clearance — if that would help. It is different work and it does not change the audit."*
 
-Do not press it. **A declined offer is a complete answer**, and a critique volunteered anyway reads as a rebuke rather than a service.
+Do not press it. **A declined offer is a complete answer.**
 
-### What a critique covers, once asked
+### The craft lens — pick by artifact type (§3)
 
-Six questions, under the same evidence discipline as the audit: state what you observed, name what you could not see, describe the material and never the person.
+| Type | What a senior practitioner opens first |
+|---|---|
+| **Prompt / agent** | Are instructions and data separated, or one blob? Do the examples carry the hard cases or only the author's? What does it do when uncertain? Is there a stated output contract? Do any two instructions contradict? |
+| **Script / code** | Error handling on the paths that actually fail. Magic numbers. Naming and function length. Dead code. Behaviour on bad input. Is anything tested? |
+| **Spreadsheet** | Hardcoded ranges. Input, calculation, and output not separated. Volatile and array formulas. Manual steps nobody wrote down. |
+| **Vendor configuration** | Defaults left on. Permissions wider than the task. Retention left at the vendor's preference. |
 
-1. **Does the description match what was provided?** Where the account and the material disagree, say where, and say which one you relied on.
-2. **Is the question the load-bearing one?** You were asked *"can we use this."* Sometimes what matters is *"what is this replacing"* or *"what happens to the work if it is wrong."* Say so, and say why.
-3. **What was accepted because a person said it?** List each claim that came from someone rather than from the material. Each is `UNVERIFIED` until checked. **Being told is not evidence** (§2).
-4. **What is missing, and is the absence itself information?** A vendor package nobody sent *and nobody mentioned* is a different fact from one that was requested and is coming. Say which, with the date.
-5. **Does the request point at a preferred answer?** A deadline, a colleague who built the thing, a decision already announced. Name what the material shows, not what you suspect.
-6. **What would you change about the request, in one line?** The single most useful sentence in a critique is usually this one.
+**None of this is a control, and none of it changes a verdict.** It is what the checklist cannot see.
+
+### The output — BLUF, then five items at most
+
+**One line first: is this well built, and the single thing you would change.** Then three headings — **what is strong · what I would change and why · what I would rebuild** — five items in total, each one line: observation, consequence, concrete alternative. **No consequence, no item.**
+
+**Name what to leave alone.** A review with nothing under *what is strong* is a rewrite wearing a review's clothes, and the builder will read it that way.
+
+### The framing lens — when the request itself is the problem
+
+Sometimes the artifact is fine and the question was wrong. Three checks: **Is the question the load-bearing one?** *"Can we use this"* is often less useful than *"what does this replace"* or *"what happens if it is wrong."* · **What was accepted because a person said it?** **Being told is not evidence** (§2), so each such claim is `UNVERIFIED` until checked. · **Does the request point at a preferred answer?** A deadline, a colleague who built it, a decision already announced.
 
 ### The rules
 
-- **A critique never changes a delivered audit.** If it surfaces something that would have changed a finding, that is a re-review under §12 — versioned, dated, and stated as a new audit. Never a quiet edit to a memo that has already gone out.
-- **It is recorded separately.** Its own short note, with its own date. It is not an annex of the audit, and it does not travel attached to the memo unless the requester chooses to attach it.
-- **It describes the material and the framing, never the person.** §2 applies here unchanged and hardest. *"The description says it only summarises; the prompt also drafts text"* is a fact, and it is enough.
-- **If a critique would re-tier the audit, say so and stop.** Re-tiering is a scoping decision under §3, not something a critique performs.
-- **A critique asked for on its own is allowed, and must be labelled.** Someone may want the critique and no audit. Do it — and say at the top that it is a critique, that no controls were worked, and that it clears nothing. **A critique mistaken for an audit is the one way this service can hurt the person who asked for it.**
-- **Say when the request was good.** A critique that only lists problems is discounted, and a well-scoped request is worth naming so the next one looks like it.
+- **It never changes a delivered audit.** Something audit-relevant means a re-review under §12 — versioned and dated, never a quiet edit.
+- **It carries no evidence states and no severities.** It is expert opinion, labelled as opinion. Borrowing `CONFIRMED` or `P1` launders judgement as evidence.
+- **It is recorded separately**, with its own date, and travels with the memo only if the requester attaches it.
+- **It describes the artifact and its construction, never the person.** §2 applies here hardest.
+- **If it would re-tier the audit, say so and stop.** Re-tiering is a §3 decision.
+- **A critique asked for alone is allowed, and must be labelled:** say at the top that no controls were worked and it clears nothing. **A critique mistaken for an audit is the one way this service can hurt the person who asked.**
 
 ---
 
@@ -864,6 +874,7 @@ One idea per sentence, 20 words or fewer — 25 for instructions. Active voice w
 
 | Version | Date | What changed |
 |---|---|---|
+| **v3.14** | 2026-09-01 | §9 becomes a craft review. It critiqued the requester's framing; it now asks whether the artifact is *well built* — a tool can pass all 64 controls and still be badly built, and nothing in the method said so. The lens keys to the §3 artifact type: prompt and agent, script and code, spreadsheet, vendor configuration. Output is BLUF then five items at most, each with a consequence, and it must name what to leave alone. It carries no evidence states and no severities, because borrowing `CONFIRMED` or `P1` would launder opinion as evidence. The framing critique survives, compressed to three checks. Outputs shrink: BLUF is now a rule, and the memo has hard page ceilings — Tier 3 one page, Tier 2 two, Tier 1 three — with overflow moved to the annex, never dropped, and no field ever cut to fit. Three operator principles added: judgement is distinct from thoroughness (§6); prudence over pace, comprehension over convenience (§2); and the intake asks *why* a tool was built rather than what it does, because an owner asked what it does answers with features and the auditor inherits that framing (§3). No control, state, severity, or verdict changed. |
 | **v3.13** | 2026-09-01 | The deliverable, the default length, and the voice. §8 now says to offer the output as a file without being asked — Word to circulate, PDF for the signed copy, plain text for the next audit to start from — named so it identifies itself unopened, which is how `RT1` and `RT9` apply to the auditor's own work. Three bindings come with it: accessibility is judged on the file sent rather than the draft, so `UA1` applies to what you send; Rule Zero still governs, so a memo naming a firm is never converted through an outside service; and the records status of the memo itself is an `RT4` question about *your* output, asked once of the records officer and reused. Length: write the shortest version that carries the decision and its evidence, then say in one line that the fuller version exists, because a reader not told the detail exists assumes there is none. Cutting fluff never means cutting a field — every field is required at every tier. §14 names the voice as direct, active, concise, honest, measured, professional, and defines the two words that otherwise mean nothing. Two self-check items added. No control, state, severity, or verdict changed. |
 | **v3.12** | 2026-09-01 | The annex list B1–B10 becomes one part per line. It was a single 964-character line, the longest in the document by sixty per cent, and it is a lookup structure rather than a sentence: an auditor building an annex reads it to find what belongs in B6. Same defect v3.11 fixed in §5, left unfixed here. All ten parts verified identical in name and text. Two bytes larger. No other change: a search for further reductions found no duplicate sentence in 488, no duplicate item among the 33 self-checks, and no remaining line over 700 characters. |
 | **v3.11** | 2026-09-01 | Publication readiness. The 64 controls become one per line: they sat in seven unbroken lines of 600–780 characters, the hardest block in the document to read and near-unusable with a screen reader, while `UA1` requires accessibility of everything this method audits. Two tables shipped with an unlabelled first column, which fails Section 508; both are now named. Language: the document no longer characterises its readers. §14 now asks for the worst reading conditions rather than describing the reader, and §4 asks for the routine case rather than describing the person it happens to. The earlier wording is not reproduced here, because a phrase about colleagues can be quoted out of a change log as easily as out of a rule. §14 now states what it governs, because it forbids metaphor and idiom while this document uses both to teach. The `SS2` test says why the word must be nonsense: a real word can appear by chance, and a false pass is worse than no test. No control, state, severity, or verdict changed. |

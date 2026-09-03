@@ -807,11 +807,11 @@ def test_the_expert_read_is_distinguished_from_its_neighbours(doc):
 def test_the_critique_is_a_separate_section_not_part_of_the_audit(doc):
     """v3.5 wrongly folded this into stage 2. An audit that also reviews the
     requester is slower, outside the remit, and reads as a rebuke."""
-    assert "## 9 · The critique, on request — a separate service" in doc
-    s = doc.split("## 9 · The critique")[1].split("## 10 ·")[0]
-    assert "An audit judges the artifact. A critique judges what you were given" in s
-    assert "deliver the audit first" in s.lower()
-    assert "never run a critique nobody asked for" in s
+    assert "## 9 · The expert critique, on request — a separate service" in doc
+    s = doc.split("## 9 · The expert critique")[1].split("## 10 ·")[0]
+    assert "A tool can pass all 64 controls and still be badly built" in s
+    assert "It is a different job, and it happens only if someone asks" in s
+    assert "**The audit ends at step 4.**" in doc
     assert "**The audit ends at step 4.**" in doc, "the card must say where the audit stops"
 
 
@@ -826,32 +826,61 @@ def test_stage_two_reads_the_artifact_only(doc):
 
 
 def test_the_offer_is_made_once_and_not_pressed(doc):
-    s = doc.split("## 9 · The critique")[1].split("## 10 ·")[0]
+    s = doc.split("## 9 · The expert critique")[1].split("## 10 ·")[0]
     assert "Make the offer once" in s
     assert "A declined offer is a complete answer" in s
-    assert "reads as a rebuke rather than a service" in s
+    assert "Do not press it." in s
+    assert "the craft, not the clearance" in s
 
 
-def test_a_critique_covers_six_questions_under_audit_discipline(doc):
-    s = doc.split("What a critique covers, once asked")[1].split("### The rules")[0]
-    assert len(re.findall(r"^\d\. \*\*", s, re.M)) == 6
-    for probe in ("Does the description match what was provided",
-                  "Is the question the load-bearing one",
+def test_the_craft_lens_adapts_to_the_artifact_type(doc):
+    """v3.14 turned §9 from a review of the requester's framing into a senior
+    practitioner's review of how the thing is built. The lens must key to the
+    §3 artifact type, or it is generic advice."""
+    s = doc.split("### The craft lens")[1].split("### The output")[0]
+    for kind in ("Prompt / agent", "Script / code", "Spreadsheet", "Vendor configuration"):
+        assert f"**{kind}**" in s, f"craft lens missing type: {kind}"
+    for probe in ("instructions and data separated", "Error handling on the paths that actually fail",
+                  "Hardcoded ranges", "Permissions wider than the task"):
+        assert probe in s, f"craft probe missing: {probe}"
+    assert "None of this is a control, and none of it changes a verdict" in s
+
+
+def test_the_critique_output_is_bounded_and_names_what_is_good(doc):
+    s = doc.split("### The output")[1].split("### The framing lens")[0]
+    assert "One line first" in s
+    assert "five items in total" in s
+    assert "No consequence, no item." in s
+    assert "Name what to leave alone." in s
+    assert "rewrite wearing a review's clothes" in s
+
+
+def test_the_framing_lens_survives_as_three_checks(doc):
+    """The v3.6 framing critique was right but was the smaller half. It stays,
+    compressed, rather than being lost."""
+    s = doc.split("### The framing lens")[1].split("### The rules")[0]
+    for probe in ("Is the question the load-bearing one",
                   "What was accepted because a person said it",
-                  "What is missing, and is the absence itself information",
-                  "Does the request point at a preferred answer",
-                  "What would you change about the request"):
-        assert probe in s, f"critique question missing: {probe}"
+                  "Does the request point at a preferred answer"):
+        assert probe in s, f"framing check missing: {probe}"
     assert "Being told is not evidence" in s
 
 
+def test_the_critique_carries_no_audit_vocabulary(doc):
+    """Borrowing CONFIRMED or P1 would launder opinion as evidence."""
+    s = doc.split("## 9 · The expert critique")[1].split("## 10 ·")[0]
+    assert "It carries no evidence states and no severities" in s
+    assert "expert opinion, labelled as opinion" in s
+    assert "launders judgement as evidence" in s
+
+
 def test_a_critique_can_never_alter_a_delivered_audit(doc):
-    s = doc.split("## 9 · The critique")[1].split("## 10 ·")[0]
-    assert "A critique never changes a delivered audit" in s
+    s = doc.split("## 9 · The expert critique")[1].split("## 10 ·")[0]
+    assert "It never changes a delivered audit" in s
     assert "re-review under §12" in s, "the re-review pointer must name the right section"
-    assert "Never a quiet edit to a memo that has already gone out" in s
+    assert "never a quiet edit" in s
     assert "It is recorded separately" in s
-    assert "If a critique would re-tier the audit, say so and stop" in s
+    assert "If it would re-tier the audit, say so and stop" in s
 
 
 def test_being_told_is_not_evidence_is_audit_discipline_not_only_critique(doc):
@@ -879,9 +908,11 @@ def test_the_example_separates_the_audit_from_the_critique(example):
 
 
 def test_the_reason_the_critique_exists_is_stated(doc):
-    s = doc.split("## 9 · The critique")[1].split("## 10 ·")[0]
-    assert "right method run carefully on the wrong framing" in s
-    assert "the audit itself cannot see that" in s
+    s = doc.split("## 9 · The expert critique")[1].split("## 10 ·")[0]
+    assert "The lenses ask whether it is fit to use" in s
+    assert "whether it is any good" in s
+    assert "someone senior in that craft" in s
+    assert "It is what the checklist cannot see" in s
 
 
 def test_tier_three_is_flagged_as_the_unwitnessed_one(doc):
@@ -912,16 +943,18 @@ def test_every_written_count_matches_what_is_actually_there(doc):
     measured = {
         "q4":   len(re.findall(r"^\d\. \*\*", s4.split("### Not to be confused")[0], re.M)),
         "r4":   len(re.findall(r"^\d\. \*\*", s4.split("five rules")[1], re.M)),
-        "q9":   len(re.findall(r"^\d\. \*\*",
-                   doc.split("What a critique covers, once asked")[1].split("### The rules")[0], re.M)),
+        # §9 is no longer a numbered list: the craft lens is a table keyed to the
+        # §3 artifact types, and the framing lens is three inline checks.
+        "c9":   len(re.findall(r"^\| \*\*[A-Z][^|]+\*\* \|",
+                   doc.split("### The craft lens")[1].split("### The output")[0], re.M)),
         "ctl":  len(re.findall(r"`[A-Z]{2}\d+` \[[AE]\]", doc)),
         "lens": len(re.findall(r"^### L\d · ", doc, re.M)),
         "rows": len([l for l in doc.splitlines() if re.match(r"^\| [1-8] \|", l)]),
     }
-    assert measured == {"q4": 5, "r4": 5, "q9": 6, "ctl": 64, "lens": 7, "rows": 8}, measured
+    assert measured == {"q4": 5, "r4": 5, "c9": 4, "ctl": 64, "lens": 7, "rows": 8}, measured
     assert "64 controls" in doc and "7 lenses" in doc
     assert "### The five questions" in doc and "All five questions" in doc
-    assert "The five rules" in doc and "Six questions, under the same" in doc
+    assert "The five rules" in doc and "Three checks:" in doc
     # no stale count may name §4's questions by number outside §4 itself
     assert "the four questions" not in doc
     # There are now THREE sets of five: §4's expert-read questions, §10's
@@ -939,8 +972,8 @@ def test_every_written_count_matches_what_is_actually_there(doc):
 
 def test_a_standalone_critique_must_be_labelled_as_not_an_audit(doc):
     """The failure mode is a critique read as clearance."""
-    s = doc.split("## 9 · The critique")[1].split("## 10 ·")[0]
-    assert "A critique asked for on its own is allowed, and must be labelled" in s
+    s = doc.split("## 9 · The expert critique")[1].split("## 10 ·")[0]
+    assert "A critique asked for alone is allowed, and must be labelled" in s
     assert "no controls were worked" in s and "it clears nothing" in s
     assert "mistaken for an audit is the one way this service can hurt" in s
 
@@ -1346,8 +1379,13 @@ def test_the_output_is_offered_as_a_file(doc):
 
 def test_short_by_default_but_the_reader_is_told_the_long_version_exists(doc):
     s = doc.split("**Length follows the tier")[1].split("### What the floor looks like")[0]
-    assert "Write the shortest version that carries the decision and its evidence" in s
-    assert "A reader who is not told the detail exists will assume there is none" in s
+    assert "Bottom line up front, always" in s
+    assert "A reader who has to hunt for the answer assumes you are hedging" in s
+    # ceilings must be measurable, not a judgement call
+    assert "Tier 3 — one page. Tier 2 — two. Tier 1 — three." in s
+    assert "the overflow moves to the annex" in s
+    assert "It is never dropped, and a field is never cut to fit" in s
+    assert "A reader not told the detail exists assumes there is none" in s
     # and the misreading that would gut the memo is foreclosed
     assert "Cutting fluff never means cutting a field" in s
     assert "Every field above is required at every tier" in s
@@ -1366,3 +1404,30 @@ def test_the_self_check_covers_the_deliverable(doc):
     s = doc.split("## 13 · Self-check")[1].split("## 14 ·")[0]
     assert "offered as a file, named so it identifies itself unopened" in s
     assert "told, in one line, that a fuller version exists" in s
+
+
+# --- v3.14: the operator's three principles ---------------------------------
+
+def test_judgement_is_named_as_distinct_from_thoroughness(doc):
+    """Proportionality said which controls to skip. It did not say why that is
+    a skill rather than laziness."""
+    s = doc.split("**Proportionality")[1].split("### The verdict")[0]
+    assert "Finding every problem is skill; knowing which ones to raise is judgement" in s
+    assert "only the second is worth a director's time" in s
+
+
+def test_the_operating_stance_is_stated_next_to_the_95_percent_rule(doc):
+    s = doc.split("### When you are not sure")[1].split("### When someone asks you")[0]
+    assert "Prudence over pace. Comprehension over convenience." in s
+    assert "a finding you cannot defend, in a record you cannot withdraw" in s
+
+
+def test_the_intake_asks_why_not_what(doc):
+    """An owner asked what a tool does answers with features, and the auditor
+    inherits that framing - which is exactly what §4 question 2 exists to catch."""
+    s = doc.split("### Ask for these before you start")[1].split("### Stakes tier")[0]
+    assert "**Why it was built**" in s
+    assert "what was happening before it, and what it replaced" in s
+    assert "Ask for the reason, not the description" in s
+    assert "you inherit their framing" in s
+    assert "§4 question 2" in s
