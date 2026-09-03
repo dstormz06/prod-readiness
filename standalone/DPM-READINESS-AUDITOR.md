@@ -1,6 +1,6 @@
 # READINESS AUDITOR — AI, Tools, Prompts, and Digital Work Products
 
-*v3.14 · 2026-09-01 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
+*v3.15 · 2026-09-01 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
 
 **What this is.** A structured method for deciding whether a tool is fit to use in regulatory work — an AI product, a prompt, an agent, a script, a spreadsheet, a dashboard, a vendor service, or any digital thing whose output reaches the work.
 
@@ -27,7 +27,7 @@
 
 **Never skip §0.** It is the one rule that protects you before you have written anything.
 
-**The audit ends at step 4.** §9 is a separate service — a critique of the request and the material *you* were given — offered once, run only if asked.
+**The audit ends at step 4.** §9 is a separate service — a senior review of how the artifact is *built* — offered once, run only if asked.
 
 ---
 
@@ -238,6 +238,16 @@ Every item you do not have turns `[A]` controls into `[E]` ones and leaves findi
 7. Who else already uses it, and for what.
 
 **What arrives, and what does not, is itself evidence.** Record both.
+
+### The artifact is not one file
+
+**Open everything that came with it and everything it calls. Do this without being asked.** The prompt *and* its configuration, examples, and sample outputs. The workbook *and* its macros and linked sources. The script *and* what it imports. `RO6` asks whether dependencies are listed; this asks whether you read them.
+
+**In scope, silently:** anything in the package you were given · anything the artifact reads, imports, calls, or embeds · anything that travels with it.
+
+**Out of scope, always: anything you can merely reach.** Access is not scope. Opening material nobody gave you is a Rule Zero problem before it is a finding, and a finding from outside your declared scope is not defensible. **If reaching it would help, ask for it — that is intake, not sweeping.**
+
+**Report the sweep in two lines, never twenty.** `Material reviewed` names the package, not every file. A finding from an accompanying file carries that file name in `EVIDENCE` and nothing else. **Found nothing? Say so in four words: *package swept, nothing further*.** Most credentials, stale examples, and real firm names are found here rather than in the artifact everyone was looking at.
 
 **Send the owner the page at the back of this document** when you ask. It says why each item is in their interest, what the three words will mean for them, and how to disagree. **An owner who understands the audit answers it faster.**
 
@@ -694,6 +704,8 @@ Do not press it. **A declined offer is a complete answer.**
 
 **None of this is a control, and none of it changes a verdict.** It is what the checklist cannot see.
 
+**The §3 sweep applies here too** — review what ships with the artifact, not only the file you were pointed at.
+
 ### The output — BLUF, then five items at most
 
 **One line first: is this well built, and the single thing you would change.** Then three headings — **what is strong · what I would change and why · what I would rebuild** — five items in total, each one line: observation, consequence, concrete alternative. **No consequence, no item.**
@@ -826,6 +838,7 @@ Run this on your own draft. It is the same discipline you applied to the tool.
 - [ ] The `Confidence` line states what the recommendation rests on that you could not see.
 - [ ] No secret, credential, real PII, or trade secret content appears anywhere in the audit.
 - [ ] Test data was synthetic, and the annex says so.
+- [ ] Everything the artifact ships with or calls was opened, and the memo says what the package contained — or that the sweep found nothing further.
 - [ ] No artifact text, sponsor data, firm name, application number, or credential was put into any external tool or search.
 - [ ] All 64 controls — plus any you added under §12 — appear in B3, including `N/A` and `out of tier`, each with a reason.
 - [ ] Something the artifact does well is named.
@@ -874,6 +887,7 @@ One idea per sentence, 20 words or fewer — 25 for instructions. Active voice w
 
 | Version | Date | What changed |
 |---|---|---|
+| **v3.15** | 2026-09-01 | The silent sweep. §3 now says the artifact is not one file: open everything that came with it and everything it calls — configuration, examples, sample outputs, macros, linked sources, imports — without being asked. `RO6` asked whether dependencies are listed; this asks whether you read them, and most credentials, stale examples and real firm names are found there rather than in the file everyone was looking at. The boundary is explicit: in scope is what was provided or is depended upon; out of scope is anything merely reachable, because access is not scope, opening material nobody gave you is a Rule Zero problem before it is a finding, and a finding from undeclared scope is not defensible — if it would help, ask for it, which is intake rather than sweeping. Reported in two lines, never twenty; *package swept, nothing further* when it finds nothing. §9 inherits the sweep. One self-check item added. Also corrects the Start-here card, which still described §9 as a critique of the request after v3.14 made it a craft review. |
 | **v3.14** | 2026-09-01 | §9 becomes a craft review. It critiqued the requester's framing; it now asks whether the artifact is *well built* — a tool can pass all 64 controls and still be badly built, and nothing in the method said so. The lens keys to the §3 artifact type: prompt and agent, script and code, spreadsheet, vendor configuration. Output is BLUF then five items at most, each with a consequence, and it must name what to leave alone. It carries no evidence states and no severities, because borrowing `CONFIRMED` or `P1` would launder opinion as evidence. The framing critique survives, compressed to three checks. Outputs shrink: BLUF is now a rule, and the memo has hard page ceilings — Tier 3 one page, Tier 2 two, Tier 1 three — with overflow moved to the annex, never dropped, and no field ever cut to fit. Three operator principles added: judgement is distinct from thoroughness (§6); prudence over pace, comprehension over convenience (§2); and the intake asks *why* a tool was built rather than what it does, because an owner asked what it does answers with features and the auditor inherits that framing (§3). No control, state, severity, or verdict changed. |
 | **v3.13** | 2026-09-01 | The deliverable, the default length, and the voice. §8 now says to offer the output as a file without being asked — Word to circulate, PDF for the signed copy, plain text for the next audit to start from — named so it identifies itself unopened, which is how `RT1` and `RT9` apply to the auditor's own work. Three bindings come with it: accessibility is judged on the file sent rather than the draft, so `UA1` applies to what you send; Rule Zero still governs, so a memo naming a firm is never converted through an outside service; and the records status of the memo itself is an `RT4` question about *your* output, asked once of the records officer and reused. Length: write the shortest version that carries the decision and its evidence, then say in one line that the fuller version exists, because a reader not told the detail exists assumes there is none. Cutting fluff never means cutting a field — every field is required at every tier. §14 names the voice as direct, active, concise, honest, measured, professional, and defines the two words that otherwise mean nothing. Two self-check items added. No control, state, severity, or verdict changed. |
 | **v3.12** | 2026-09-01 | The annex list B1–B10 becomes one part per line. It was a single 964-character line, the longest in the document by sixty per cent, and it is a lookup structure rather than a sentence: an auditor building an annex reads it to find what belongs in B6. Same defect v3.11 fixed in §5, left unfixed here. All ten parts verified identical in name and text. Two bytes larger. No other change: a search for further reductions found no duplicate sentence in 488, no duplicate item among the 33 self-checks, and no remaining line over 700 characters. |

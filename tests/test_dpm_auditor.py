@@ -1431,3 +1431,34 @@ def test_the_intake_asks_why_not_what(doc):
     assert "Ask for the reason, not the description" in s
     assert "you inherit their framing" in s
     assert "§4 question 2" in s
+
+
+# --- v3.15: the silent sweep, and its boundary ------------------------------
+
+def test_the_sweep_covers_the_package_not_only_the_named_file(doc):
+    s = doc.split("### The artifact is not one file")[1].split("### Stakes tier")[0]
+    assert "Do this without being asked" in s
+    assert "`RO6` asks whether dependencies are listed; this asks whether you read them" in s
+    for inscope in ("anything the artifact reads, imports, calls, or embeds",
+                    "anything that travels with it"):
+        assert inscope in s
+
+
+def test_the_sweep_stops_at_what_was_provided(doc):
+    """Without this the rule licenses opening anything reachable - a Rule Zero
+    breach, and a finding from undeclared scope is not defensible."""
+    s = doc.split("### The artifact is not one file")[1].split("### Stakes tier")[0]
+    assert "Out of scope, always: anything you can merely reach" in s
+    assert "Access is not scope" in s
+    assert "Rule Zero problem before it is a finding" in s
+    assert "ask for it — that is intake, not sweeping" in s
+
+
+def test_the_sweep_is_reported_briefly(doc):
+    s = doc.split("### The artifact is not one file")[1].split("### Stakes tier")[0]
+    assert "Report the sweep in two lines, never twenty" in s
+    assert "package swept, nothing further" in s
+    # and the critique inherits it
+    assert "The §3 sweep applies here too" in doc
+    c = doc.split("## 13 · Self-check")[1].split("## 14 ·")[0]
+    assert "Everything the artifact ships with or calls was opened" in c
