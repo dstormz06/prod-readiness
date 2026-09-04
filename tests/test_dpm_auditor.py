@@ -1471,3 +1471,36 @@ def test_the_sweep_is_reported_briefly(doc):
     assert "The §3 sweep applies here too" in doc
     c = doc.split("## 13 · Self-check")[1].split("## 14 ·")[0]
     assert "Everything the artifact ships with or calls was opened" in c
+
+
+# --- v3.17: the document's own maintainer, and the register -----------------
+
+def test_the_document_names_its_own_maintainer_slot(doc):
+    """RO4 requires a named maintainer and backup of everything this method
+    audits. The method itself had neither, and did not say so."""
+    head = doc.split("## Start here")[0]
+    assert "**This document.** Maintainer:" in head
+    assert "Backup:" in head
+    assert "Fill both names before this circulates" in head
+    assert "`RO4` applies to this method as much as to anything it audits" in head
+    assert "leaving it blank *and unremarked* is the defect" in head
+
+
+def test_the_register_watches_what_the_memo_cannot(doc):
+    """Conditions carry owners and dates; nothing watched them. A cleared-with-
+    conditions tool stays in use whether or not the conditions closed."""
+    s = doc.split("### The register — one row per audit")[1].split("## 13 ·")[0]
+    assert "nothing in this method watches them" in s
+    assert "the audit becomes the thing that made it look approved" in s
+    for col in ("open conditions with their dates", "next re-review trigger",
+                "where the memo and working papers are kept"):
+        assert col in s, f"register column missing: {col}"
+    assert "Shows what is overdue" in s
+    assert "Answers the director's first question" in s
+    # bounded, or it rots
+    assert "It is not a second audit" in s
+    assert "No findings, no evidence states, no severities" in s
+    assert "A register that grows into a database is a register nobody updates" in s
+    # and the office decision is routed, not taken
+    assert "are decisions for your office and your records officer" in s
+    assert "§11 applies" in s

@@ -1,10 +1,12 @@
 # READINESS AUDITOR — AI, Tools, Prompts, and Digital Work Products
 
-*v3.16 · 2026-09-01 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
+*v3.17 · 2026-09-01 · 64 controls · 7 lenses · 3 stakes tiers · expert read · defensibility standard · dual output: director memo + working annex · self-contained*
 
 **What this is.** A structured method for deciding whether a tool is fit to use in regulatory work — an AI product, a prompt, an agent, a script, a spreadsheet, a dashboard, a vendor service, or any digital thing whose output reaches the work.
 
 **Who this is for.** The people who own the work — project managers and reviewers, not engineers. This edition was prepared for the Division of Project Management (OGD/ORO). It is deliberately office-neutral: every operative rule says *your office*, so any division at the FDA can adopt it without editing a word. Name the office that maintains it on the memo, and §11 names the decisions that office does not own.
+
+**This document.** Maintainer: `<name, role>` · Backup: `<name, role>` · Version and change date: above · Change log: at the back. **Fill both names before this circulates.** `RO4` applies to this method as much as to anything it audits, and *"one person maintains it and no backup is named"* is a finding this document would write about any other tool. Leaving it blank is the honest state; leaving it blank *and unremarked* is the defect.
 
 **What this is not.** Not agency policy. Not an Authority to Operate. Not a privacy, records, security, or legal determination. It does not confer or establish compliance with any regulation. It produces an evidence-backed recommendation and names exactly who must decide the parts you cannot. Say this on the memo. A tool that overstates its own authority is the first thing a reviewer distrusts.
 
@@ -797,6 +799,22 @@ Do these without being told.
 
 **Say in B1 what you inherited, and from which audit.** Inheritance is defensible only when it is visible. An inherited answer nobody can trace is indistinguishable from one nobody checked.
 
+### The register — one row per audit
+
+**Every condition carries an owner and a date, and nothing in this method watches them.** A tool `CLEARED WITH CONDITIONS` keeps being used whether or not its conditions closed, and the audit becomes the thing that made it look approved. Re-review triggers have the same problem: they are set, and then nobody is looking.
+
+**One row per audit, in one place your office controls:** date · artifact and version · tier · verdict · open conditions with their dates · next re-review trigger · where the memo and working papers are kept.
+
+**It does three things, and nothing else:**
+
+- **Shows what is overdue.** A condition past its date is the register's whole reason for existing.
+- **Answers the director's first question** — *how many tools have we audited, what did we clear, what is still open* — from a file rather than from memory. Every audit already contains the answer; only the collecting is missing.
+- **Feeds the inheritance rule above.** The row says what the next audit may carry forward and what has expired.
+
+**It is not a second audit.** No findings, no evidence states, no severities — those live in the memo, and duplicating them creates two records that can disagree. **A register that grows into a database is a register nobody updates.**
+
+**Where it lives, who maintains it, and whether it is itself a federal record are decisions for your office and your records officer**, not for the auditor — §11 applies. Ask once, record the answer with its date, and reuse it.
+
 ---
 
 ## 13 · Self-check before you hand it over
@@ -889,6 +907,7 @@ One idea per sentence, 20 words or fewer — 25 for instructions. Active voice w
 
 | Version | Date | What changed |
 |---|---|---|
+| **v3.17** | 2026-09-01 | Closes the two gaps that could be closed without inventing facts. The document now carries its own maintainer and backup slots: `RO4` applies to this method as much as to anything it audits, and *one person maintains it and no backup is named* is a finding it would write about any other tool. The names are left blank on purpose — blank is the honest state, blank and unremarked was the defect. §12 gains the register: every condition carries an owner and a date and nothing watched them, so a tool `CLEARED WITH CONDITIONS` stayed in use whether or not its conditions closed and the audit became the thing that made it look approved. One row per audit — date, artifact and version, tier, verdict, open conditions with dates, next re-review trigger, where the papers are. It shows what is overdue, answers the director's first question from a file rather than from memory, and feeds the inheritance rule. It is bounded on purpose: no findings, no evidence states, no severities, because a register that grows into a database is a register nobody updates. Where it lives and whether it is itself a record are routed to the office and the records officer under §11, not decided here. Two gaps remain open and are not the auditor's to close: no `LICENSE` and no attribution, and `UA6` — nobody other than the author has used this method. No control, state, severity, or verdict changed. |
 | **v3.16** | 2026-09-01 | Corrects two defects v3.14 left in §4. It still described §9 by its pre-v3.14 purpose — a critique of the material the auditor was given — which v3.15 fixed on the Start-here card and missed here. The deeper defect: v3.14 pointed §9 at the artifact, so §4 and §9 no longer differ by subject, and a disambiguation written on that axis had stopped separating them. They are now told apart by what happens to the output — a §4 hypothesis is a search plan that becomes a finding or is killed; a §9 judgement is an opinion that must never be tested into a finding, and trying to confirm one means the two have been crossed. No control, state, severity, or verdict changed. |
 | **v3.15** | 2026-09-01 | The silent sweep. §3 now says the artifact is not one file: open everything that came with it and everything it calls — configuration, examples, sample outputs, macros, linked sources, imports — without being asked. `RO6` asked whether dependencies are listed; this asks whether you read them, and most credentials, stale examples and real firm names are found there rather than in the file everyone was looking at. The boundary is explicit: in scope is what was provided or is depended upon; out of scope is anything merely reachable, because access is not scope, opening material nobody gave you is a Rule Zero problem before it is a finding, and a finding from undeclared scope is not defensible — if it would help, ask for it, which is intake rather than sweeping. Reported in two lines, never twenty; *package swept, nothing further* when it finds nothing. §9 inherits the sweep. One self-check item added. Also corrects the Start-here card, which still described §9 as a critique of the request after v3.14 made it a craft review. |
 | **v3.14** | 2026-09-01 | §9 becomes a craft review. It critiqued the requester's framing; it now asks whether the artifact is *well built* — a tool can pass all 64 controls and still be badly built, and nothing in the method said so. The lens keys to the §3 artifact type: prompt and agent, script and code, spreadsheet, vendor configuration. Output is BLUF then five items at most, each with a consequence, and it must name what to leave alone. It carries no evidence states and no severities, because borrowing `CONFIRMED` or `P1` would launder opinion as evidence. The framing critique survives, compressed to three checks. Outputs shrink: BLUF is now a rule, and the memo has hard page ceilings — Tier 3 one page, Tier 2 two, Tier 1 three — with overflow moved to the annex, never dropped, and no field ever cut to fit. Three operator principles added: judgement is distinct from thoroughness (§6); prudence over pace, comprehension over convenience (§2); and the intake asks *why* a tool was built rather than what it does, because an owner asked what it does answers with features and the auditor inherits that framing (§3). No control, state, severity, or verdict changed. |
